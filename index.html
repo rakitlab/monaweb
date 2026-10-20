@@ -677,21 +677,21 @@ img.bs-art{background:none;opacity:1;-webkit-mask:none;mask:none;object-fit:cove
 
 /* 06 COCOK UNTUK: pilih situasi (daftar buku besar + layar rincian) */
 .sit{display:grid;grid-template-columns:minmax(250px,.8fr) minmax(0,1.5fr);background:var(--key);border:var(--bw) solid var(--ink);border-radius:6px;overflow:hidden}
-.sit-list{display:flex;flex-direction:column;border-right:var(--bw) solid var(--ink);background:var(--paper)}
-.sit-t{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;flex:1;min-height:66px;padding:0 14px 0 0;background:transparent;border:0;border-top:var(--bw) solid var(--ink);color:var(--ink);text-align:left;cursor:pointer;font:inherit;transition:background .2s,color .2s}
+.sit-list{display:flex;flex-direction:column;border-right:var(--bw) solid var(--ink);background:var(--ink)}
+.sit-t{position:relative;display:grid;grid-template-columns:44px minmax(0,1fr) auto;align-items:center;flex:1;min-height:66px;padding:0 14px 0 0;background:transparent;border:0;border-top:var(--bw) solid #3a3a37;color:var(--paper);text-align:left;cursor:pointer;font:inherit;transition:background .2s,color .2s}
 .sit-t:first-child{border-top:0}
-.sit-t i{align-self:stretch;display:grid;place-items:center;border-right:var(--bw) solid var(--line);font:500 10px var(--mono);font-style:normal;letter-spacing:.1em;color:var(--faint);transition:color .2s,border-color .2s}
+.sit-t i{align-self:stretch;display:grid;place-items:center;border-right:var(--bw) solid #3a3a37;font:500 10px var(--mono);font-style:normal;letter-spacing:.1em;color:#8a867e;transition:color .2s,border-color .2s}
 .sit-t .tt{display:flex;flex-direction:column;gap:3px;padding:12px 12px 12px 14px;min-width:0}
 .sit-t .tt b{font-size:14px;font-weight:600;letter-spacing:-.015em;line-height:1.2}
-.sit-t .tt small{font:500 9.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);transition:color .2s}
+.sit-t .tt small{font:500 9.5px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#a9a59c;transition:color .2s}
 .sit-t .sm{display:none}
-.sit-t em{font:500 9px var(--mono);font-style:normal;letter-spacing:.12em;text-transform:uppercase;padding:4px 7px;border:var(--bw) solid var(--ink);border-radius:3px;white-space:nowrap;transition:background .2s,border-color .2s,color .2s}
-.sit-t em.p{background:var(--ink);color:var(--paper)}
-.sit-t:hover{background:var(--key)}
-.sit-t.on{background:var(--ink);color:var(--paper)}
-.sit-t.on i{color:var(--or);border-color:#3a3a37}
-.sit-t.on .tt small{color:#a9a59c}
-.sit-t.on em{border-color:#77736a}
+.sit-t em{font:500 9px var(--mono);font-style:normal;letter-spacing:.12em;text-transform:uppercase;padding:4px 7px;border:var(--bw) solid #77736a;border-radius:3px;white-space:nowrap;transition:background .2s,border-color .2s,color .2s}
+.sit-t em.p{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.sit-t:hover{background:#1f1f1d}
+.sit-t.on{background:var(--key);color:var(--ink)}
+.sit-t.on i{color:var(--or);border-color:var(--line)}
+.sit-t.on .tt small{color:var(--faint)}
+.sit-t.on em{border-color:var(--ink)}
 .sit-t.on em.p{background:var(--or);border-color:var(--or);color:#fff}
 .sit-t .prog{position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--or);transform:scaleX(0);transform-origin:0 50%;opacity:0}
 .sit-t.on .prog{opacity:1}
@@ -720,25 +720,15 @@ img.bs-art{background:none;opacity:1;-webkit-mask:none;mask:none;object-fit:cove
 .sit-p .lc .rs b{font-weight:500;color:var(--phos)}
 .sit-p .ft{display:flex;flex-wrap:wrap;gap:6px}
 .sit-p .ft span{font:500 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:5px 8px;border:var(--bw) solid var(--ink);border-radius:4px}
-.nf{margin-top:14px;border:var(--bw) dashed var(--ink);border-radius:6px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-.nf>.cap{grid-column:1/-1;padding:12px 18px;color:var(--mute);border-bottom:var(--bw) dashed var(--ink)}
-.nfi{display:flex;gap:12px;align-items:flex-start;min-width:0;padding:16px 18px;border-left:var(--bw) dashed var(--ink)}
-.nfi:first-of-type{border-left:0}
-.nfi b{display:block;margin-bottom:3px;font-weight:600;font-size:14px;letter-spacing:-.01em;line-height:1.25}
-.nfi p{font-size:13px;line-height:1.45;color:var(--mute)}
-.nfi .ib{width:36px;height:36px}
 @media (max-width:860px){
   .sit{grid-template-columns:minmax(0,1fr)}
   .sit-list{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:var(--bw) solid var(--ink);scrollbar-width:none}
   .sit-list::-webkit-scrollbar{display:none}
-  .sit-t{flex:0 0 auto;min-width:150px;grid-template-columns:34px minmax(0,1fr);min-height:56px;padding:0 10px 0 0;border-top:0;border-left:var(--bw) solid var(--ink)}
+  .sit-t{flex:0 0 auto;min-width:150px;grid-template-columns:34px minmax(0,1fr);min-height:56px;padding:0 10px 0 0;border-top:0;border-left:var(--bw) solid #3a3a37}
   .sit-t:first-child{border-left:0}
   .sit-t em,.sit-t .lg,.sit-t .tt small{display:none}
   .sit-t .sm{display:block}
   .sit-t .tt{padding:10px}
-  .nf{grid-template-columns:minmax(0,1fr)}
-  .nfi{border-left:0;border-top:var(--bw) dashed var(--ink)}
-  .nfi:first-of-type{border-top:0}
 }
 @media (max-width:560px){
   .sit-p .bd{padding:16px}
@@ -1130,10 +1120,6 @@ img.bs-art{object-position:50% 50%;filter:contrast(1.16) saturate(.82) brightnes
 .kp dt{margin-bottom:10px;font:500 10px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
 .kp dd{margin:0;font-size:clamp(20px,2.1vw,30px);font-weight:600;letter-spacing:-.045em;line-height:1;white-space:nowrap}
 .sit-p .bd{padding:22px 20px 20px}
-.nf{margin-top:-.8px;border-style:solid}
-.nf>.cap,.nfi{border-style:solid!important}
-.nf>.cap{padding:12px 20px}
-.nfi{padding:18px 20px}
 
 /* 07 CERITA: buku tetap, hiasan dibuang */
 .bkw{background:var(--ink);background-image:none}
@@ -1252,16 +1238,12 @@ img.bs-art{object-position:50% 50%;filter:contrast(1.16) saturate(.82) brightnes
 .foot .scr .key{flex:none}
 
 
-.nf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--bw);margin-top:-1px;background:var(--ink);border:var(--bw) solid var(--ink)!important}
-.nf>.cap{grid-column:1/-1;background:var(--well);border:0!important}
-.nfi{background:var(--paper);border:0!important}
 .fqc .m{color:var(--sage-ink)}
 .pt tbody tr:not(.pt-g){background:var(--paper)}
 .pt .pt-g th{background:var(--well)}
 .pt td.pro{background:var(--key)}
 .xr{grid-template-columns:58px minmax(0,1.3fr) repeat(3,minmax(0,1fr))}
 img.bs-art{object-position:50% 50%}
-@media (max-width:860px){.nf{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:900px){.bs-gap{--gx:50%!important;--gy:44%!important}img.bs-art{object-position:50% 50%}.bs-role .pm>span{padding:0 5px;letter-spacing:.04em;font-size:9px}}
 /* di layar sempit kotaknya jadi potret, jadi dipakai potongan tegak frescony */
 .bs picture{display:contents}
@@ -1640,12 +1622,6 @@ h1,h2,h3,h4,.ch-t,.cap,.tab,.steps span,.pg-h span,.pg-f span,
       <article class="sit-p" role="tabpanel" id="sp4" aria-labelledby="st4"><div class="kp"><div class="kp-h"><span class="pn cap">P-05</span><span class="chip">Paket Gratis</span></div><dl><div><dt>Kiriman</dt><dd>Rp2.000.000</dd></div><div><dt>Sisa</dt><dd>Rp640.000</dd></div><div><dt>Aman per hari</dt><dd>Rp45.700</dd></div></dl></div><div class="bd"><h3>Anak kos dan mahasiswa</h3><p class="ds">Kiriman datang sebulan sekali. Lihat sisa uangmu tiap hari, jangan menunggu tanggal tua.</p><div class="lc lcd"><span class="cap">Lisa · baru dicatat</span><q data-t="“makan siang 15 ribu”">“makan siang 15 ribu”</q><span class="rs"><svg class="ic"><use href="#i-spark"/></svg><b>Makan · Rp15.000</b></span></div><div class="ft"><span>Ketik</span><span>Foto struk</span></div></div></article>
       <article class="sit-p" role="tabpanel" id="sp5" aria-labelledby="st5"><div class="kp"><div class="kp-h"><span class="pn cap">P-06</span><span class="chip">Paket Gratis</span></div><dl><div><dt>Baris</dt><dd>312</dd></div><div><dt>Kolom dipetakan</dt><dd>5 / 5</dd></div><div><dt>Duplikat</dt><dd>0</dd></div></dl></div><div class="bd"><h3>Pencatat setia spreadsheet</h3><p class="ds">Catatanmu sudah ada di Excel. Unggah CSV atau Excel, cek pratinjaunya, lanjut dari sana.</p><div class="lc lcd"><span class="cap">Lisa · impor</span><q data-t="catatan-2026.xlsx">catatan-2026.xlsx</q><span class="rs"><svg class="ic"><use href="#i-spark"/></svg><b>312 baris siap diimpor</b></span></div><div class="ft"><span>Impor CSV</span><span>Excel</span></div></div></article>
     </div>
-  </div>
-  <div class="nf">
-    <span class="cap">Belum cocok kalau kamu mencari</span>
-    <div class="nfi"><span class="ib"><svg class="ic"><use href="#i-nobank"/></svg></span><div><b>Sambungan langsung ke rekening</b><p>Mona tidak meminta login atau PIN m-banking. Catatan masuk lewat ketik, suara, foto struk, atau notifikasi.</p></div></div>
-    <div class="nfi"><span class="ib"><svg class="ic"><use href="#i-phone"/></svg></span><div><b>Aplikasi untuk iPhone</b><p>Mona rilis di Android dulu. Google Play dan iPhone menyusul.</p></div></div>
-    <div class="nfi"><span class="ib"><svg class="ic"><use href="#i-users"/></svg></span><div><b>Space untuk lebih dari 5 orang</b><p>Satu Space menampung hingga 5 orang.</p></div></div>
   </div>
 </section>
 
