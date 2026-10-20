@@ -2,7 +2,14 @@
 
 Website untuk aplikasi Mona, pencatat uang dengan asisten Lisa. Dibuat oleh Rakit Lab.
 
-Seluruh situs ada di satu file, `index.html`, ditambah foto lukisan di `assets/mona-lisa.jpg`. Tidak ada build, tidak ada dependensi.
+Seluruh situs ada di satu file, `index.html`, ditambah empat foto lukisan di `assets/`. Tidak ada build, tidak ada dependensi.
+
+| Berkas | Dipakai di |
+| -- | -- |
+| `mona-lisa.jpg` | Animasi sampul (map 01) |
+| `last-supper.jpg` | Latar Space bersama (map 05), layar lebar |
+| `last-supper-tall.jpg` | Latar Space bersama di layar ≤600px, potongan tegak |
+| `creation-of-adam.jpg` | Latar map 10 |
 
 ## Isi halaman
 
@@ -14,12 +21,12 @@ Halaman berupa tumpukan map bertab. Tiap map punya `id` yang dipakai menu naviga
 | 02 | `buku` | Kalender September 2026 yang bisa dijelajahi |
 | 03 | `catat` | Lisa mini: suara, ketik, foto struk, notifikasi bank |
 | 04 | `arsip` | Spreadsheet lama lawan empat map Mona (Dompet, Investasi, Kewajiban, Neraca) |
-| 05 | `bersama` | Space bersama di atas lukisan asli; empat peran dengan inisial, izin per peran |
+| 05 | `bersama` | Space bersama di atas Perjamuan Terakhir; empat peran dengan wajah piksel, izin per peran |
 | 06 | `cocok` | Enam situasi: pilih satu di daftar, panel kanan berisi tiga angka dan contoh catatan |
 | 07 | `cerita` | Buku cerita yang dibuka halaman demi halaman: Mona Lisa, Mona, Lisa, papan inspirasi UI, penutup |
-| 08 | `harga` | Dua kartu paket (Gratis, Pro) dan tabel 18 fitur per kelompok |
+| 08 | `harga` | Dua kartu paket (Gratis, Pro), lalu pemisah `.pt-sep` dan tabel 18 fitur per kelompok |
 | 09 | `tanya` | Enam janji privasi dan FAQ akordeon; jawaban diketik di layar Lisa |
-| 10 | `gabung` | Pendaftaran uji coba tertutup |
+| 10 | `gabung` | Pendaftaran uji coba tertutup, di atas Penciptaan Adam |
 
 Kalau menambah atau memindah map, perbarui tiga tempat: nomor di `.tab`, daftar di `#nsel` (menu desktop), dan daftar di `#nsheet` (menu HP).
 
@@ -58,6 +65,9 @@ Menambah teks baru: tulis dalam bahasa Indonesia seperti biasa, lalu tambahkan p
 - Ikon digambar sebagai `<symbol>` SVG di bagian atas file (grid 24, garis 1,6).
 - Wajah Lisa digambar dari 16 × 8 titik oleh JavaScript. Sengaja hanya muncul di logo, Lisa mini, kartu notifikasi, dan dua halaman buku tentang Lisa.
 - Skala huruf mengikuti aplikasi: isi 15px, tombol 14px, judul `clamp(28px, 3.5vw, 48px)`, label mono kecil huruf kapital, garis rambut 0,8px.
-- Avatar peran di Space berupa inisial di kotak warna (`.av`, warna per `data-r`).
+- Avatar peran di Space berupa wajah piksel 8 × 8, sekeluarga dengan arsip wajah di aplikasi. Mata, mulut, aksesori, warna piksel, dan latar diatur per peran di tabel `WAJAH`; warnanya dari `--ap` dan `--ab` per `data-r`.
 - Buku di map 07 memakai `data-bk` pada tombol untuk melompat ke bab. Di layar sempit (860px ke bawah) buku jadi satu halaman per layar. Bisa digeser, dan panah kiri/kanan di keyboard juga jalan.
-- Animasi mengikuti `prefers-reduced-motion`: ketikan dan balik halaman langsung selesai.
+- Di map 01, sebelum catatan dibereskan lukisannya dibuat murung: sudut bibir turun, mata lelah, dahi berkerut, rambut lepas dari kerudung, warna sedikit pudar. Semuanya memudar ke nol antara detik 7,9 dan 9,3 (`SAD0`, `SAD1`), jadi yang tersisa persis lukisan aslinya yang tersenyum. Ukurannya memakai piksel lukisan asli, bukan piksel layar, dan titik akar rambut diukur dari siluet kerudung, jadi tetap pas di ukuran jendela mana pun. Warna kulit dan bayangan bibir diambil dari lukisannya sendiri; kalau kanvasnya ternoda (`getImageData` gagal), dipakai warna bawaan.
+- Lekukan tab map digambar dari dua segitiga border (`.tab::before` hitam, `.tab::after` warna map), bukan `clip-path` di atas latar hitam. Cara lama memakai lapisan `z-index` negatif dan di sebagian browser hitamnya bocor memenuhi lekukan.
+- Judul dan subjudul tiap bagian disejajarkan per baris pertama (`align-items:baseline`), bukan rata bawah. `.fh.fh-one` membuat judulnya tetap satu baris di layar lebar.
+- Animasi mengikuti `prefers-reduced-motion`: ketikan dan balik halaman langsung selesai. Dalam mode itu lukisan map 01 langsung tampil utuh dan tersenyum.
