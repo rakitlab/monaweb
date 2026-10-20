@@ -2,7 +2,7 @@
 
 Website untuk aplikasi Mona, pencatat uang dengan asisten Lisa. Dibuat oleh Rakit Lab.
 
-Seluruh situs ada di satu file, `index.html`, ditambah lima foto lukisan di `assets/`. Tidak ada build, tidak ada dependensi.
+Seluruh situs ada di satu file, `index.html`, ditambah lima foto lukisan di `assets/`. Tidak ada build, tidak ada dependensi. Dua berkas sisanya, `waitlist.gs` dan `waitlist.md`, adalah backend daftar tunggu — tidak ikut disajikan ke pengunjung.
 
 | Berkas | Dipakai di |
 | -- | -- |
@@ -18,7 +18,7 @@ Halaman berupa tumpukan map bertab. Tiap map punya `id` yang dipakai menu naviga
 
 | No | id | Isi |
 | -- | -- | -- |
-| 01 | `sampul` | Animasi sebelum dan sesudah, ajakan ikut uji coba |
+| 01 | `sampul` | Animasi sebelum dan sesudah, ajakan masuk daftar tunggu |
 | 02 | `buku` | Kalender September 2026 yang bisa dijelajahi |
 | 03 | `catat` | Lisa mini: suara, ketik, foto struk, notifikasi bank |
 | 04 | `arsip` | Spreadsheet lama lawan empat map Mona (Dompet, Investasi, Kewajiban, Neraca) |
@@ -27,17 +27,19 @@ Halaman berupa tumpukan map bertab. Tiap map punya `id` yang dipakai menu naviga
 | 07 | `cerita` | Buku cerita yang dibuka halaman demi halaman: Mona Lisa, Mona, Lisa, papan inspirasi UI, penutup |
 | 08 | `harga` | Dua kartu paket (Gratis, Pro), lalu pemisah `.pt-sep` dan tabel 18 fitur per kelompok |
 | 09 | `tanya` | Enam janji privasi dan FAQ akordeon; jawaban diketik di layar Lisa |
-| 10 | `gabung` | Pendaftaran uji coba tertutup, di atas Penciptaan Adam; isi alamat, tombol kirim membuka email yang sudah terisi |
+| 10 | `gabung` | Daftar tunggu, di atas Penciptaan Adam; satu isian email, satu tombol |
 
 Kalau menambah atau memindah map, perbarui tiga tempat: nomor di `.tab`, daftar di `#nsel` (menu desktop), dan daftar di `#nsheet` (menu HP).
 
-## Email undangan
+## Daftar tunggu
 
-Semua alamat di halaman memakai `info.rakitdev@gmail.com`, diambil dari satu tempat: isi `#addr` di map 10 (`MAILTO` di skrip).
+Semua tombol ajakan di halaman — menu atas, sampul, halaman terakhir buku cerita, dua kartu harga, form, dan kaki halaman — berbunyi sama: **Join Waitlist**, dan semuanya menuju `#gabung`. Teksnya sengaja tidak diterjemahkan; di kedua bahasa bunyinya tetap sama.
 
-Di map 10 pengunjung menulis alamat Google-nya, lalu menekan kirim. Tombolnya menyusun `mailto:` lengkap dengan judul dan badan surat yang sudah jadi — alamat yang tadi diketik ikut masuk ke dalamnya. Karena `mailto:` tidak selalu ada yang menangani (Gmail di browser, misalnya), ada dua jalan cadangan: **Buka di Gmail** yang memakai alamat compose Gmail web, dan **Salin isi emailnya** yang menyalin seluruh surat ke papan klip.
+Di map 10 pengunjung hanya menulis satu alamat email. Tombolnya mengirim JSON ke Google Apps Script, yang menyimpan barisnya ke Google Sheet lalu mengirim pemberitahuan ke `info.rakitdev@gmail.com`. Kiriman memakai tipe `text/plain` dengan sengaja: permintaan sederhana seperti itu tidak memicu preflight `OPTIONS`, yang memang tidak dilayani Apps Script.
 
-Judul dan badan suratnya ada di `tplSubject()` dan `tplBody()`, keduanya lewat `__()` jadi ikut bahasa yang sedang dipakai.
+Alamat Web App-nya ada di satu tempat, `WAITLIST_URL` di akhir skrip. Selama masih kosong, tombolnya jatuh balik ke `mailto:` supaya halaman tidak pernah diam saja saat ditekan. Cara memasangnya ada di [`waitlist.md`](waitlist.md); script-nya di [`waitlist.gs`](waitlist.gs).
+
+Form juga punya satu kolom centang tersembunyi (`.jhp`) sebagai umpan penangkap robot. Kalau terisi, script-nya menjawab ok tapi tidak menyimpan apa-apa.
 
 ## Menjalankan di komputer
 

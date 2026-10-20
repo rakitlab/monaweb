@@ -1,0 +1,5 @@
+# Catatan dan backend daftar tunggu: dipakai saat memasang, bukan disajikan
+# ke pengunjung. Yang dideploy hanya index.html, assets/, dan vercel.json.
+README.md
+waitlist.md
+waitlist.gs
