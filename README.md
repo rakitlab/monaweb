@@ -2,11 +2,12 @@
 
 Website untuk aplikasi Mona, pencatat uang dengan asisten Lisa. Dibuat oleh Rakit Lab.
 
-Seluruh situs ada di satu file, `index.html`, ditambah empat foto lukisan di `assets/`. Tidak ada build, tidak ada dependensi.
+Seluruh situs ada di satu file, `index.html`, ditambah lima foto lukisan di `assets/`. Tidak ada build, tidak ada dependensi.
 
 | Berkas | Dipakai di |
 | -- | -- |
-| `mona-lisa.jpg` | Animasi sampul (map 01) |
+| `mona-lisa.jpg` | Animasi sampul (map 01), setelah catatan dibereskan |
+| `mona-lisa-sad.jpg` | Animasi sampul (map 01), sebelum dibereskan — "Mona Lisa with soothing temple patches" |
 | `last-supper.jpg` | Latar Space bersama (map 05), layar lebar |
 | `last-supper-tall.jpg` | Latar Space bersama di layar ≤600px, potongan tegak |
 | `creation-of-adam.jpg` | Latar map 10 |
@@ -26,9 +27,17 @@ Halaman berupa tumpukan map bertab. Tiap map punya `id` yang dipakai menu naviga
 | 07 | `cerita` | Buku cerita yang dibuka halaman demi halaman: Mona Lisa, Mona, Lisa, papan inspirasi UI, penutup |
 | 08 | `harga` | Dua kartu paket (Gratis, Pro), lalu pemisah `.pt-sep` dan tabel 18 fitur per kelompok |
 | 09 | `tanya` | Enam janji privasi dan FAQ akordeon; jawaban diketik di layar Lisa |
-| 10 | `gabung` | Pendaftaran uji coba tertutup, di atas Penciptaan Adam |
+| 10 | `gabung` | Pendaftaran uji coba tertutup, di atas Penciptaan Adam; isi alamat, tombol kirim membuka email yang sudah terisi |
 
 Kalau menambah atau memindah map, perbarui tiga tempat: nomor di `.tab`, daftar di `#nsel` (menu desktop), dan daftar di `#nsheet` (menu HP).
+
+## Email undangan
+
+Semua alamat di halaman memakai `info.rakitdev@gmail.com`, diambil dari satu tempat: isi `#addr` di map 10 (`MAILTO` di skrip).
+
+Di map 10 pengunjung menulis alamat Google-nya, lalu menekan kirim. Tombolnya menyusun `mailto:` lengkap dengan judul dan badan surat yang sudah jadi — alamat yang tadi diketik ikut masuk ke dalamnya. Karena `mailto:` tidak selalu ada yang menangani (Gmail di browser, misalnya), ada dua jalan cadangan: **Buka di Gmail** yang memakai alamat compose Gmail web, dan **Salin isi emailnya** yang menyalin seluruh surat ke papan klip.
+
+Judul dan badan suratnya ada di `tplSubject()` dan `tplBody()`, keduanya lewat `__()` jadi ikut bahasa yang sedang dipakai.
 
 ## Menjalankan di komputer
 
@@ -67,7 +76,11 @@ Menambah teks baru: tulis dalam bahasa Indonesia seperti biasa, lalu tambahkan p
 - Skala huruf mengikuti aplikasi: isi 15px, tombol 14px, judul `clamp(28px, 3.5vw, 48px)`, label mono kecil huruf kapital, garis rambut 0,8px.
 - Avatar peran di Space berupa wajah piksel 8 × 8, sekeluarga dengan arsip wajah di aplikasi. Mata, mulut, aksesori, warna piksel, dan latar diatur per peran di tabel `WAJAH`; warnanya dari `--ap` dan `--ab` per `data-r`.
 - Buku di map 07 memakai `data-bk` pada tombol untuk melompat ke bab. Di layar sempit (860px ke bawah) buku jadi satu halaman per layar. Bisa digeser, dan panah kiri/kanan di keyboard juga jalan.
-- Di map 01, sebelum catatan dibereskan lukisannya dibuat murung: sudut bibir turun, mata lelah, dahi berkerut, rambut lepas dari kerudung, warna sedikit pudar. Semuanya memudar ke nol antara detik 7,9 dan 9,3 (`SAD0`, `SAD1`), jadi yang tersisa persis lukisan aslinya yang tersenyum. Ukurannya memakai piksel lukisan asli, bukan piksel layar, dan titik akar rambut diukur dari siluet kerudung, jadi tetap pas di ukuran jendela mana pun. Warna kulit dan bayangan bibir diambil dari lukisannya sendiri; kalau kanvasnya ternoda (`getImageData` gagal), dipakai warna bawaan.
+- Di map 01, sebelum catatan dibereskan yang tampil adalah `mona-lisa-sad.jpg`, lukisan versi murung dengan plester di pelipis. Potongan dan ukuran pikselnya dibuat sama persis dengan `mona-lisa.jpg`, jadi keduanya bisa dilarutkan satu ke yang lain di tempat yang sama tanpa bergeser. Larutannya berjalan antara detik 7,9 dan 9,3 (`SAD0`, `SAD1`); sesudah itu yang tersisa persis lukisan aslinya yang tersenyum. Dalam `prefers-reduced-motion` langsung yang tersenyum. Kalau menukar salah satu gambarnya, samakan dulu ukuran dan potongannya dengan yang lain.
+- Kartu map di sampul (`drawFolders`) mengikuti kartu di aplikasi: sudut 0, tab miring dengan tepi kanan condong keluar ke bawah, lalu nomor mono kecil diikuti nama tebal. Label "Akhirnya senyum." otomatis turun ke bawah tumpukan kartu kalau posisinya bersinggungan.
+- Tiap transaksi di map 02 punya satu lukisan kecil yang muncul di belakang isi selnya saat tanggalnya disorot. Gambarnya dibuat di dalam kode (`PLAK` di skrip, bahannya di `<defs>` awal halaman), bukan berkas gambar: satu dasar bercahaya dari kiri atas, satu set warna tanah, tepi dilembutkan, lalu retak vernis tipis. Menambah jenis baru cukup menambah satu entri di `PLAK` dengan nama yang sama dengan ikonnya, lalu memakai nama itu di kolom pertama `D`.
+- Alur teks diatur dari CSS dan penerjemah, bukan dari spasi mati di HTML — kalau ditulis di HTML, kunci `I18N` jadi tidak cocok lagi. CSS memberi `text-wrap:pretty` untuk badan teks (baris terakhir tidak menyisakan satu kata) dan `text-wrap:balance` untuk judul dan label pendek. `poli()` di skrip merapikan teks tepat setelah diterjemahkan: pemisah `·` dan `+` tidak boleh memulai baris, angka tidak terpisah dari satuannya, dan tanda hubung di kata pendek (`m-Banking`, `bertanya-tanya`) tidak dijadikan tempat ganti baris. `poli()` harus kekal — hasilnya dibaca ulang oleh pengamat perubahan.
+- Map 10 memakai tinta putih di atas jingga; garis tepi mapnya tetap hitam supaya tumpukan map tetap menyambung dengan bagian di atasnya.
 - Lekukan tab map digambar dari dua segitiga border (`.tab::before` hitam, `.tab::after` warna map), bukan `clip-path` di atas latar hitam. Cara lama memakai lapisan `z-index` negatif dan di sebagian browser hitamnya bocor memenuhi lekukan.
 - Judul dan subjudul tiap bagian disejajarkan per baris pertama (`align-items:baseline`), bukan rata bawah. `.fh.fh-one` membuat judulnya tetap satu baris di layar lebar.
 - Animasi mengikuti `prefers-reduced-motion`: ketikan dan balik halaman langsung selesai. Dalam mode itu lukisan map 01 langsung tampil utuh dan tersenyum.

@@ -1180,6 +1180,49 @@ img.bs-art{object-position:50% 50%;filter:contrast(1.16) saturate(.82) brightnes
 
 /* 10 + kaki */
 .folder.or{padding-bottom:var(--sp)}
+/* Map 10 memakai tinta putih, bukan hitam: di atas jingga, putih lebih
+   tenang dan kontrasnya lebih kuat. Garis tepi map tetap hitam supaya
+   tumpukan map tetap menyambung dengan bagian di atasnya. */
+.folder.or{color:#fff}
+.folder.or>.tab{color:#fff}
+.or .lt{color:rgba(255,255,255,.62)}
+.jx>p{color:rgba(255,255,255,.88);max-width:46ch}
+.jform{display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px;max-width:520px}
+.jfield{display:flex;flex-direction:column;gap:7px;flex:1 1 240px;min-width:0}
+.jfield label{color:rgba(255,255,255,.72)}
+.jform input{height:46px;min-width:0;padding:0 14px;border:var(--bw) solid rgba(255,255,255,.75);
+  background:rgba(255,255,255,.1);color:#fff;font:500 15px var(--sans);letter-spacing:-.01em}
+.jform input::placeholder{color:rgba(255,255,255,.55)}
+.jform input:focus{outline:0;border-color:#fff;background:rgba(255,255,255,.18)}
+.jform input.bad{border-color:#fff;background:rgba(120,30,10,.35)}
+.key.jsend{height:46px;flex:none;background:#fff;border-color:#fff;color:var(--or);font-weight:600}
+.key.jsend:hover{background:var(--ink);border-color:var(--ink);color:#fff}
+.jmsg{min-height:16px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:#fff}
+.jmsg:empty{display:none}
+.mail{gap:10px;max-width:520px;padding:7px 7px 7px 14px;background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.75)}
+.mail .cap{color:rgba(255,255,255,.7);flex:none}
+.mail code{color:#fff}
+.mail button{background:transparent;border:var(--bw) solid rgba(255,255,255,.75);color:#fff;height:34px;padding:0 14px}
+.mail button:hover{background:#fff;color:var(--or)}
+/* di layar sempit alamatnya dibiarkan turun baris, jangan dipotong titik tiga:
+   alamat yang terpotong tidak ada gunanya buat disalin atau dibaca */
+@media (max-width:620px){
+  .mail{flex-wrap:wrap;row-gap:8px}
+  .mail code{flex:1 0 100%;white-space:normal;overflow:visible;text-overflow:clip;
+    overflow-wrap:anywhere;font-size:13.5px}
+  .mail button{margin-left:auto}
+}
+.jalt{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:-6px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+.jalt span{color:rgba(255,255,255,.5)}
+.jalt button{border:0;padding:0;background:none;color:#fff;font:inherit;cursor:pointer;
+  text-decoration:underline;text-underline-offset:3px}
+.jalt button:hover{text-decoration-thickness:2px}
+.steps span{border-color:rgba(255,255,255,.75)}
+.steps b{background:#fff;color:var(--or)}
+.folder.or :focus-visible{outline-color:#fff}
 /* Penciptaan Adam sebagai latar map 10: dijadikan duotone jingga lewat
    multiply, supaya tetap jadi latar dan teks hitam di atasnya tetap tegas */
 .jbg{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;
@@ -1188,7 +1231,8 @@ img.bs-art{object-position:50% 50%;filter:contrast(1.16) saturate(.82) brightnes
   mix-blend-mode:multiply;opacity:.44}
 .folder.or::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   border-radius:inherit;
-  background:linear-gradient(100deg,rgba(229,103,58,.7) 0%,rgba(229,103,58,.14) 48%,rgba(229,103,58,.6) 100%)}
+  background:linear-gradient(100deg,rgba(116,38,12,.40) 0%,rgba(116,38,12,.08) 52%,rgba(116,38,12,.32) 100%),
+             linear-gradient(100deg,rgba(229,103,58,.78) 0%,rgba(229,103,58,.18) 48%,rgba(229,103,58,.66) 100%)}
 .folder.or>.join{position:relative;z-index:1}
 .foot{margin-top:0}
 .foot .top{grid-template-columns:minmax(0,1fr)}
@@ -1247,6 +1291,46 @@ img.bs-art{object-position:50% 50%}
   .lang button{min-width:40px;padding:0 6px}
   .foot .scr{flex-direction:column;align-items:flex-start;gap:16px}
 }
+
+/* ---------- LUKISAN KECIL DI KALENDER ----------
+   Saat satu tanggal disorot, di belakang isinya muncul lukisan benda yang
+   dibeli hari itu — digambar di dalam kode (lihat PLAK di skrip), bukan
+   berkas gambar, jadi gayanya pasti seragam dan tak ada yang diunduh.
+   Di atasnya ada kabut gelap supaya angka dan nominalnya tetap terbaca,
+   dan ikon garisnya memudar supaya tidak bertumpuk dengan lukisannya. */
+.day .pl{position:absolute;inset:0;z-index:0;overflow:hidden;opacity:0;
+  pointer-events:none;transition:opacity .3s ease}
+.day .pl svg{width:100%;height:100%;display:block}
+.day .pl::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(12,8,4,.62),rgba(12,8,4,.14) 44%,rgba(12,8,4,.78))}
+.day.sel .pl{opacity:1}
+.day .n{position:relative}
+.day .n,.day .led,.day .art,.day .a{z-index:1}
+.day.sel .art svg.ic{opacity:0;transition:opacity .22s ease}
+.day .art svg.ic{transition:opacity .22s ease}
+@media (prefers-reduced-motion:reduce){
+  .day .pl,.day .art svg.ic{transition:none}
+}
+
+/* ---------- ALUR TEKS ----------
+   Berlaku untuk kedua bahasa, karena aturannya di mesin pemenggal baris,
+   bukan di teksnya: tidak perlu spasi mati yang akan merusak kunci I18N.
+   - text-wrap:pretty  — baris terakhir tidak boleh menyisakan satu kata.
+   - text-wrap:balance — judul dan label pendek dibagi rata antarbaris.
+   - hyphens:manual    — kata tidak pernah dipotong dengan tanda hubung;
+                         bahasa Indonesia punya banyak kata panjang dan
+                         pemenggalannya sering jatuh di tempat yang salah.
+   Yang tetap boleh memotong kata hanya yang memang tak muat: alamat email
+   dan URL, lewat overflow-wrap:anywhere di tempatnya masing-masing. */
+body{hyphens:manual;-webkit-hyphens:manual}
+p,li,dd,blockquote,figcaption,summary,
+.lede,.stmt,.d,.ds,.pr,.pq,.plan-d,.fh p,.jx>p{text-wrap:pretty}
+h1,h2,h3,h4,.ch-t,.cap,.tab,.steps span,.pg-h span,.pg-f span,
+.lm-tabs small,.fo-sum .cap,.drawer p b,.drawer .d{text-wrap:balance}
+/* label mono pendek: kalau sampai dua baris, jangan putus tepat di pemisah */
+.cap{text-wrap:balance}
+/* alamat dan tautan panjang boleh dipotong daripada melebar keluar kotak */
+.mail code,.foot .cols a[href^="mailto"],.fqc .m{overflow-wrap:anywhere}
 </style>
 
 
@@ -1289,6 +1373,11 @@ img.bs-art{object-position:50% 50%}
     <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19.5c0-3.4 2.7-5.6 6-5.6s6 2.2 6 5.6M16 5.6a3.2 3.2 0 0 1 0 5.8M18 14.2c1.9.7 3.2 2.5 3.2 5.3"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
     <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <!-- Bahan lukisan kecil di kalender (map 02): satu set gradien warna
+         tanah, dasar bercahaya dari kiri atas, pelembut tepi ala sfumato,
+         retak vernis, dan lapisan kuning tua. Dipakai bersama oleh semua
+         gambar supaya ke-14 benda terasa satu keluarga. Lihat PLAK di skrip. -->
+<linearGradient id="pg0" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#7b715d"/><stop offset=".52" stop-color="#1C1309"/><stop offset="1" stop-color="#181007"/></linearGradient><linearGradient id="pg1" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#8d7c64"/><stop offset=".52" stop-color="#3A2715"/><stop offset="1" stop-color="#271a0d"/></linearGradient><linearGradient id="pg2" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#a9916c"/><stop offset=".52" stop-color="#6B4A24"/><stop offset="1" stop-color="#402b15"/></linearGradient><linearGradient id="pg3" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#c6a874"/><stop offset=".52" stop-color="#9C7232"/><stop offset="1" stop-color="#583f1c"/></linearGradient><linearGradient id="pg4" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#e0c087"/><stop offset=".52" stop-color="#C99C52"/><stop offset="1" stop-color="#6f542c"/></linearGradient><linearGradient id="pg5" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#f2e3b9"/><stop offset=".52" stop-color="#E9D8A8"/><stop offset="1" stop-color="#7f7257"/></linearGradient><linearGradient id="pg6" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#989a76"/><stop offset=".52" stop-color="#4E5B35"/><stop offset="1" stop-color="#31341d"/></linearGradient><linearGradient id="pg7" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#b4816b"/><stop offset=".52" stop-color="#7E3022"/><stop offset="1" stop-color="#491e14"/></linearGradient><linearGradient id="pg8" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#969895"/><stop offset=".52" stop-color="#4A566A"/><stop offset="1" stop-color="#2f3138"/></linearGradient><linearGradient id="pg9" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#e5dabd"/><stop offset=".52" stop-color="#D2C9B0"/><stop offset="1" stop-color="#736b5b"/></linearGradient><radialGradient id="pgr" cx=".32" cy=".26" r=".9"><stop offset="0" stop-color="#8A7340"/><stop offset=".45" stop-color="#4C3D21"/><stop offset="1" stop-color="#160F07"/></radialGradient><linearGradient id="pvn" x1="0" y1="0" x2=".4" y2="1"><stop offset="0" stop-color="#FFD98A" stop-opacity=".22"/><stop offset=".55" stop-color="#C98B3A" stop-opacity=".06"/><stop offset="1" stop-color="#2A1706" stop-opacity=".3"/></linearGradient><filter id="pcr" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="3.1" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 .08 0 0 0 0 .05 0 0 0 0 .03 -9 -9 -9 0 12.1"/></filter><filter id="psf" x="-15%" y="-15%" width="130%" height="130%"><feGaussianBlur stdDeviation=".55"/></filter>
   </defs>
 </svg>
 
@@ -1637,7 +1726,7 @@ img.bs-art{object-position:50% 50%}
     <div class="fqh">
       <span class="cap">FAQ · 7 pertanyaan</span>
       <h3><span class="lt">Masih ada</span>yang ingin ditanyakan?</h3>
-      <div class="fqc lcd"><div class="t"><span class="cap">Lisa · siap membantu</span><b>Belum ketemu jawabannya?</b><span class="m">halo@rakitlab.space</span></div><a class="key or" href="mailto:halo@rakitlab.space"><svg class="ic"><use href="#i-mail"/></svg>Kirim email</a></div>
+      <div class="fqc lcd"><div class="t"><span class="cap">Lisa · siap membantu</span><b>Belum ketemu jawabannya?</b><span class="m">info.rakitdev@gmail.com</span></div><a class="key or" href="mailto:info.rakitdev@gmail.com?subject=Pertanyaan%20tentang%20Mona"><svg class="ic"><use href="#i-mail"/></svg>Kirim email</a></div>
     </div>
     <div class="fq" id="fq">
       <div class="fi open"><button type="button" class="fq-q" id="fq1" aria-expanded="true" aria-controls="fa1"><i>01</i><span>Apakah Mona tersambung ke rekening bank?</span><svg class="ic pl"><use href="#i-minus"/></svg></button><div class="fq-a" id="fa1" role="region" aria-labelledby="fq1"><div><div class="ans"><p data-a="Tidak. Kamu mencatat lewat ketik, suara, foto struk, atau notifikasi.">Tidak. Kamu mencatat lewat ketik, suara, foto struk, atau notifikasi.</p></div></div></div></div>
@@ -1658,8 +1747,17 @@ img.bs-art{object-position:50% 50%}
   <div class="join">
     <h2><span class="lt">Mulai dari</span>catatan pertama.</h2>
     <div class="jx">
-      <p>Kirim email Google yang kamu pakai di Play Store. Undangan kami balas, gratis plus 7 hari Pro.</p>
-      <div class="mail"><code id="addr">halo@rakitlab.space</code><button type="button" id="copy">Salin email</button></div>
+      <p>Tulis email Google yang kamu pakai di Play Store. Tombol kirim membuka email yang isinya sudah kami siapkan. Undangan kami balas, gratis plus 7 hari Pro.</p>
+      <form class="jform" id="jform" novalidate>
+        <span class="jfield">
+          <label class="cap" for="jmail">Email Google kamu</label>
+          <input id="jmail" type="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="nama@gmail.com" aria-describedby="jmsg">
+        </span>
+        <button class="key jsend" type="submit">Kirim email <svg class="ic"><use href="#i-mail"/></svg></button>
+      </form>
+      <p class="jmsg" id="jmsg" role="status"></p>
+      <div class="mail"><span class="cap">Dikirim ke</span><code id="addr">info.rakitdev@gmail.com</code><button type="button" id="copy">Salin email</button></div>
+      <div class="jalt"><button type="button" id="jgmail">Buka di Gmail</button><span aria-hidden="true">·</span><button type="button" id="jtpl">Salin isi emailnya</button></div>
       <div class="steps"><span><b>1</b> Kirim email</span><span><b>2</b> Terima undangan</span><span><b>3</b> Pasang</span></div>
     </div>
   </div>
@@ -1675,7 +1773,7 @@ img.bs-art{object-position:50% 50%}
       <div><span class="wm2">MONA</span><span>Money Navigator dengan asisten Lisa.<br>Dibuat oleh Rakit Lab.</span></div>
       <div><span class="cap">Produk</span><a href="#buku">Buku</a><a href="#arsip">Arsip</a><a href="#bersama">Space bersama</a><a href="#cocok">Cocok untuk</a><a href="#cerita">Cerita</a><a href="#harga">Harga</a></div>
       <div><span class="cap">Legal</span><a href="#tanya">Kebijakan privasi</a><a href="#tanya">Syarat penggunaan</a><a href="#tanya">Hapus akun</a></div>
-      <div><span class="cap">Kontak</span><span>halo@rakitlab.space</span><a href="https://rakitlab.space" target="_blank" rel="noopener">rakitlab.space</a></div>
+      <div><span class="cap">Kontak</span><a href="mailto:info.rakitdev@gmail.com">info.rakitdev@gmail.com</a><a href="https://rakitlab.space" target="_blank" rel="noopener">rakitlab.space</a></div>
     </div>
     <div class="legal cap"><span><span class="led"></span>ID.RAKITLAB.MONA</span><span>© 2026 Rakit Lab · M-01 Money Navigator</span></div>
   </div>
@@ -1689,17 +1787,41 @@ var $=function(i){return document.getElementById(i)};
 /* ---------- BAHASA: Inggris (bawaan) dan Indonesia ----------
    Sumber teks halaman ditulis dalam bahasa Indonesia. Kamus di bawah
    menerjemahkan teks utuh (bukan potongan) ke bahasa Inggris saat dijalankan. */
-var I18N={"Mona — Money Navigator":"Mona — Money Navigator","Mona mencatat uangmu dalam lima detik. Ucapkan, ketik, atau foto struk.":"Mona logs your money in five seconds. Say it, type it, or snap the receipt.","Mona, kembali ke atas":"Mona, back to top","Bagian halaman":"Page sections","Sampul":"Cover","Buku":"Ledger","Catat":"Log","Arsip":"Archive","Bersama":"Shared","Cocok untuk":"Made for","Cocok":"Made for","Cerita":"Story","Harga":"Pricing","Tanya":"FAQ","Gabung":"Join","Language":"Bahasa","Ikut uji coba":"Join the beta","Buka menu":"Open menu","01 · Sampul":"01 · Cover","Sebelum & sesudah":"Before & after","Animasi: struk, catatan tempel, dan spreadsheet berserakan di depan lukisan Mona Lisa, lalu Lisa merapikannya ke dalam map arsip":"Animation: receipts, sticky notes and spreadsheets scattered in front of the Mona Lisa, then Lisa files them into archive folders","Bulan ini":"This month","Struk · 47":"Receipts · 47","Saldo: ???":"Balance: ???","Jeda animasi":"Pause animation","Putar animasi":"Play animation","Putar ulang":"Replay","Uji coba tertutup":"Closed beta","Rahasia senyum Mona Lisa?":"The secret behind Mona Lisa’s smile?","Catatannya sudah rapi.":"Her books are in order.","Ucapkan, ketik, atau foto.":"Say it, type it, or snap it.","Lisa mengarsipkannya dalam lima detik.":"Lisa files it in five seconds.","Lihat caranya":"See how","02 · Buku":"02 · Ledger","Setiap hari ada yang dibayar. Mona mencatat":"Something gets paid every day. Mona logs","semuanya":"all of it","Lisa · menunggu":"Lisa · waiting","Arahkan ke tanggal":"Hover over a date","Ketuk tanggal":"Tap a date","Arahkan":"Hover","Ketuk":"Tap","Lisa · menerima":"Lisa · receiving","Lisa · membaca":"Lisa · reading","Lisa · terbaca":"Lisa · read","Lisa · tersimpan":"Lisa · saved","Lisa · mendengarkan":"Lisa · listening","Ketik transaksi":"Type a transaction","m-Banking · baru saja":"m-Banking · just now","Menunggu…":"Waiting…","Lisa membaca…":"Lisa is reading…","Terbaca · 0,6 dtk":"Read · 0.6 s","Tersimpan ke Buku":"Saved to Ledger","Tersimpan ✓":"Saved ✓","Simpan":"Save","Kategori":"Category","Dompet":"Wallet","Catatan":"Note","Pemasukan":"Income","Pengeluaran":"Expense","catatan":"entries","Keluar":"Out","Masuk":"In","Rata-rata":"Average","4 detik":"4 seconds","per catatan":"per entry","Minggu":"Sunday","Senin":"Monday","Selasa":"Tuesday","Rabu":"Wednesday","Kamis":"Thursday","Jumat":"Friday","Sabtu":"Saturday","Sen":"Mon","Sel":"Tue","Rab":"Wed","Kam":"Thu","Jum":"Fri","Sab":"Sat","Min":"Sun","suara":"voice","ketik":"typed","struk":"receipt","notifikasi":"notification","Tunai":"Cash","Kopi susu":"Milk coffee","kopi susu 28 ribu pakai gopay":"milk coffee 28k with gopay","Ojek ke kantor":"Ride to the office","ojek 18rb":"bike ride 18k","Nasi padang":"Nasi padang","RM SEDERHANA · 2 item":"RM SEDERHANA · 2 items","Bensin":"Fuel","bensin 60 ribu tunai":"fuel 60k cash","Belanja mingguan":"Weekly groceries","INDOMARET · 9 item":"INDOMARET · 9 items","Monstera kecil":"Small monstera","beli tanaman 45rb pakai dana":"bought a plant 45k with dana","Token listrik":"Electricity token","PLN prabayar Rp200.000 berhasil":"PLN prepaid Rp200.000 successful","Kopi":"Coffee","es kopi 25 ribu":"iced coffee 25k","Paket data":"Mobile data","Pembelian paket data Rp100.000":"Mobile data purchase Rp100.000","Nonton":"Movie","nonton 50rb ovo":"movie 50k ovo","Makan siang tim":"Team lunch","WARUNG BU SRI · dipisah 2 kategori":"WARUNG BU SRI · split into 2 categories","Kado Dita":"Gift for Dita","patungan kado dita 75 ribu":"chipped in for dita’s gift 75k","Servis motor":"Motorbike service","BENGKEL JAYA · servis + oli":"BENGKEL JAYA · service + oil","kopi 28rb":"coffee 28k","Kos":"Rent","Transfer ke IBU KOS Rp1.500.000":"Transfer to LANDLADY Rp1.500.000","Sabun & sampo":"Soap & shampoo","sabun sampo 54 ribu":"soap shampoo 54k","bensin 60rb":"fuel 60k","Raka bayar patungan":"Raka paid his share","Transfer masuk Rp150.000 dari RAKA":"Incoming transfer Rp150.000 from RAKA","Bakso":"Meatball soup","bakso 22 ribu tunai":"meatball soup 22k cash","Konser":"Concert","tiket konser 350rb bca":"concert ticket 350k bca","kopi susu 28 ribu":"milk coffee 28k","Langganan musik":"Music subscription","Tagihan langganan Rp54.990":"Subscription bill Rp54.990","Pupuk":"Fertiliser","pupuk 18rb":"fertiliser 18k","Belanja bulanan":"Monthly groceries","SUPERINDO · 21 item":"SUPERINDO · 21 items","Gajian":"Payday","Gaji masuk Rp8.500.000":"Salary in Rp8.500.000","Kirim ke mama":"Sent to mum","kirim mama satu juta":"send mum one million","Makan malam":"Dinner","SATE KHAS SENAYAN · 3 item":"SATE KHAS SENAYAN · 3 items","Ojek":"Bike ride","ojek 21rb":"bike ride 21k","kopi 28 ribu gopay":"coffee 28k gopay","Nabung emas":"Gold savings","emas 1 gram 1,185 juta":"gold 1 gram 1.185m","Makan & minum":"Food & drink","Transportasi":"Transport","Belanja harian":"Groceries","Rumah":"Home","Tagihan":"Bills","Hiburan":"Entertainment","Hadiah":"Gifts","Tempat tinggal":"Housing","Piutang":"Receivable","Langganan":"Subscriptions","Gaji":"Salary","Keluarga":"Family","Investasi":"Invest","Lainnya":"Other","Item":"Item","item":"items","utang Raka\n200rb??":"Raka owes\n200k??","bensin\nbrp ya":"fuel\nhow much","bayar\nlistrik!!":"pay\nelectric!!","gajian\ntgl 25":"payday\non the 25th","parkir 5rb":"parking 5k","transfer\nmama":"transfer\nmum","langganan\nmusik?":"music\nsub?","nasi padang\n35":"nasi padang\n35","patungan\n4 org":"split\n4 ways","sisa\nberapa??":"how much\nleft??","jangan\nlupa catat":"don’t forget\nto log","bensin 60 / 50?":"fuel 60 / 50?","sisa 1,2jt?? 980?":"left 1.2m?? 980?","hutang Dita 75":"owe Dita 75","01 Dompet":"01 Wallets","02 Investasi":"02 Invest","03 Kewajiban":"03 Debts","04 Neraca":"04 Balance","4 dompet":"4 wallets","emas · saham":"gold · stocks","cicilan":"instalments","kekayaan bersih":"net worth","KEKAYAAN BERSIH · SEP 2026":"NET WORTH · SEP 2026","UTANG 4,6%":"DEBT 4.6%","Akhirnya senyum.":"Finally smiling.","Lisa membaca":"Lisa reading","Mengarsipkan…":"Filing…","Semua terarsip":"All filed","5 detik":"5 seconds","03 · Catat":"03 · Log","Lisa mini":"Lisa mini","Satu kalimat,":"One sentence,","satu catatan.":"one entry.","Ucapkan, ketik, atau foto. Lisa memilah sisanya.":"Say it, type it, or snap it. Lisa sorts out the rest.","Cara mencatat":"Ways to log","Ucapkan":"Say it","Suara":"Voice","Bicara saja":"Just talk","Ketik":"Type","Seperti chat":"Like a chat","Foto struk":"Receipt photo","Struk":"Receipt","Satu ketukan":"One tap","Notifikasi bank":"Bank notifications","Notif":"Notif","Otomatis":"Automatic","LR-01 · Perekam":"LR-01 · Recorder","Siap":"Ready","Merekam":"Recording","Siap disimpan":"Ready to save","Tersimpan":"Saved","Mengetik":"Typing","Membidik":"Framing","Notifikasi masuk":"Notification in","Baca":"Read","1 kalimat":"1 sentence","= 1 catatan":"= 1 entry","1 ketikan":"1 message","1 foto struk":"1 receipt photo","= 21 item terbaca":"= 21 items read","1 notifikasi":"1 notification","= 1 draf siap cek":"= 1 draft to check","0,6 dtk":"0.6 s","0,4 dtk":"0.4 s","1,5 dtk":"1.5 s","0,3 dtk":"0.3 s","kopi susu 28 ribu, pakai gopay":"milk coffee 28k, with gopay","gajian 8,5jt masuk bca":"salary 8.5m into bca","Waktu":"Time","Hari ini, ":"Today, ","Hari ini,":"Today,","Piutang dibayar":"Receivable paid","Dari":"From","Draf Lisa":"Lisa’s draft","Di Buku":"In Ledger","Cek dulu, lalu simpan":"Check it, then save","Tersimpan ke Buku ✓":"Saved to Ledger ✓","Tambahkan jumlah, mis. 28rb":"Add an amount, e.g. 28k","Kamu bilang":"You said","Ucapkan lagi":"Say it again","Ketuk untuk ulang":"Tap to repeat","Kamu ketik":"You type","ketik: kopi 28rb gopay":"type: coffee 28k gopay","Ketik transaksi, misalnya kopi 28rb gopay":"Type a transaction, e.g. coffee 28k gopay","Jumlah":"Amount","Coba":"Try","kopi 28rb gopay":"coffee 28k gopay","kopi susu 28rb gopay":"milk coffee 28k gopay","emas 1jt bca":"gold 1m bca","beli emas 1jt bca":"buy gold 1m bca","spasi":"space","Kamu foto":"You snap","Arahkan ke struk":"Point at the receipt","Memotret…":"Capturing…","21 item terbaca":"21 items read","Beras 5 kg":"Rice 5 kg","Minyak 2 L":"Cooking oil 2 L","Susu UHT 6x":"UHT milk 6x","Sabun cuci":"Detergent","+ 17 item lain":"+ 17 more items","Belanja":"Groceries","Makan":"Food","Foto ulang":"Retake","Ketuk untuk foto ulang":"Tap to retake","HP-mu menerima":"Your phone gets","Tanpa buka Mona":"Without opening Mona","Jumat, 18 September":"Friday, 18 September","Transfer masuk Rp150.000 dari RAKA SATRIA":"Incoming transfer Rp150.000 from RAKA SATRIA","Tersimpan di Buku · +Rp150.000":"Saved to Ledger · +Rp150.000","Abaikan":"Dismiss","Draf siap:":"Draft ready:","04 · Arsip":"04 · Archive","Halaman depan app":"The app’s home screen","Semua uangmu,":"All your money,","satu tumpukan map.":"one stack of folders.","Kiri: spreadsheet lama dengan rumus yang patah. Kanan: empat map di Mona yang selalu seimbang. Ketuk tab untuk membuka map.":"Left: the old spreadsheet with broken formulas. Right: four folders in Mona that always balance. Tap a tab to open a folder.","Sebelum: spreadsheet lama":"Before: the old spreadsheet","Sebelum":"Before","catatan-2025.xlsx · 14 tab":"notes-2025.xlsx · 14 tabs","Contoh spreadsheet lama":"Sample of an old spreadsheet","Tgl":"Date","Keterangan":"Description","Saldo":"Balance","gaji":"salary","bensin":"fuel","kopi?":"coffee?","pinjam R.":"lent R.","(lupa?)":"(forgot?)","rumus patah":"broken formulas","baris tanpa jumlah":"rows without amounts","Saldo tak pernah cocok":"Balance never adds up","Sesudah":"After","Halaman depan Mona":"Mona’s home screen","Map arsip":"Archive folders","Kewajiban":"Debts","Neraca":"Balance","Emas · saham · reksa dana":"Gold · stocks · mutual funds","Saham":"Stocks","Emas · 60 gram":"Gold · 60 grams","Reksa dana":"Mutual funds","Cicilan & tagihan":"Instalments & bills","Cicilan motor · 8 bln lagi":"Motorbike loan · 8 months left","Kartu kredit":"Credit card","Kekayaan bersih · Sep 2026":"Net worth · Sep 2026","Aset":"Assets","Bersih":"Net","rumus":"formulas","map, selalu seimbang":"folders, always balanced","Dihitung otomatis":"Calculated for you","Periode gajian":"Payday periods","Bulan mulai di tanggal gajian.":"Your month starts on payday.","Budget berlaju":"Pace-based budgets","Terpakai dibanding waktu berjalan.":"Spending compared with time elapsed.","Utang & piutang":"Debts & receivables","Sisa dan perkiraan lunas.":"What’s left and when it’s paid off.","Tagihan berulang":"Recurring bills","Tercatat sendiri, ada pengingat.":"Logged automatically, with reminders.","Multi mata uang":"Multiple currencies","Kurs otomatis.":"Automatic exchange rates.","Impor dari app lama":"Import from your old app","Unggah CSV atau Excel.":"Upload CSV or Excel.","Tetap jalan offline":"Works offline","Sinkron saat ada sinyal.":"Syncs when you’re back online.","Kunci & samarkan":"Lock & hide","PIN, sidik jari, nominal tersembunyi.":"PIN, fingerprint, hidden amounts.","05 · Bersama":"05 · Shared","Space · Pro":"Space · Pro","Uang bersama,":"Shared money,","tanpa saling tebak.":"no guesswork.","Satu Space untuk keluarga atau usaha. Undang hingga 5 orang, dengan peran yang jelas.":"One Space for a family or a business. Invite up to 5 people, each with a clear role.","Space · 4 dari 5 anggota":"Space · 4 of 5 members","Sinkron":"Synced","Kode undangan · 8 huruf":"Invite code · 8 letters","Pencatat: Raka, anak, ART, staf":"Logger: Raka, child, helper, staff","Pencatat":"Logger","Pemilik: Dimas, kamu":"Owner: Dimas, you","Pemilik":"Owner","Pengelola: Sari, pasangan":"Manager: Sari, partner","Pengelola":"Manager","Pengamat: Pak Harun, konsultan":"Viewer: Pak Harun, adviser","Pengamat":"Viewer","Pesan suara · Raka":"Voice note · Raka","“tolong catat parkirnya ya”":"“please log the parking”","Parkir · Rp5.000":"Parking · Rp5.000","oleh Raka":"by Raka","Peran di Space":"Roles in a Space","01 · Pemilik":"01 · Owner","kamu":"you","Akses penuh.":"Full access.","Lihat":"View","Ubah":"Edit","Kelola":"Manage","02 · Pengelola":"02 · Manager","pasangan":"partner","Lihat dan ubah semua.":"Views and edits everything.","03 · Pencatat":"03 · Logger","anak, ART, staf":"child, helper, staff","Hanya mencatat.":"Logs only.","04 · Pengamat":"04 · Viewer","konsultan":"adviser","Hanya melihat.":"View only.","Undang lewat kode":"Invite with a code","8 huruf":"of 8 letters","Anggota boleh akun gratis":"Members can use free accounts","Data aman":"Data stays safe","saat Pro berakhir":"when Pro ends","06 · Cocok untuk":"06 · Made for","Enam situasi":"Six situations","Cocok untuk kamu":"Made for people","yang tak sempat mencatat.":"who never get round to logging.","Mona dibuat untuk orang yang sibuk. Pilih situasi yang paling mirip denganmu, dan lihat bagaimana Mona dan Lisa membantunya, lengkap dengan paket yang pas.":"Mona is built for busy people. Pick the situation closest to yours and see how Mona and Lisa help, along with the plan that fits.","Situasi":"Situations","Karyawan yang gajiannya cepat habis":"Employees whose salary runs out fast","Karyawan":"Employee","Gajian cepat habis":"Salary runs out fast","Gratis":"Free","Pasangan dan keluarga":"Couples and families","Space bersama":"Shared Space","Pemilik warung dan usaha kecil":"Shop owners and small businesses","Warung":"Shop","Usaha kecil":"Small business","Freelancer dengan bayaran tak menentu":"Freelancers with irregular pay","Freelancer":"Freelancer","Bayaran tak menentu":"Irregular pay","Anak kos dan mahasiswa":"Students living away from home","Anak kos":"Student","Kiriman bulanan":"Monthly allowance","Pencatat setia spreadsheet":"Loyal spreadsheet keepers","Spreadsheet":"Spreadsheet","Impor CSV, Excel":"CSV, Excel import","Paket Gratis":"Free plan","Paket Pro":"Pro plan","Tanggal 25":"The 25th","Terpakai":"Used","Hari ke":"Day","Gajian tanggal 25, tanggal 10 sudah bertanya-tanya uangnya ke mana. Catat kopi dan parkir lewat suara.":"Paid on the 25th, wondering where it all went by the 10th. Log coffee and parking by voice.","Lisa · baru dicatat":"Lisa · just logged","“kopi susu 28 ribu gopay”":"“milk coffee 28k gopay”","Kopi · Rp28.000":"Coffee · Rp28.000","Analisis mingguan":"Weekly analysis","Anggota":"Members","Catatan minggu ini":"Entries this week","Peran":"Roles","Belanja dicatat berdua. Kamu sebagai pemilik, pasangan ikut mengelola, anak atau ART cukup mencatat.":"Shopping logged by both of you. You own the Space, your partner helps manage, your kids or helper just log.","“beli beras 65 ribu”":"“bought rice 65k”","Belanja · Rp65.000 · oleh Pasangan":"Groceries · Rp65.000 · by Partner","Empat peran":"Four roles","Laba minggu ini":"Profit this week","2 staf":"2 staff","Kategori usaha":"Business categories","Modal, jualan, dan uang dapur tidak lagi bercampur. Staf mencatat, kamu memantau, konsultan cukup melihat.":"Capital, sales and household money stop getting mixed up. Staff log, you keep watch, your adviser just views.","“beli plastik kemasan 85 ribu”":"“bought packaging 85k”","Usaha · Rp85.000 · oleh Staf":"Business · Rp85.000 · by Staff","Masuk bulan ini":"In this month","Rata-rata 3 bulan":"3-month average","Proyek":"Projects","Bayaran masuk kapan saja. Catat sekali, lalu lihat apakah bulan ini cukup.":"Payments land whenever. Log them once and see whether this month is covered.","“terima bayaran desain 3 juta”":"“got paid 3m for design work”","Pemasukan · +Rp3.000.000":"Income · +Rp3.000.000","Kategori sendiri":"Custom categories","Kiriman":"Allowance","Sisa":"Left","Aman per hari":"Safe per day","Kiriman datang sebulan sekali. Lihat sisa uangmu tiap hari, jangan menunggu tanggal tua.":"The allowance arrives once a month. See what’s left every day instead of waiting for the end-of-month crunch.","“makan siang 15 ribu”":"“lunch 15k”","Makan · Rp15.000":"Food · Rp15.000","Baris":"Rows","Kolom dipetakan":"Columns mapped","Duplikat":"Duplicates","Catatanmu sudah ada di Excel. Unggah CSV atau Excel, cek pratinjaunya, lanjut dari sana.":"Your records already live in Excel. Upload CSV or Excel, check the preview and carry on from there.","Lisa · impor":"Lisa · import","catatan-2026.xlsx":"notes-2026.xlsx","312 baris siap diimpor":"312 rows ready to import","Impor CSV":"CSV import","Belum cocok kalau kamu mencari":"Not a fit yet if you’re after","Sambungan langsung ke rekening":"A direct link to your bank account","Mona tidak meminta login atau PIN m-banking. Catatan masuk lewat ketik, suara, foto struk, atau notifikasi.":"Mona never asks for your m-banking login or PIN. Entries come in by typing, voice, receipt photos or notifications.","Aplikasi untuk iPhone":"An iPhone app","Uji coba tertutup baru di Android. Google Play dan iPhone menyusul.":"The closed beta is Android only for now. Google Play and iPhone are coming.","Space untuk lebih dari 5 orang":"A Space for more than 5 people","Satu Space menampung hingga 5 orang.":"One Space holds up to 5 people.","07 · Cerita":"07 · Story","Dua nama, satu senyum":"Two names, one smile","Dua nama,":"Two names,","satu senyum.":"one smile.","Mona Lisa adalah lukisan yang membuat orang berhenti dan menatap. Kami meminjam namanya, lalu membaginya jadi dua: Mona sebagai pemandu, Lisa sebagai asisten. Ceritanya ada di buku di bawah. Bukalah halaman demi halaman.":"The Mona Lisa is the painting that makes people stop and stare. We borrowed her name and split it in two: Mona the guide, Lisa the assistant. The story is in the book below. Turn it page by page.","Buku cerita · edisi uji coba":"Storybook · beta edition","Klik tab, panah, atau geser halaman":"Click a tab, use the arrows, or swipe","Buku cerita Mona":"Mona storybook","Buku cerita":"Storybook","Halaman 1":"Page 1","Halaman 2":"Page 2","Halaman 3":"Page 3","Halaman 4":"Page 4","Halaman 5":"Page 5","Halaman 6":"Page 6","Halaman 7":"Page 7","Halaman 8":"Page 8","Halaman 9":"Page 9","Halaman 10":"Page 10","Bab 01 · Senyum":"Chapter 01 · Smile","Sebuah lukisan,":"A painting,","sebuah senyum.":"a smile.","Di salah satu ruangan Museum Louvre, orang-orang berdesakan di depan lukisan yang ukurannya tidak seberapa besar. Mereka tidak sedang menunggu apa-apa. Mereka hanya menatap seraut wajah yang tersenyum tipis, lalu mencoba menebak apa yang sedang dipikirkannya.":"In one room of the Louvre, people crowd in front of a painting that isn’t very big. They aren’t waiting for anything. They just look at a face with a faint smile and try to guess what she’s thinking.","Itulah Mona Lisa. Leonardo da Vinci mulai mengerjakannya sekitar tahun 1503, dan lima abad kemudian orang masih berhenti untuknya. Senyum itu terasa tenang, padahal tak seorang pun tahu isi kepalanya.":"That’s the Mona Lisa. Leonardo da Vinci started it around 1503, and five centuries later people still stop for her. The smile feels calm, even though nobody knows what’s on her mind.","Urusan uang sering terasa sebaliknya: riuh dan penuh tebak-tebakan. Kami ingin catatanmu setenang senyum itu.":"Money often feels like the opposite: noisy and full of guesswork. We want your records to feel as calm as that smile.","Dari senyum ke piksel":"From smile to pixels","Museum Louvre · Paris":"Louvre Museum · Paris","Leonardo da Vinci, sekitar 1503. Cat minyak di panel kayu poplar. Dikenal lewat senyum yang sulit ditebak.":"Leonardo da Vinci, around 1503. Oil on poplar panel. Known for a smile nobody can read.","Rakit Lab · Uji coba tertutup":"Rakit Lab · Closed beta","Rakit Lab, 2026. Kertas, tinta, layar titik, dan AI seperlunya. Dikenal lewat catatan yang sudah rapi.":"Rakit Lab, 2026. Paper, ink, a dot screen and just enough AI. Known for records that are already in order.","Dua label, satu senyum":"Two labels, one smile","Bab 02 · Nama":"Chapter 02 · Name","Kenapa":"Why","Mona?":"Mona?","Kompas, penunjuk arah":"Compass, a pointer","Mona adalah singkatan dari Money Navigator, penunjuk arah untuk uangmu. Namun namanya juga membawa cerita lain.":"Mona is short for Money Navigator, a compass for your money. But the name carries another story too.","Pada lukisannya, kata mona berasal dari madonna, sapaan hormat yang kira-kira berarti nyonya. Seperti orang yang mengurus rumah dan hafal isi setiap laci. Itulah peran yang kami inginkan untuk Mona: tidak menggurui, tapi tahu persis di mana semuanya berada.":"In the painting’s title, mona comes from madonna, a respectful form of address that roughly means my lady. Like the person who runs the house and knows what’s in every drawer. That’s the role we want for Mona: never preachy, but always knowing exactly where everything is.","Penunjuk arah":"A compass","Lalu, Lisa":"Then, Lisa","Lalu,":"And","kenapa Lisa?":"why Lisa?","Lisa adalah asisten kecil di dalam Mona. Dia mendengar, membaca struk, dan mengarsipkan catatanmu. Wajah pikselnya ikut tersenyum dan berkedip pelan, seperti teman yang selalu menyimak.":"Lisa is the small assistant inside Mona. She listens, reads receipts and files your entries. Her pixel face smiles and blinks slowly, like a friend who’s always paying attention.","Di telinga kita, Lisa juga dekat dengan lisan, dan cara tercepat mencatat memang tinggal bicara. Ucapkan saja, sisanya urusan Lisa.":"To Indonesian ears, Lisa also sounds like lisan, the spoken word, and the fastest way to log is simply to speak. Say it, and Lisa handles the rest.","Lisa · siap mencatat":"Lisa · ready to log","Halo, aku Lisa.":"Hi, I’m Lisa.","Asisten kecil":"A small assistant","Bab 03 · Kertas":"Chapter 03 · Paper","Terlihat analog.":"Looks analogue.","Percayalah, ini canggih.":"Trust us, it’s smart.","Mona memakai bahasa kertas: map, tinta, stempel, layar titik. Itu disengaja. Uang adalah urusan serius, dan tampilan yang tenang membantu kita memeriksa dengan kepala dingin.":"Mona speaks the language of paper: folders, ink, stamps, a dot screen. That’s on purpose. Money is serious, and a calm interface helps you check things with a clear head.","Tapi tenang bukan berarti sederhana. Seperti angsa di permukaan danau, yang terlihat hanya gerak yang pelan. Di halaman sebelah, kami membuka sedikit kertasnya supaya kamu bisa melihat apa yang bekerja di baliknya.":"But calm doesn’t mean simple. Like a swan on a lake, all you see is slow movement. On the next page we lift the paper a little so you can see what’s working underneath.","Lisa · di balik kertas":"Lisa · behind the paper","Tenang di luar, sibuk di dalam.":"Calm outside, busy inside.","Analog di luar":"Analogue outside","Di balik kertas":"Behind the paper","Yang kamu lihat,":"What you see,","yang bekerja di dalam.":"what works inside.","Struk dan catatan tempel yang kamu lihat sebenarnya":"The receipts and sticky notes you see are actually","dibaca lalu dipilah jadi tanggal, jumlah, dan kategori":"read and sorted into date, amount and category","dalam lima detik. Map arsipnya":"in five seconds. The archive folders are","terkunci per baris":"locked row by row",", disimpan di server Singapura lewat koneksi terenkripsi. Lonceng notifikasi mengubah kabar dari aplikasi bank menjadi catatan,":", stored on servers in Singapore over an encrypted connection. The notification bell turns alerts from your bank app into entries,","tanpa login bank dan tanpa PIN":"with no bank login and no PIN",". Catatan harian Lisa":". Lisa’s daily notes","merangkum pola uangmu tiap minggu":"sum up your money patterns every week",", dan Gemini hanya dipanggil saat kamu bertanya. Terakhir, kunci undangan membuat Space":", and Gemini is only called when you ask. Finally, the invite key keeps a Space","tersinkron hingga lima orang":"in sync for up to five people","dengan empat peran.":"across four roles.","Lonceng":"Bell","Undangan":"Invite","Yang bekerja di dalam":"What works inside","Bab 04 · Rupa":"Chapter 04 · Form","Rapi dan kaku,":"Tidy and rigid,","tapi tidak dingin.":"but never cold.","Mona disusun di atas grid yang kaku: garis rambut, sudut kecil, label mono, dan angka yang selalu sejajar. Semua berbaris, supaya angka mudah dibandingkan dan tidak ada yang tersembunyi.":"Mona is built on a strict grid: hairlines, square corners, mono labels and numbers that always line up. Everything sits in rows, so figures are easy to compare and nothing hides.","Tapi uang bukan urusan dingin. Ia berisi gajian yang ditunggu, kopi yang dibeli buru-buru, dan cicilan yang dipikirkan menjelang tidur. Maka kami menambah sedikit hal yang akrab di tangan: warna kertas, tinta pekat, dan satu jingga untuk stempel.":"But money isn’t a cold subject. It’s the payday you wait for, the coffee grabbed in a hurry, the instalment you think about before bed. So we added a few familiar things: paper tones, dense ink and a single orange for the stamp.","Angka sebaiknya terasa ditulis oleh manusia, dan dibaca oleh manusia.":"Numbers should feel written by people, and read by people.","Rapi, tapi hangat":"Tidy, but warm","Papan inspirasi · sentuh tiap tempelan":"Mood board · touch each piece","Kertas, bukan layar putih. Angka terasa lebih nyata di atas warna yang hangat.":"Paper, not a white screen. Numbers feel more real on a warm tone.","Kertas · #EDEAE3":"Paper · #EDEAE3","Tinta hitam pekat untuk angka. Tegas, tidak ragu-ragu.":"Dense black ink for numbers. Decisive, never hesitant.","Tinta · #111":"Ink · #111","Satu warna jingga saja, seperti stempel. Dipakai hemat agar selalu berarti.":"Just one orange, like a stamp. Used sparingly so it always means something.","LUNAS":"PAID","Layar titik milik Lisa. Satu-satunya layar yang menyala di antara kertas.":"Lisa’s dot screen. The only thing that lights up among the paper.","Layar Lisa":"Lisa’s screen","Dua huruf: yang halus untuk dibaca, dan yang bergaya label gudang untuk angka dan catatan.":"Two typefaces: a smooth one for reading, and a warehouse-label one for numbers and notes.","Garis buku kas. Kita sudah lama menulis uang di atas garis seperti ini.":"Ledger lines. We’ve written money down on lines like these for a long time.","ayam goreng":"fried chicken","jus mangga":"mango juice","parkir":"parking","Struk yang ditempel. Bukti kecil yang membuat sebuah angka punya cerita.":"A pinned receipt. Small proof that gives a number its story.","kopi susu":"milk coffee","Garis rambut 0,8px. Cukup tipis untuk merapikan, cukup tegas untuk dibaca.":"0.8px hairlines. Thin enough to tidy, firm enough to read.","Garis 0,8":"Line 0.8","Sama-sama rapi. Bedanya, Mona menulis angka seperti buku kas: sejajar, bergaris, mudah dicek.":"Both are tidy. The difference: Mona writes numbers like a ledger, aligned, ruled and easy to check.","Aplikasi biasa":"A typical app","Pengeluaran bulan ini":"Spending this month","Lihat detail":"See details","Total keluar · 22 transaksi":"Total out · 22 transactions","Sentuh tiap tempelan untuk membaca alasannya.":"Touch each piece to read why it’s there.","Papan inspirasi":"Mood board","Bab 05 · Penutup":"Chapter 05 · Closing","Dibuat":"Made","dengan tenang.":"calmly.","Baru":"Just","mulai":"started","Mona dibuat oleh Rakit Lab pada 2026, dari kertas, tinta, layar titik, dan AI seperlunya. Tujuannya sederhana: catatan yang sudah rapi, sebelum kamu sempat merapikannya sendiri.":"Mona was made by Rakit Lab in 2026 from paper, ink, a dot screen and just enough AI. The goal is simple: records that are already in order before you get round to tidying them.","Kami tidak ingin uangmu terasa seperti ujian. Kami ingin ia terasa seperti buku catatan yang rapi, yang tidak menghakimi, dan yang selalu siap menerima satu baris lagi.":"We don’t want your money to feel like an exam. We want it to feel like a tidy notebook that doesn’t judge and is always ready for one more line.","Halaman terakhir":"Last page","Bukunya selesai.":"The book is finished.","Catatanmu belum.":"Your records aren’t.","Kalau kamu sudah sampai di sini, tinggal satu langkah kecil: kirim email, terima undangan, lalu tulis baris pertamamu.":"If you’ve made it this far, there’s one small step left: send an email, accept the invite, then write your first line.","Mulai dari catatan pertama":"Start with your first entry","Baca dari awal":"Read from the start","Sampai catatan berikutnya.":"Until your next entry.","Android · uji coba tertutup":"Android · closed beta","Bab buku":"Book chapters","Senyum":"Smile","Nama":"Name","Kertas":"Paper","Rupa":"Form","Penutup":"Closing","Halaman sebelumnya":"Previous page","Halaman berikutnya":"Next page","Bab":"Chapter","hal":"p.","08 · Harga":"08 · Pricing","Gratis & Pro":"Free & Pro","Catat gratis.":"Log for free.","Berbagi? Pakai Pro.":"Sharing? Go Pro.","Semua cara mencatat dan mengatur ada di paket Gratis. Pro menambah Space bersama, kuota lebih besar, dan cadangan Google Drive. Coba 7 hari, tanpa kartu kredit.":"Every way to log and organise is in the Free plan. Pro adds shared Spaces, bigger limits and Google Drive backup. Try it for 7 days, no credit card.","01 · Gratis":"01 · Free","Untuk sendiri":"Just for you","Selamanya":"Forever","Semua yang kamu butuhkan untuk mencatat dan mengatur uang sendiri.":"Everything you need to log and organise your own money.","Mulai gratis":"Start free","Catat 50 kali sehari: ketik, suara, struk":"50 entries a day: typed, voice, receipts","Notifikasi dari 1 aplikasi bank":"Notifications from 1 bank app","Periode gajian, budget, utang, tagihan":"Payday periods, budgets, debts, bills","Tanya Lisa 5 kali sehari":"Ask Lisa 5 times a day","02 · Pro":"02 · Pro","Uji coba 7 hari":"7-day trial","Segera":"Soon","Harga diumumkan saat rilis":"Price announced at launch","Untuk keluarga dan usaha kecil yang mengurus uang bersama.":"For families and small businesses that manage money together.","Coba Pro gratis":"Try Pro free","Semua di Gratis, ditambah:":"Everything in Free, plus:","Space bersama hingga 5 orang, 4 peran":"Shared Space for up to 5 people, 4 roles","Catat 200 kali sehari, kategori tanpa batas":"200 entries a day, unlimited categories","Notifikasi dari semua aplikasi bank":"Notifications from every bank app","Tanya Lisa tanpa batas*, analisis kapan saja":"Unlimited Lisa questions*, analysis any time","Cadangan Google Drive, 10 tema":"Google Drive backup, 10 themes","08 · B · Perbandingan":"08 · B · Comparison","Bandingkan":"Compare","semua fitur.":"every feature.","Delapan belas fitur, dikelompokkan per bagian. Gratis di kolom kiri, Pro di kolom kanan.":"Eighteen features, grouped by section. Free in the left column, Pro in the right.","Daftar fitur":"Feature list","18 fitur":"18 features","Perbandingan fitur paket Gratis dan Pro":"Feature comparison of the Free and Pro plans","Fitur":"Feature","Mencatat":"Logging","Catat lewat ketik, suara, foto struk":"Log by typing, voice, receipt photo","50/hari":"50/day","200/hari":"200/day","Notifikasi bank jadi catatan":"Bank notifications become entries","1 aplikasi":"1 app","Semua aplikasi":"All apps","Tanpa batas":"Unlimited","Impor CSV dan Excel":"CSV and Excel import","Ya":"Yes","Mengatur":"Organising","Utang dan piutang":"Debts and receivables","Tagihan berulang dan pengingat":"Recurring bills and reminders","Multi mata uang, kurs otomatis":"Multiple currencies, automatic rates","Tanya Lisa":"Ask Lisa","5/hari":"5/day","Tanpa batas*":"Unlimited*","Analisis keuangan":"Financial analysis","Mingguan":"Weekly","Kapan saja":"Any time","Berbagi":"Sharing","Gabung Space orang lain":"Join someone else’s Space","Buat Space bersama":"Create a shared Space","Tidak ada":"Not included","Hingga 5 orang":"Up to 5 people","Empat peran: pemilik, pengelola, pencatat, pengamat":"Four roles: owner, manager, logger, viewer","Data dan tampilan":"Data and appearance","Kunci PIN, sidik jari, samarkan nominal":"PIN or fingerprint lock, hide amounts","Cadangan Google Drive":"Google Drive backup","Tema":"Themes","Kuota reset tiap 00.00 WIB.":"Limits reset daily at 00:00 WIB (UTC+7).","*Batas wajar 300 tanya per hari.":"*Fair use: 300 questions a day.","Anggota Space boleh memakai akun Gratis.":"Space members can use a Free account.","09 · Tanya":"09 · FAQ","Privasi & FAQ":"Privacy & FAQ","Data keuanganmu,":"Your financial data","tetap milikmu.":"stays yours.","Enam hal yang kami pegang, dan jawaban untuk pertanyaan yang paling sering datang.":"Six things we stand by, and answers to the questions we hear most.","Ringkasan privasi · 6 janji":"Privacy summary · 6 promises","Janji kami":"Our promise","Tanpa login bank":"No bank login","Tidak minta PIN atau password m-banking.":"We never ask for your m-banking PIN or password.","Tidak diminta":"Never requested","Tidak untuk iklan":"Not for ads","Datamu tidak dijual.":"Your data is never sold.","Tidak dijual":"Never sold","Terkunci per baris":"Row-level locking","Hanya kamu dan anggota undanganmu.":"Only you and the members you invite.","Akses terbatas":"Restricted access","Server di Singapura":"Servers in Singapore","Koneksi terenkripsi.":"Encrypted connections.","Terenkripsi":"Encrypted","AI seperlunya":"AI only when needed","Dikirim ke Gemini hanya saat diminta.":"Sent to Gemini only when you ask.","Atas permintaan":"On request","Hapus kapan saja":"Delete any time","Hapus akun, semua data ikut terhapus.":"Delete your account and all data goes with it.","Tuntas":"Complete","FAQ · 7 pertanyaan":"FAQ · 7 questions","Masih ada":"Still have","yang ingin ditanyakan?":"a question?","Lisa · siap membantu":"Lisa · here to help","Belum ketemu jawabannya?":"Didn’t find your answer?","Kirim email":"Send an email","Apakah Mona tersambung ke rekening bank?":"Does Mona connect to my bank account?","Tidak. Kamu mencatat lewat ketik, suara, foto struk, atau notifikasi.":"No. You log by typing, voice, receipt photos or notifications.","Sudah bisa diunduh?":"Can I download it yet?","Uji coba tertutup di Android. Google Play dan iPhone menyusul.":"It’s in closed beta on Android. Google Play and iPhone are coming.","Berapa harganya?":"How much does it cost?","Paket Gratis cukup untuk mencatat sendiri. Harga Pro diumumkan saat rilis, dan kamu bisa mencoba 7 hari tanpa kartu kredit.":"The Free plan covers logging on your own. Pro pricing is announced at launch, and you can try it for 7 days without a credit card.","Bisa pindah dari aplikasi lain?":"Can I move over from another app?","Bisa. Unggah CSV atau Excel, cek pratinjaunya.":"Yes. Upload a CSV or Excel file and check the preview.","Siapa yang bisa melihat catatanku?":"Who can see my entries?","Hanya kamu dan anggota Space yang kamu undang, sesuai peran masing-masing.":"Only you and the Space members you invite, according to their roles.","Bagaimana kalau Pro berakhir?":"What happens when Pro ends?","Datamu tetap utuh. Space bersama jadi hanya-baca.":"Your data stays intact. Shared Spaces become read-only.","Apakah jawaban Lisa selalu benar?":"Is Lisa always right?","Bisa keliru. Setiap draf menunggu kamu cek, dan Lisa bukan penasihat keuangan.":"She can be wrong. Every draft waits for you to check it, and Lisa isn’t a financial adviser.","10 · Gabung":"10 · Join","Mulai dari":"Start with","catatan pertama.":"your first entry.","Kirim email Google yang kamu pakai di Play Store. Undangan kami balas, gratis plus 7 hari Pro.":"Email us the Google address you use on the Play Store. We’ll reply with an invite: free, plus 7 days of Pro.","Salin email":"Copy email","Tersalin":"Copied","Tekan salin":"Press copy","Terima undangan":"Get the invite","Pasang":"Install","Kaki halaman":"Footer","Money Navigator dengan asisten Lisa.":"Money Navigator with Lisa, your assistant.","Dibuat oleh Rakit Lab.":"Made by Rakit Lab.","Produk":"Product","Kebijakan privasi":"Privacy policy","Syarat penggunaan":"Terms of use","Hapus akun":"Delete account","Kontak":"Contact","Struk ·":"Receipts ·"};
+var I18N={"Mona — Money Navigator":"Mona — Money Navigator","Mona mencatat uangmu dalam lima detik. Ucapkan, ketik, atau foto struk.":"Mona logs your money in five seconds. Say it, type it, or snap the receipt.","Mona, kembali ke atas":"Mona, back to top","Bagian halaman":"Page sections","Sampul":"Cover","Buku":"Ledger","Catat":"Log","Arsip":"Archive","Bersama":"Shared","Cocok untuk":"Made for","Cocok":"Made for","Cerita":"Story","Harga":"Pricing","Tanya":"FAQ","Gabung":"Join","Language":"Bahasa","Ikut uji coba":"Join the beta","Buka menu":"Open menu","01 · Sampul":"01 · Cover","Sebelum & sesudah":"Before & after","Animasi: struk, catatan tempel, dan spreadsheet berserakan di depan lukisan Mona Lisa, lalu Lisa merapikannya ke dalam map arsip":"Animation: receipts, sticky notes and spreadsheets scattered in front of the Mona Lisa, then Lisa files them into archive folders","Bulan ini":"This month","Struk · 47":"Receipts · 47","Saldo: ???":"Balance: ???","Jeda animasi":"Pause animation","Putar animasi":"Play animation","Putar ulang":"Replay","Uji coba tertutup":"Closed beta","Rahasia senyum Mona Lisa?":"The secret behind Mona Lisa’s smile?","Catatannya sudah rapi.":"Her books are in order.","Ucapkan, ketik, atau foto.":"Say it, type it, or snap it.","Lisa mengarsipkannya dalam lima detik.":"Lisa files it in five seconds.","Lihat caranya":"See how","02 · Buku":"02 · Ledger","Setiap hari ada yang dibayar. Mona mencatat":"Something gets paid every day. Mona logs","semuanya":"all of it","Lisa · menunggu":"Lisa · waiting","Arahkan ke tanggal":"Hover over a date","Ketuk tanggal":"Tap a date","Arahkan":"Hover","Ketuk":"Tap","Lisa · menerima":"Lisa · receiving","Lisa · membaca":"Lisa · reading","Lisa · terbaca":"Lisa · read","Lisa · tersimpan":"Lisa · saved","Lisa · mendengarkan":"Lisa · listening","Ketik transaksi":"Type a transaction","m-Banking · baru saja":"m-Banking · just now","Menunggu…":"Waiting…","Lisa membaca…":"Lisa is reading…","Terbaca · 0,6 dtk":"Read · 0.6 s","Tersimpan ke Buku":"Saved to Ledger","Tersimpan ✓":"Saved ✓","Simpan":"Save","Kategori":"Category","Dompet":"Wallet","Catatan":"Note","Pemasukan":"Income","Pengeluaran":"Expense","catatan":"entries","Keluar":"Out","Masuk":"In","Rata-rata":"Average","4 detik":"4 seconds","per catatan":"per entry","Minggu":"Sunday","Senin":"Monday","Selasa":"Tuesday","Rabu":"Wednesday","Kamis":"Thursday","Jumat":"Friday","Sabtu":"Saturday","Sen":"Mon","Sel":"Tue","Rab":"Wed","Kam":"Thu","Jum":"Fri","Sab":"Sat","Min":"Sun","suara":"voice","ketik":"typed","struk":"receipt","notifikasi":"notification","Tunai":"Cash","Kopi susu":"Milk coffee","kopi susu 28 ribu pakai gopay":"milk coffee 28k with gopay","Ojek ke kantor":"Ride to the office","ojek 18rb":"bike ride 18k","Nasi padang":"Nasi padang","RM SEDERHANA · 2 item":"RM SEDERHANA · 2 items","Bensin":"Fuel","bensin 60 ribu tunai":"fuel 60k cash","Belanja mingguan":"Weekly groceries","INDOMARET · 9 item":"INDOMARET · 9 items","Monstera kecil":"Small monstera","beli tanaman 45rb pakai dana":"bought a plant 45k with dana","Token listrik":"Electricity token","PLN prabayar Rp200.000 berhasil":"PLN prepaid Rp200.000 successful","Kopi":"Coffee","es kopi 25 ribu":"iced coffee 25k","Paket data":"Mobile data","Pembelian paket data Rp100.000":"Mobile data purchase Rp100.000","Nonton":"Movie","nonton 50rb ovo":"movie 50k ovo","Makan siang tim":"Team lunch","WARUNG BU SRI · dipisah 2 kategori":"WARUNG BU SRI · split into 2 categories","Kado Dita":"Gift for Dita","patungan kado dita 75 ribu":"chipped in for dita’s gift 75k","Servis motor":"Motorbike service","BENGKEL JAYA · servis + oli":"BENGKEL JAYA · service + oil","kopi 28rb":"coffee 28k","Kos":"Rent","Transfer ke IBU KOS Rp1.500.000":"Transfer to LANDLADY Rp1.500.000","Sabun & sampo":"Soap & shampoo","sabun sampo 54 ribu":"soap shampoo 54k","bensin 60rb":"fuel 60k","Raka bayar patungan":"Raka paid his share","Transfer masuk Rp150.000 dari RAKA":"Incoming transfer Rp150.000 from RAKA","Bakso":"Meatball soup","bakso 22 ribu tunai":"meatball soup 22k cash","Konser":"Concert","tiket konser 350rb bca":"concert ticket 350k bca","kopi susu 28 ribu":"milk coffee 28k","Langganan musik":"Music subscription","Tagihan langganan Rp54.990":"Subscription bill Rp54.990","Pupuk":"Fertiliser","pupuk 18rb":"fertiliser 18k","Belanja bulanan":"Monthly groceries","SUPERINDO · 21 item":"SUPERINDO · 21 items","Gajian":"Payday","Gaji masuk Rp8.500.000":"Salary in Rp8.500.000","Kirim ke mama":"Sent to mum","kirim mama satu juta":"send mum one million","Makan malam":"Dinner","SATE KHAS SENAYAN · 3 item":"SATE KHAS SENAYAN · 3 items","Ojek":"Bike ride","ojek 21rb":"bike ride 21k","kopi 28 ribu gopay":"coffee 28k gopay","Nabung emas":"Gold savings","emas 1 gram 1,185 juta":"gold 1 gram 1.185m","Makan & minum":"Food & drink","Transportasi":"Transport","Belanja harian":"Groceries","Rumah":"Home","Tagihan":"Bills","Hiburan":"Entertainment","Hadiah":"Gifts","Tempat tinggal":"Housing","Piutang":"Receivable","Langganan":"Subscriptions","Gaji":"Salary","Keluarga":"Family","Investasi":"Invest","Lainnya":"Other","Item":"Item","item":"items","utang Raka\n200rb??":"Raka owes\n200k??","bensin\nbrp ya":"fuel\nhow much","bayar\nlistrik!!":"pay\nelectric!!","gajian\ntgl 25":"payday\non the 25th","parkir 5rb":"parking 5k","transfer\nmama":"transfer\nmum","langganan\nmusik?":"music\nsub?","nasi padang\n35":"nasi padang\n35","patungan\n4 org":"split\n4 ways","sisa\nberapa??":"how much\nleft??","jangan\nlupa catat":"don’t forget\nto log","bensin 60 / 50?":"fuel 60 / 50?","sisa 1,2jt?? 980?":"left 1.2m?? 980?","hutang Dita 75":"owe Dita 75","01 Dompet":"01 Wallets","02 Investasi":"02 Invest","03 Kewajiban":"03 Debts","04 Neraca":"04 Balance","4 dompet":"4 wallets","emas · saham":"gold · stocks","cicilan":"instalments","kekayaan bersih":"net worth","KEKAYAAN BERSIH · SEP 2026":"NET WORTH · SEP 2026","UTANG 4,6%":"DEBT 4.6%","Akhirnya senyum.":"Finally smiling.","Lisa membaca":"Lisa reading","Mengarsipkan…":"Filing…","Semua terarsip":"All filed","5 detik":"5 seconds","03 · Catat":"03 · Log","Lisa mini":"Lisa mini","Satu kalimat,":"One sentence,","satu catatan.":"one entry.","Ucapkan, ketik, atau foto. Lisa memilah sisanya.":"Say it, type it, or snap it. Lisa sorts out the rest.","Cara mencatat":"Ways to log","Ucapkan":"Say it","Suara":"Voice","Bicara saja":"Just talk","Ketik":"Type","Seperti chat":"Like a chat","Foto struk":"Receipt photo","Struk":"Receipt","Satu ketukan":"One tap","Notifikasi bank":"Bank notifications","Notif":"Notif","Otomatis":"Automatic","LR-01 · Perekam":"LR-01 · Recorder","Siap":"Ready","Merekam":"Recording","Siap disimpan":"Ready to save","Tersimpan":"Saved","Mengetik":"Typing","Membidik":"Framing","Notifikasi masuk":"Notification in","Baca":"Read","1 kalimat":"1 sentence","= 1 catatan":"= 1 entry","1 ketikan":"1 message","1 foto struk":"1 receipt photo","= 21 item terbaca":"= 21 items read","1 notifikasi":"1 notification","= 1 draf siap cek":"= 1 draft to check","0,6 dtk":"0.6 s","0,4 dtk":"0.4 s","1,5 dtk":"1.5 s","0,3 dtk":"0.3 s","kopi susu 28 ribu, pakai gopay":"milk coffee 28k, with gopay","gajian 8,5jt masuk bca":"salary 8.5m into bca","Waktu":"Time","Hari ini, ":"Today, ","Hari ini,":"Today,","Piutang dibayar":"Receivable paid","Dari":"From","Draf Lisa":"Lisa’s draft","Di Buku":"In Ledger","Cek dulu, lalu simpan":"Check it, then save","Tersimpan ke Buku ✓":"Saved to Ledger ✓","Tambahkan jumlah, mis. 28rb":"Add an amount, e.g. 28k","Kamu bilang":"You said","Ucapkan lagi":"Say it again","Ketuk untuk ulang":"Tap to repeat","Kamu ketik":"You type","ketik: kopi 28rb gopay":"type: coffee 28k gopay","Ketik transaksi, misalnya kopi 28rb gopay":"Type a transaction, e.g. coffee 28k gopay","Jumlah":"Amount","Coba":"Try","kopi 28rb gopay":"coffee 28k gopay","kopi susu 28rb gopay":"milk coffee 28k gopay","emas 1jt bca":"gold 1m bca","beli emas 1jt bca":"buy gold 1m bca","spasi":"space","Kamu foto":"You snap","Arahkan ke struk":"Point at the receipt","Memotret…":"Capturing…","21 item terbaca":"21 items read","Beras 5 kg":"Rice 5 kg","Minyak 2 L":"Cooking oil 2 L","Susu UHT 6x":"UHT milk 6x","Sabun cuci":"Detergent","+ 17 item lain":"+ 17 more items","Belanja":"Groceries","Makan":"Food","Foto ulang":"Retake","Ketuk untuk foto ulang":"Tap to retake","HP-mu menerima":"Your phone gets","Tanpa buka Mona":"Without opening Mona","Jumat, 18 September":"Friday, 18 September","Transfer masuk Rp150.000 dari RAKA SATRIA":"Incoming transfer Rp150.000 from RAKA SATRIA","Tersimpan di Buku · +Rp150.000":"Saved to Ledger · +Rp150.000","Abaikan":"Dismiss","Draf siap:":"Draft ready:","04 · Arsip":"04 · Archive","Halaman depan app":"The app’s home screen","Semua uangmu,":"All your money,","satu tumpukan map.":"one stack of folders.","Kiri: spreadsheet lama dengan rumus yang patah. Kanan: empat map di Mona yang selalu seimbang. Ketuk tab untuk membuka map.":"Left: the old spreadsheet with broken formulas. Right: four folders in Mona that always balance. Tap a tab to open a folder.","Sebelum: spreadsheet lama":"Before: the old spreadsheet","Sebelum":"Before","catatan-2025.xlsx · 14 tab":"notes-2025.xlsx · 14 tabs","Contoh spreadsheet lama":"Sample of an old spreadsheet","Tgl":"Date","Keterangan":"Description","Saldo":"Balance","gaji":"salary","bensin":"fuel","kopi?":"coffee?","pinjam R.":"lent R.","(lupa?)":"(forgot?)","rumus patah":"broken formulas","baris tanpa jumlah":"rows without amounts","Saldo tak pernah cocok":"Balance never adds up","Sesudah":"After","Halaman depan Mona":"Mona’s home screen","Map arsip":"Archive folders","Kewajiban":"Debts","Neraca":"Balance","Emas · saham · reksa dana":"Gold · stocks · mutual funds","Saham":"Stocks","Emas · 60 gram":"Gold · 60 grams","Reksa dana":"Mutual funds","Cicilan & tagihan":"Instalments & bills","Cicilan motor · 8 bln lagi":"Motorbike loan · 8 months left","Kartu kredit":"Credit card","Kekayaan bersih · Sep 2026":"Net worth · Sep 2026","Aset":"Assets","Bersih":"Net","rumus":"formulas","map, selalu seimbang":"folders, always balanced","Dihitung otomatis":"Calculated for you","Periode gajian":"Payday periods","Bulan mulai di tanggal gajian.":"Your month starts on payday.","Budget berlaju":"Pace-based budgets","Terpakai dibanding waktu berjalan.":"Spending compared with time elapsed.","Utang & piutang":"Debts & receivables","Sisa dan perkiraan lunas.":"What’s left and when it’s paid off.","Tagihan berulang":"Recurring bills","Tercatat sendiri, ada pengingat.":"Logged automatically, with reminders.","Multi mata uang":"Multiple currencies","Kurs otomatis.":"Automatic exchange rates.","Impor dari app lama":"Import from your old app","Unggah CSV atau Excel.":"Upload CSV or Excel.","Tetap jalan offline":"Works offline","Sinkron saat ada sinyal.":"Syncs when you’re back online.","Kunci & samarkan":"Lock & hide","PIN, sidik jari, nominal tersembunyi.":"PIN, fingerprint, hidden amounts.","05 · Bersama":"05 · Shared","Space · Pro":"Space · Pro","Uang bersama,":"Shared money,","tanpa saling tebak.":"no guesswork.","Satu Space untuk keluarga atau usaha. Undang hingga 5 orang, dengan peran yang jelas.":"One Space for a family or a business. Invite up to 5 people, each with a clear role.","Space · 4 dari 5 anggota":"Space · 4 of 5 members","Sinkron":"Synced","Kode undangan · 8 huruf":"Invite code · 8 letters","Pencatat: Raka, anak, ART, staf":"Logger: Raka, child, helper, staff","Pencatat":"Logger","Pemilik: Dimas, kamu":"Owner: Dimas, you","Pemilik":"Owner","Pengelola: Sari, pasangan":"Manager: Sari, partner","Pengelola":"Manager","Pengamat: Pak Harun, konsultan":"Viewer: Pak Harun, adviser","Pengamat":"Viewer","Pesan suara · Raka":"Voice note · Raka","“tolong catat parkirnya ya”":"“please log the parking”","Parkir · Rp5.000":"Parking · Rp5.000","oleh Raka":"by Raka","Peran di Space":"Roles in a Space","01 · Pemilik":"01 · Owner","kamu":"you","Akses penuh.":"Full access.","Lihat":"View","Ubah":"Edit","Kelola":"Manage","02 · Pengelola":"02 · Manager","pasangan":"partner","Lihat dan ubah semua.":"Views and edits everything.","03 · Pencatat":"03 · Logger","anak, ART, staf":"child, helper, staff","Hanya mencatat.":"Logs only.","04 · Pengamat":"04 · Viewer","konsultan":"adviser","Hanya melihat.":"View only.","Undang lewat kode":"Invite with a code","8 huruf":"of 8 letters","Anggota boleh akun gratis":"Members can use free accounts","Data aman":"Data stays safe","saat Pro berakhir":"when Pro ends","06 · Cocok untuk":"06 · Made for","Enam situasi":"Six situations","Cocok untuk kamu":"Made for people","yang tak sempat mencatat.":"who never get round to logging.","Mona dibuat untuk orang yang sibuk. Pilih situasi yang paling mirip denganmu, dan lihat bagaimana Mona dan Lisa membantunya, lengkap dengan paket yang pas.":"Mona is built for busy people. Pick the situation closest to yours and see how Mona and Lisa help, along with the plan that fits.","Situasi":"Situations","Karyawan yang gajiannya cepat habis":"Employees whose salary runs out fast","Karyawan":"Employee","Gajian cepat habis":"Salary runs out fast","Gratis":"Free","Pasangan dan keluarga":"Couples and families","Space bersama":"Shared Space","Pemilik warung dan usaha kecil":"Shop owners and small businesses","Warung":"Shop","Usaha kecil":"Small business","Freelancer dengan bayaran tak menentu":"Freelancers with irregular pay","Freelancer":"Freelancer","Bayaran tak menentu":"Irregular pay","Anak kos dan mahasiswa":"Students living away from home","Anak kos":"Student","Kiriman bulanan":"Monthly allowance","Pencatat setia spreadsheet":"Loyal spreadsheet keepers","Spreadsheet":"Spreadsheet","Impor CSV, Excel":"CSV, Excel import","Paket Gratis":"Free plan","Paket Pro":"Pro plan","Tanggal 25":"The 25th","Terpakai":"Used","Hari ke":"Day","Gajian tanggal 25, tanggal 10 sudah bertanya-tanya uangnya ke mana. Catat kopi dan parkir lewat suara.":"Paid on the 25th, wondering where it all went by the 10th. Log coffee and parking by voice.","Lisa · baru dicatat":"Lisa · just logged","“kopi susu 28 ribu gopay”":"“milk coffee 28k gopay”","Kopi · Rp28.000":"Coffee · Rp28.000","Analisis mingguan":"Weekly analysis","Anggota":"Members","Catatan minggu ini":"Entries this week","Peran":"Roles","Belanja dicatat berdua. Kamu sebagai pemilik, pasangan ikut mengelola, anak atau ART cukup mencatat.":"Shopping logged by both of you. You own the Space, your partner helps manage, your kids or helper just log.","“beli beras 65 ribu”":"“bought rice 65k”","Belanja · Rp65.000 · oleh Pasangan":"Groceries · Rp65.000 · by Partner","Empat peran":"Four roles","Laba minggu ini":"Profit this week","2 staf":"2 staff","Kategori usaha":"Business categories","Modal, jualan, dan uang dapur tidak lagi bercampur. Staf mencatat, kamu memantau, konsultan cukup melihat.":"Capital, sales and household money stop getting mixed up. Staff log, you keep watch, your adviser just views.","“beli plastik kemasan 85 ribu”":"“bought packaging 85k”","Usaha · Rp85.000 · oleh Staf":"Business · Rp85.000 · by Staff","Masuk bulan ini":"In this month","Rata-rata 3 bulan":"3-month average","Proyek":"Projects","Bayaran masuk kapan saja. Catat sekali, lalu lihat apakah bulan ini cukup.":"Payments land whenever. Log them once and see whether this month is covered.","“terima bayaran desain 3 juta”":"“got paid 3m for design work”","Pemasukan · +Rp3.000.000":"Income · +Rp3.000.000","Kategori sendiri":"Custom categories","Kiriman":"Allowance","Sisa":"Left","Aman per hari":"Safe per day","Kiriman datang sebulan sekali. Lihat sisa uangmu tiap hari, jangan menunggu tanggal tua.":"The allowance arrives once a month. See what’s left every day instead of waiting for the end-of-month crunch.","“makan siang 15 ribu”":"“lunch 15k”","Makan · Rp15.000":"Food · Rp15.000","Baris":"Rows","Kolom dipetakan":"Columns mapped","Duplikat":"Duplicates","Catatanmu sudah ada di Excel. Unggah CSV atau Excel, cek pratinjaunya, lanjut dari sana.":"Your records already live in Excel. Upload CSV or Excel, check the preview and carry on from there.","Lisa · impor":"Lisa · import","catatan-2026.xlsx":"notes-2026.xlsx","312 baris siap diimpor":"312 rows ready to import","Impor CSV":"CSV import","Belum cocok kalau kamu mencari":"Not a fit yet if you’re after","Sambungan langsung ke rekening":"A direct link to your bank account","Mona tidak meminta login atau PIN m-banking. Catatan masuk lewat ketik, suara, foto struk, atau notifikasi.":"Mona never asks for your m-banking login or PIN. Entries come in by typing, voice, receipt photos or notifications.","Aplikasi untuk iPhone":"An iPhone app","Uji coba tertutup baru di Android. Google Play dan iPhone menyusul.":"The closed beta is Android only for now. Google Play and iPhone are coming.","Space untuk lebih dari 5 orang":"A Space for more than 5 people","Satu Space menampung hingga 5 orang.":"One Space holds up to 5 people.","07 · Cerita":"07 · Story","Dua nama, satu senyum":"Two names, one smile","Dua nama,":"Two names,","satu senyum.":"one smile.","Mona Lisa adalah lukisan yang membuat orang berhenti dan menatap. Kami meminjam namanya, lalu membaginya jadi dua: Mona sebagai pemandu, Lisa sebagai asisten. Ceritanya ada di buku di bawah. Bukalah halaman demi halaman.":"The Mona Lisa is the painting that makes people stop and stare. We borrowed her name and split it in two: Mona the guide, Lisa the assistant. The story is in the book below. Turn it page by page.","Buku cerita · edisi uji coba":"Storybook · beta edition","Klik tab, panah, atau geser halaman":"Click a tab, use the arrows, or swipe","Buku cerita Mona":"Mona storybook","Buku cerita":"Storybook","Halaman 1":"Page 1","Halaman 2":"Page 2","Halaman 3":"Page 3","Halaman 4":"Page 4","Halaman 5":"Page 5","Halaman 6":"Page 6","Halaman 7":"Page 7","Halaman 8":"Page 8","Halaman 9":"Page 9","Halaman 10":"Page 10","Bab 01 · Senyum":"Chapter 01 · Smile","Sebuah lukisan,":"A painting,","sebuah senyum.":"a smile.","Di salah satu ruangan Museum Louvre, orang-orang berdesakan di depan lukisan yang ukurannya tidak seberapa besar. Mereka tidak sedang menunggu apa-apa. Mereka hanya menatap seraut wajah yang tersenyum tipis, lalu mencoba menebak apa yang sedang dipikirkannya.":"In one room of the Louvre, people crowd in front of a painting that isn’t very big. They aren’t waiting for anything. They just look at a face with a faint smile and try to guess what she’s thinking.","Itulah Mona Lisa. Leonardo da Vinci mulai mengerjakannya sekitar tahun 1503, dan lima abad kemudian orang masih berhenti untuknya. Senyum itu terasa tenang, padahal tak seorang pun tahu isi kepalanya.":"That’s the Mona Lisa. Leonardo da Vinci started it around 1503, and five centuries later people still stop for her. The smile feels calm, even though nobody knows what’s on her mind.","Urusan uang sering terasa sebaliknya: riuh dan penuh tebak-tebakan. Kami ingin catatanmu setenang senyum itu.":"Money often feels like the opposite: noisy and full of guesswork. We want your records to feel as calm as that smile.","Dari senyum ke piksel":"From smile to pixels","Museum Louvre · Paris":"Louvre Museum · Paris","Leonardo da Vinci, sekitar 1503. Cat minyak di panel kayu poplar. Dikenal lewat senyum yang sulit ditebak.":"Leonardo da Vinci, around 1503. Oil on poplar panel. Known for a smile nobody can read.","Rakit Lab · Uji coba tertutup":"Rakit Lab · Closed beta","Rakit Lab, 2026. Kertas, tinta, layar titik, dan AI seperlunya. Dikenal lewat catatan yang sudah rapi.":"Rakit Lab, 2026. Paper, ink, a dot screen and just enough AI. Known for records that are already in order.","Dua label, satu senyum":"Two labels, one smile","Bab 02 · Nama":"Chapter 02 · Name","Kenapa":"Why","Mona?":"Mona?","Kompas, penunjuk arah":"Compass, a pointer","Mona adalah singkatan dari Money Navigator, penunjuk arah untuk uangmu. Namun namanya juga membawa cerita lain.":"Mona is short for Money Navigator, a compass for your money. But the name carries another story too.","Pada lukisannya, kata mona berasal dari madonna, sapaan hormat yang kira-kira berarti nyonya. Seperti orang yang mengurus rumah dan hafal isi setiap laci. Itulah peran yang kami inginkan untuk Mona: tidak menggurui, tapi tahu persis di mana semuanya berada.":"In the painting’s title, mona comes from madonna, a respectful form of address that roughly means my lady. Like the person who runs the house and knows what’s in every drawer. That’s the role we want for Mona: never preachy, but always knowing exactly where everything is.","Penunjuk arah":"A compass","Lalu, Lisa":"Then, Lisa","Lalu,":"And","kenapa Lisa?":"why Lisa?","Lisa adalah asisten kecil di dalam Mona. Dia mendengar, membaca struk, dan mengarsipkan catatanmu. Wajah pikselnya ikut tersenyum dan berkedip pelan, seperti teman yang selalu menyimak.":"Lisa is the small assistant inside Mona. She listens, reads receipts and files your entries. Her pixel face smiles and blinks slowly, like a friend who’s always paying attention.","Di telinga kita, Lisa juga dekat dengan lisan, dan cara tercepat mencatat memang tinggal bicara. Ucapkan saja, sisanya urusan Lisa.":"To Indonesian ears, Lisa also sounds like lisan, the spoken word, and the fastest way to log is simply to speak. Say it, and Lisa handles the rest.","Lisa · siap mencatat":"Lisa · ready to log","Halo, aku Lisa.":"Hi, I’m Lisa.","Asisten kecil":"A small assistant","Bab 03 · Kertas":"Chapter 03 · Paper","Terlihat analog.":"Looks analogue.","Percayalah, ini canggih.":"Trust us, it’s smart.","Mona memakai bahasa kertas: map, tinta, stempel, layar titik. Itu disengaja. Uang adalah urusan serius, dan tampilan yang tenang membantu kita memeriksa dengan kepala dingin.":"Mona speaks the language of paper: folders, ink, stamps, a dot screen. That’s on purpose. Money is serious, and a calm interface helps you check things with a clear head.","Tapi tenang bukan berarti sederhana. Seperti angsa di permukaan danau, yang terlihat hanya gerak yang pelan. Di halaman sebelah, kami membuka sedikit kertasnya supaya kamu bisa melihat apa yang bekerja di baliknya.":"But calm doesn’t mean simple. Like a swan on a lake, all you see is slow movement. On the next page we lift the paper a little so you can see what’s working underneath.","Lisa · di balik kertas":"Lisa · behind the paper","Tenang di luar, sibuk di dalam.":"Calm outside, busy inside.","Analog di luar":"Analogue outside","Di balik kertas":"Behind the paper","Yang kamu lihat,":"What you see,","yang bekerja di dalam.":"what works inside.","Struk dan catatan tempel yang kamu lihat sebenarnya":"The receipts and sticky notes you see are actually","dibaca lalu dipilah jadi tanggal, jumlah, dan kategori":"read and sorted into date, amount and category","dalam lima detik. Map arsipnya":"in five seconds. The archive folders are","terkunci per baris":"locked row by row",", disimpan di server Singapura lewat koneksi terenkripsi. Lonceng notifikasi mengubah kabar dari aplikasi bank menjadi catatan,":", stored on servers in Singapore over an encrypted connection. The notification bell turns alerts from your bank app into entries,","tanpa login bank dan tanpa PIN":"with no bank login and no PIN",". Catatan harian Lisa":". Lisa’s daily notes","merangkum pola uangmu tiap minggu":"sum up your money patterns every week",", dan Gemini hanya dipanggil saat kamu bertanya. Terakhir, kunci undangan membuat Space":", and Gemini is only called when you ask. Finally, the invite key keeps a Space","tersinkron hingga lima orang":"in sync for up to five people","dengan empat peran.":"across four roles.","Lonceng":"Bell","Undangan":"Invite","Yang bekerja di dalam":"What works inside","Bab 04 · Rupa":"Chapter 04 · Form","Rapi dan kaku,":"Tidy and rigid,","tapi tidak dingin.":"but never cold.","Mona disusun di atas grid yang kaku: garis rambut, sudut kecil, label mono, dan angka yang selalu sejajar. Semua berbaris, supaya angka mudah dibandingkan dan tidak ada yang tersembunyi.":"Mona is built on a strict grid: hairlines, square corners, mono labels and numbers that always line up. Everything sits in rows, so figures are easy to compare and nothing hides.","Tapi uang bukan urusan dingin. Ia berisi gajian yang ditunggu, kopi yang dibeli buru-buru, dan cicilan yang dipikirkan menjelang tidur. Maka kami menambah sedikit hal yang akrab di tangan: warna kertas, tinta pekat, dan satu jingga untuk stempel.":"But money isn’t a cold subject. It’s the payday you wait for, the coffee grabbed in a hurry, the instalment you think about before bed. So we added a few familiar things: paper tones, dense ink and a single orange for the stamp.","Angka sebaiknya terasa ditulis oleh manusia, dan dibaca oleh manusia.":"Numbers should feel written by people, and read by people.","Rapi, tapi hangat":"Tidy, but warm","Papan inspirasi · sentuh tiap tempelan":"Mood board · touch each piece","Kertas, bukan layar putih. Angka terasa lebih nyata di atas warna yang hangat.":"Paper, not a white screen. Numbers feel more real on a warm tone.","Kertas · #EDEAE3":"Paper · #EDEAE3","Tinta hitam pekat untuk angka. Tegas, tidak ragu-ragu.":"Dense black ink for numbers. Decisive, never hesitant.","Tinta · #111":"Ink · #111","Satu warna jingga saja, seperti stempel. Dipakai hemat agar selalu berarti.":"Just one orange, like a stamp. Used sparingly so it always means something.","LUNAS":"PAID","Layar titik milik Lisa. Satu-satunya layar yang menyala di antara kertas.":"Lisa’s dot screen. The only thing that lights up among the paper.","Layar Lisa":"Lisa’s screen","Dua huruf: yang halus untuk dibaca, dan yang bergaya label gudang untuk angka dan catatan.":"Two typefaces: a smooth one for reading, and a warehouse-label one for numbers and notes.","Garis buku kas. Kita sudah lama menulis uang di atas garis seperti ini.":"Ledger lines. We’ve written money down on lines like these for a long time.","ayam goreng":"fried chicken","jus mangga":"mango juice","parkir":"parking","Struk yang ditempel. Bukti kecil yang membuat sebuah angka punya cerita.":"A pinned receipt. Small proof that gives a number its story.","kopi susu":"milk coffee","Garis rambut 0,8px. Cukup tipis untuk merapikan, cukup tegas untuk dibaca.":"0.8px hairlines. Thin enough to tidy, firm enough to read.","Garis 0,8":"Line 0.8","Sama-sama rapi. Bedanya, Mona menulis angka seperti buku kas: sejajar, bergaris, mudah dicek.":"Both are tidy. The difference: Mona writes numbers like a ledger, aligned, ruled and easy to check.","Aplikasi biasa":"A typical app","Pengeluaran bulan ini":"Spending this month","Lihat detail":"See details","Total keluar · 22 transaksi":"Total out · 22 transactions","Sentuh tiap tempelan untuk membaca alasannya.":"Touch each piece to read why it’s there.","Papan inspirasi":"Mood board","Bab 05 · Penutup":"Chapter 05 · Closing","Dibuat":"Made","dengan tenang.":"calmly.","Baru":"Just","mulai":"started","Mona dibuat oleh Rakit Lab pada 2026, dari kertas, tinta, layar titik, dan AI seperlunya. Tujuannya sederhana: catatan yang sudah rapi, sebelum kamu sempat merapikannya sendiri.":"Mona was made by Rakit Lab in 2026 from paper, ink, a dot screen and just enough AI. The goal is simple: records that are already in order before you get round to tidying them.","Kami tidak ingin uangmu terasa seperti ujian. Kami ingin ia terasa seperti buku catatan yang rapi, yang tidak menghakimi, dan yang selalu siap menerima satu baris lagi.":"We don’t want your money to feel like an exam. We want it to feel like a tidy notebook that doesn’t judge and is always ready for one more line.","Halaman terakhir":"Last page","Bukunya selesai.":"The book is finished.","Catatanmu belum.":"Your records aren’t.","Kalau kamu sudah sampai di sini, tinggal satu langkah kecil: kirim email, terima undangan, lalu tulis baris pertamamu.":"If you’ve made it this far, there’s one small step left: send an email, accept the invite, then write your first line.","Mulai dari catatan pertama":"Start with your first entry","Baca dari awal":"Read from the start","Sampai catatan berikutnya.":"Until your next entry.","Android · uji coba tertutup":"Android · closed beta","Bab buku":"Book chapters","Senyum":"Smile","Nama":"Name","Kertas":"Paper","Rupa":"Form","Penutup":"Closing","Halaman sebelumnya":"Previous page","Halaman berikutnya":"Next page","Bab":"Chapter","hal":"p.","08 · Harga":"08 · Pricing","Gratis & Pro":"Free & Pro","Catat gratis.":"Log for free.","Berbagi? Pakai Pro.":"Sharing? Go Pro.","Semua cara mencatat dan mengatur ada di paket Gratis. Pro menambah Space bersama, kuota lebih besar, dan cadangan Google Drive. Coba 7 hari, tanpa kartu kredit.":"Every way to log and organise is in the Free plan. Pro adds shared Spaces, bigger limits and Google Drive backup. Try it for 7 days, no credit card.","01 · Gratis":"01 · Free","Untuk sendiri":"Just for you","Selamanya":"Forever","Semua yang kamu butuhkan untuk mencatat dan mengatur uang sendiri.":"Everything you need to log and organise your own money.","Mulai gratis":"Start free","Catat 50 kali sehari: ketik, suara, struk":"50 entries a day: typed, voice, receipts","Notifikasi dari 1 aplikasi bank":"Notifications from 1 bank app","Periode gajian, budget, utang, tagihan":"Payday periods, budgets, debts, bills","Tanya Lisa 5 kali sehari":"Ask Lisa 5 times a day","02 · Pro":"02 · Pro","Uji coba 7 hari":"7-day trial","Segera":"Soon","Harga diumumkan saat rilis":"Price announced at launch","Untuk keluarga dan usaha kecil yang mengurus uang bersama.":"For families and small businesses that manage money together.","Coba Pro gratis":"Try Pro free","Semua di Gratis, ditambah:":"Everything in Free, plus:","Space bersama hingga 5 orang, 4 peran":"Shared Space for up to 5 people, 4 roles","Catat 200 kali sehari, kategori tanpa batas":"200 entries a day, unlimited categories","Notifikasi dari semua aplikasi bank":"Notifications from every bank app","Tanya Lisa tanpa batas*, analisis kapan saja":"Unlimited Lisa questions*, analysis any time","Cadangan Google Drive, 10 tema":"Google Drive backup, 10 themes","08 · B · Perbandingan":"08 · B · Comparison","Bandingkan":"Compare","semua fitur.":"every feature.","Delapan belas fitur, dikelompokkan per bagian. Gratis di kolom kiri, Pro di kolom kanan.":"Eighteen features, grouped by section. Free in the left column, Pro in the right.","Daftar fitur":"Feature list","18 fitur":"18 features","Perbandingan fitur paket Gratis dan Pro":"Feature comparison of the Free and Pro plans","Fitur":"Feature","Mencatat":"Logging","Catat lewat ketik, suara, foto struk":"Log by typing, voice, receipt photo","50/hari":"50/day","200/hari":"200/day","Notifikasi bank jadi catatan":"Bank notifications become entries","1 aplikasi":"1 app","Semua aplikasi":"All apps","Tanpa batas":"Unlimited","Impor CSV dan Excel":"CSV and Excel import","Ya":"Yes","Mengatur":"Organising","Utang dan piutang":"Debts and receivables","Tagihan berulang dan pengingat":"Recurring bills and reminders","Multi mata uang, kurs otomatis":"Multiple currencies, automatic rates","Tanya Lisa":"Ask Lisa","5/hari":"5/day","Tanpa batas*":"Unlimited*","Analisis keuangan":"Financial analysis","Mingguan":"Weekly","Kapan saja":"Any time","Berbagi":"Sharing","Gabung Space orang lain":"Join someone else’s Space","Buat Space bersama":"Create a shared Space","Tidak ada":"Not included","Hingga 5 orang":"Up to 5 people","Empat peran: pemilik, pengelola, pencatat, pengamat":"Four roles: owner, manager, logger, viewer","Data dan tampilan":"Data and appearance","Kunci PIN, sidik jari, samarkan nominal":"PIN or fingerprint lock, hide amounts","Cadangan Google Drive":"Google Drive backup","Tema":"Themes","Kuota reset tiap 00.00 WIB.":"Limits reset daily at 00:00 WIB (UTC+7).","*Batas wajar 300 tanya per hari.":"*Fair use: 300 questions a day.","Anggota Space boleh memakai akun Gratis.":"Space members can use a Free account.","09 · Tanya":"09 · FAQ","Privasi & FAQ":"Privacy & FAQ","Data keuanganmu,":"Your financial data","tetap milikmu.":"stays yours.","Enam hal yang kami pegang, dan jawaban untuk pertanyaan yang paling sering datang.":"Six things we stand by, and answers to the questions we hear most.","Ringkasan privasi · 6 janji":"Privacy summary · 6 promises","Janji kami":"Our promise","Tanpa login bank":"No bank login","Tidak minta PIN atau password m-banking.":"We never ask for your m-banking PIN or password.","Tidak diminta":"Never requested","Tidak untuk iklan":"Not for ads","Datamu tidak dijual.":"Your data is never sold.","Tidak dijual":"Never sold","Terkunci per baris":"Row-level locking","Hanya kamu dan anggota undanganmu.":"Only you and the members you invite.","Akses terbatas":"Restricted access","Server di Singapura":"Servers in Singapore","Koneksi terenkripsi.":"Encrypted connections.","Terenkripsi":"Encrypted","AI seperlunya":"AI only when needed","Dikirim ke Gemini hanya saat diminta.":"Sent to Gemini only when you ask.","Atas permintaan":"On request","Hapus kapan saja":"Delete any time","Hapus akun, semua data ikut terhapus.":"Delete your account and all data goes with it.","Tuntas":"Complete","FAQ · 7 pertanyaan":"FAQ · 7 questions","Masih ada":"Still have","yang ingin ditanyakan?":"a question?","Lisa · siap membantu":"Lisa · here to help","Belum ketemu jawabannya?":"Didn’t find your answer?","Kirim email":"Send an email","Apakah Mona tersambung ke rekening bank?":"Does Mona connect to my bank account?","Tidak. Kamu mencatat lewat ketik, suara, foto struk, atau notifikasi.":"No. You log by typing, voice, receipt photos or notifications.","Sudah bisa diunduh?":"Can I download it yet?","Uji coba tertutup di Android. Google Play dan iPhone menyusul.":"It’s in closed beta on Android. Google Play and iPhone are coming.","Berapa harganya?":"How much does it cost?","Paket Gratis cukup untuk mencatat sendiri. Harga Pro diumumkan saat rilis, dan kamu bisa mencoba 7 hari tanpa kartu kredit.":"The Free plan covers logging on your own. Pro pricing is announced at launch, and you can try it for 7 days without a credit card.","Bisa pindah dari aplikasi lain?":"Can I move over from another app?","Bisa. Unggah CSV atau Excel, cek pratinjaunya.":"Yes. Upload a CSV or Excel file and check the preview.","Siapa yang bisa melihat catatanku?":"Who can see my entries?","Hanya kamu dan anggota Space yang kamu undang, sesuai peran masing-masing.":"Only you and the Space members you invite, according to their roles.","Bagaimana kalau Pro berakhir?":"What happens when Pro ends?","Datamu tetap utuh. Space bersama jadi hanya-baca.":"Your data stays intact. Shared Spaces become read-only.","Apakah jawaban Lisa selalu benar?":"Is Lisa always right?","Bisa keliru. Setiap draf menunggu kamu cek, dan Lisa bukan penasihat keuangan.":"She can be wrong. Every draft waits for you to check it, and Lisa isn’t a financial adviser.","10 · Gabung":"10 · Join","Mulai dari":"Start with","catatan pertama.":"your first entry.","Kirim email Google yang kamu pakai di Play Store. Undangan kami balas, gratis plus 7 hari Pro.":"Email us the Google address you use on the Play Store. We’ll reply with an invite: free, plus 7 days of Pro.","Salin email":"Copy email","Tersalin":"Copied","Tekan salin":"Press copy","Terima undangan":"Get the invite","Pasang":"Install","Kaki halaman":"Footer","Money Navigator dengan asisten Lisa.":"Money Navigator with Lisa, your assistant.","Dibuat oleh Rakit Lab.":"Made by Rakit Lab.","Produk":"Product","Kebijakan privasi":"Privacy policy","Syarat penggunaan":"Terms of use","Hapus akun":"Delete account","Kontak":"Contact","Struk ·":"Receipts ·","Tulis email Google yang kamu pakai di Play Store. Tombol kirim membuka email yang isinya sudah kami siapkan. Undangan kami balas, gratis plus 7 hari Pro.":"Write in the Google address you use on the Play Store. The send button opens an email we have already written for you. We’ll reply with an invite: free, plus 7 days of Pro.","Email Google kamu":"Your Google address","nama@gmail.com":"name@gmail.com","Dikirim ke":"Sent to","Buka di Gmail":"Open in Gmail","Salin isi emailnya":"Copy the email text","Ikut uji coba tertutup Mona":"Join the Mona closed beta","Halo Rakit Lab,":"Hi Rakit Lab,","Saya ingin ikut uji coba tertutup Mona.":"I’d like to join the Mona closed beta.","Email Google (Play Store)":"Google address (Play Store)","Perangkat":"Device","Terima kasih.":"Thank you.","Tulis dulu email Google kamu":"Write in your Google address first","Emailnya sudah disiapkan. Tinggal tekan kirim di aplikasi emailmu.":"Your email is ready — just press send in your mail app.","Gmail terbuka di tab baru.":"Gmail opened in a new tab.","Isi emailnya sudah tersalin.":"The email text is copied.","Salin manual":"Copy it by hand","(tulis email kamu di sini)":"(write your address here)","Kepada":"To","Judul":"Subject"};
 var LANG=(function(){var q=(location.search.match(/[?&]lang=(en|id)\b/)||[])[1];if(q)return q;try{var v=localStorage.getItem('mona-lang');if(v==='en'||v==='id')return v}catch(e){}return 'en'})();
 var LANGH=[],HAS=Object.prototype.hasOwnProperty,REV={};
 for(var k0 in I18N)if(HAS.call(I18N,k0)&&!HAS.call(REV,I18N[k0]))REV[I18N[k0]]=k0;
 function __(t){return LANG==='en'&&HAS.call(I18N,t)?I18N[t]:t}
 var TA=['aria-label','title','placeholder','alt','data-n','data-a','data-t','data-idle','data-k'];
+/* ---------- POLES TIPOGRAFI ----------
+   Dijalankan tepat setelah penerjemah menaruh teks, jadi berlaku untuk
+   kedua bahasa tanpa perlu menulis spasi mati di dalam HTML — kalau
+   ditulis di HTML, kunci I18N jadi tidak cocok lagi. Yang dirapikan:
+   pemisah titik tengah tidak boleh memulai baris, angka tidak terpisah
+   dari satuannya, dan tanda hubung di dalam kata pendek (m-Banking,
+   bertanya-tanya) tidak dijadikan tempat ganti baris. Kata yatim di
+   baris terakhir diurus CSS lewat text-wrap:pretty, bukan di sini.
+   poli() harus kekal: poli(poli(s)) === poli(s), karena hasil tulisnya
+   memicu pengamat perubahan yang memanggil trText sekali lagi. */
+var NB=' ',NH='‑';
+var UNIT=/(\d)\s(hari|orang|detik|menit|jam|bulan|tahun|gram|kali|days?|people|persons?|seconds?|minutes?|hours?|months?|years?|grams?)\b/g;
+var HYP=/(^|[\s( ])([0-9A-Za-zÀ-ÿ]{1,12})-([0-9A-Za-zÀ-ÿ]{1,12})(?=$|[\s.,;:!?)])/g;
+function poli(s){
+  if(s.indexOf(' ')<0&&s.indexOf('-')<0)return s;
+  s=s.replace(/ ([·•+&×]) /g,NB+'$1 ');
+  s=s.replace(UNIT,'$1'+NB+'$2');
+  s=s.replace(HYP,function(m,a,b,c){return (b+c).length>18?m:a+b+NH+c});
+  return s}
+function unpoli(s){return s.replace(/ /g,' ').replace(/‑/g,'-')}
 function tr(cur,src){/* kembalikan [teks baru, sumber Indonesia] atau null */
+  cur=unpoli(cur);
   if(LANG==='en'){if(HAS.call(I18N,cur)&&I18N[cur]!==cur)return [I18N[cur],cur];return null}
   if(src!=null&&I18N[src]===cur)return [src,null];
   if(HAS.call(REV,cur)&&REV[cur]!==cur)return [REV[cur],null];return null}
-function trText(n){var v=n.nodeValue,t=v.trim();if(!t)return;var x=tr(t,n.__id);if(!x)return;n.__id=x[1];n.nodeValue=v.replace(t,x[0])}
+function trText(n){var v=n.nodeValue,t=v.trim();if(!t)return;
+  var x=tr(t,n.__id),s=poli(x?x[0]:t);
+  if(x)n.__id=x[1];
+  if(s!==t)n.nodeValue=v.replace(t,s)}
 function trAttr(el,a){var v=el.getAttribute(a);if(!v)return;var m=el.__ida||(el.__ida={}),x=tr(v.trim(),m[a]);if(!x)return;m[a]=x[1];el.setAttribute(a,x[0])}
 function walk(root){if(!root)return;
   if(root.nodeType===3){trText(root);return}
@@ -1777,6 +1899,7 @@ var FACEH=(function(){var h='';for(var r=0;r<8;r++)for(var k=0;k<16;k++)h+='<i c
 
 /* ---------- FILM ---------- */
 var ML=new Image(); ML.src='assets/mona-lisa.jpg';
+var MLS=new Image(); MLS.src='assets/mona-lisa-sad.jpg';
 var cv=$('fc'),ctx=cv.getContext('2d'),stage=cv.parentNode;
 var T=14, t=0, playing=!reduce, last=0, W=0,H=0,DPR=1,u=1,L=null,items=[],mlInk=null,grain=[];
 var CATS=[['#C98B4B','Kopi susu','GoPay',-28000],['#7E95BC','Bensin','Tunai',-60000],['#8FA36E','Indomaret','Tunai',-127500],['#C98B4B','Nasi padang','OVO',-35000],['#B4432A','Listrik','BCA',-200000],['#7E95BC','Parkir','Tunai',-5000],['#4E6B3A','Gajian','BCA',8500000],['#D49A9A','Patungan kado','DANA',-75000],['#5E6E8C','Langganan musik','BCA',-54990]];
@@ -1825,132 +1948,34 @@ function layout(){
   var FW=desk?Math.min(300,RW*.38):Math.min(210,W*.5), fx=desk?W-FW-Math.max(26,RW*.04):W-FW-12, fy=desk?H*.14:62;
   return {desk:desk,stack:stack,pw:PW,iwd:iwd,ihd:ihd,left:left,top:top,ax:ax,ay:ay,FW:FW,fx:fx,fy:fy,k:FW/300};
 }
-/* ---------- Mona murung: ekspresi sebelum catatan dibereskan ----------
-   Selama struk masih berserakan, lukisannya dibuat cemberut: sudut bibir
-   turun, mata lelah, dahi berkerut, rambut keluar dari kerudung, warna
-   sedikit pudar dan dingin. Semua lapisan ini memudar ke nol begitu
-   catatan terakhir masuk map, jadi yang tersisa persis lukisan aslinya
-   yang tersenyum. Semua ukuran memakai piksel lukisan asli, bukan layar,
-   supaya tetap pas di ukuran jendela mana pun. */
-var SAD0=7.9,SAD1=9.3,SIW=0,SIH=0,sadPat=null,strands=null,
-    sadSkin='rgb(206,152,92)',sadLip='rgb(92,52,34)';
+/* ---------- Mona murung: lukisan versi sedih ----------
+   Selama catatan masih berserakan dipakai lukisan versi murung,
+   assets/mona-lisa-sad.jpg ("Mona Lisa with soothing temple patches").
+   Komposisi, potongan, dan ukuran pikselnya persis sama dengan lukisan
+   aslinya, jadi keduanya bisa dilarutkan satu ke yang lain di tempat yang
+   sama tanpa bergeser sedikit pun. Larutannya berjalan antara detik 7,9
+   dan 9,3 (SAD0, SAD1); sesudah itu yang tersisa persis lukisan aslinya
+   yang tersenyum. Dalam prefers-reduced-motion langsung yang tersenyum. */
+var SAD0=7.9,SAD1=9.3;
 function sadAmt(tt){if(reduce)return 0;if(tt<=SAD0)return 1;if(tt>=SAD1)return 0;
   return 1-ease((tt-SAD0)/(SAD1-SAD0))}
-
-function sampleML(){ /* ambil warna kulit dan bayangan bibir dari lukisannya sendiri */
-  var c=document.createElement('canvas');c.width=SIW;c.height=SIH;
-  var x=c.getContext('2d',{willReadFrequently:true});x.drawImage(ML,0,0);
-  function avg(ps,f){var s=[0,0,0];ps.forEach(function(p){
-    var d=x.getImageData(Math.round(p[0]*SIW),Math.round(p[1]*SIH),1,1).data;
-    s[0]+=d[0];s[1]+=d[1];s[2]+=d[2]});
-    return 'rgb('+s.map(function(v){return Math.max(0,Math.min(255,Math.round(v/ps.length*f)))}).join(',')+')'}
-  sadSkin=avg([[.405,.297],[.492,.295],[.447,.318],[.447,.288],[.42,.323],[.475,.321]],1);
-  sadLip =avg([[.408,.306],[.487,.305]],.6);
-}
-function buildSad(){
-  SIW=ML.naturalWidth;SIH=ML.naturalHeight;if(!SIW)return;
-  try{sampleML()}catch(e){} /* kanvas ternoda: pakai warna bawaan saja */
-
-  /* --- petak mulut: senyum lama ditutup kabut kulit, lalu digambar cemberut --- */
-  var PX=Math.round(.381*SIW),PY=Math.round(.2905*SIH),
-      PW=Math.round(.134*SIW),PH=Math.round(.046*SIH);
-  var c=document.createElement('canvas');c.width=PW;c.height=PH;var x=c.getContext('2d');
-  var cx=.4465*SIW-PX,cy=.3085*SIH-PY,hw=.0415*SIW,
-      dn=SIH*.0040,up=SIH*.0046; /* ujung turun, tengah naik */
-  function ell(g,rx,ry,fn){x.save();x.translate(cx,cy);x.scale(1,ry/rx);
-    var gr=x.createRadialGradient(0,0,0,0,0,rx);fn(gr);
-    x.fillStyle=gr;x.fillRect(-rx,-rx,rx*2,rx*2);x.restore()}
-  x.globalAlpha=.95;
-  ell(0,PW*.52,PH*.52,function(g){g.addColorStop(0,sadSkin);g.addColorStop(.5,sadSkin);
-    g.addColorStop(1,'rgba(0,0,0,0)')});
-  x.globalAlpha=1;x.lineCap='round';x.lineJoin='round';x.strokeStyle=sadLip;
-  function arc(){x.beginPath();x.moveTo(cx-hw,cy+dn);x.quadraticCurveTo(cx,cy-up,cx+hw,cy+dn);x.stroke()}
-  x.globalAlpha=.26;x.lineWidth=SIW*.0105;arc();      /* bayangan lembut */
-  x.globalAlpha=.88;x.lineWidth=SIW*.0045;arc();      /* garis bibir */
-  x.globalAlpha=.55;x.lineWidth=SIW*.0034;            /* sudut bibir jatuh */
-  [-1,1].forEach(function(d){x.beginPath();x.moveTo(cx+d*hw,cy+dn);
-    x.quadraticCurveTo(cx+d*hw*1.07,cy+dn+SIH*.0032,cx+d*hw*.93,cy+dn+SIH*.0062);x.stroke()});
-  x.globalAlpha=.26;x.strokeStyle='rgb(255,226,188)';x.lineWidth=SIW*.0030;
-  x.beginPath();x.moveTo(cx-hw*.7,cy+dn+SIH*.0036);
-  x.quadraticCurveTo(cx,cy-up+SIH*.0036,cx+hw*.7,cy+dn+SIH*.0036);x.stroke();
-  x.globalAlpha=1;x.globalCompositeOperation='destination-in'; /* tepi dilembutkan */
-  ell(0,PW*.5,PH*.5,function(g){g.addColorStop(0,'#000');g.addColorStop(.5,'#000');
-    g.addColorStop(1,'rgba(0,0,0,0)')});
-  sadPat={cv:c,x:PX,y:PY};
-
-  /* --- rambut halus yang lepas dari kerudung, berakar di siluet kepala.
-         Arah tiap helai diambil dari garis pusat kepala ke titik akarnya,
-         lalu dicondongkan sedikit ke atas supaya terbaca berantakan. --- */
-  /* titik akar diukur dari siluet lukisan ini sendiri (tepi kerudung) */
-  var AK=[[.470,.086],[.492,.087],[.514,.088],[.536,.090],
-          [.445,.090],[.415,.100],[.396,.110],[.379,.120],[.364,.135],[.356,.145],
-          [.348,.155],[.339,.165],[.333,.180],[.327,.190],[.318,.205],[.308,.225],
-          [.299,.250],[.292,.278],[.287,.308],[.285,.338],
-          [.558,.090],[.596,.100],[.618,.110],[.632,.120],[.650,.135],[.661,.145],
-          [.667,.155],[.675,.165],[.681,.180],[.685,.190],[.689,.205],[.694,.228],
-          [.699,.252],[.703,.280],[.705,.310],[.707,.338]];
-  var R=rng(70914),a=[],hcx=.492*SIW,hcy=.205*SIH;
-  AK.forEach(function(p){
-    var vx=p[0]*SIW-hcx,vy=p[1]*SIH-hcy,m=Math.hypot(vx,vy)||1;
-    vx/=m;vy=vy/m-.26;m=Math.hypot(vx,vy)||1;vx/=m;vy/=m;
-    var base=Math.atan2(vy,vx),
-        sx=p[0]*SIW-vx*SIW*.006,sy=p[1]*SIH-vy*SIW*.006; /* akar sedikit di dalam */
-    for(var j=0;j<4;j++){
-      var th=base+(R()-.5)*.9,len=(.010+R()*.022)*SIW,cu=(R()-.5)*1.1,
-          ct=Math.cos(th),st=Math.sin(th);
-      a.push([sx,sy,
-        sx+ct*len*.34-st*len*cu*.45, sy+st*len*.34+ct*len*cu*.45,
-        sx+ct*len*.70-st*len*cu*1.05, sy+st*len*.70+ct*len*cu*1.05,
-        sx+Math.cos(th+cu*.55)*len,  sy+Math.sin(th+cu*.55)*len,
-        SIW*(.0008+R()*.0013), .2+R()*.4])}});
-  strands=a;
-}
-function smudge(x0,y0,rx,ry,col,a){ctx.save();ctx.translate(x0,y0);ctx.scale(1,ry/rx);
-  var g=ctx.createRadialGradient(0,0,0,0,0,rx);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');
-  ctx.globalAlpha=a;ctx.fillStyle=g;ctx.fillRect(-rx,-rx,rx*2,rx*2);ctx.restore()}
-function drawSad(s){
-  if(s<=0||!SIW||!L)return;
-  var S=L.iwd/SIW;
-  ctx.save();ctx.translate(L.left,L.top);ctx.scale(S,S); /* 1 unit = 1 piksel lukisan */
-  if(sadPat){ctx.globalAlpha=s;ctx.drawImage(sadPat.cv,sadPat.x,sadPat.y)}
-  /* mata lelah dan alis yang turun di sisi luar */
-  smudge(.365*SIW,.2385*SIH,.040*SIW,.011*SIH,'rgba(72,46,28,1)',s*.46);
-  smudge(.492*SIW,.2355*SIH,.040*SIW,.011*SIH,'rgba(72,46,28,1)',s*.46);
-  smudge(.345*SIW,.2055*SIH,.040*SIW,.012*SIH,'rgba(58,36,20,1)',s*.34);
-  smudge(.512*SIW,.2030*SIH,.040*SIW,.012*SIH,'rgba(58,36,20,1)',s*.34);
-  /* kerut di antara alis */
-  ctx.globalAlpha=s*.34;ctx.strokeStyle='rgb(74,46,27)';ctx.lineWidth=SIW*.0033;ctx.lineCap='round';
-  [[.4285,.4320],[.4430,.4400]].forEach(function(p){ctx.beginPath();
-    ctx.moveTo(p[0]*SIW,.2065*SIH);ctx.lineTo(p[1]*SIW,.2315*SIH);ctx.stroke()});
-  /* rambut berantakan */
-  if(strands){ctx.strokeStyle='rgb(42,24,14)';
-    strands.forEach(function(h){ctx.globalAlpha=s*h[9];ctx.lineWidth=h[8];
-      ctx.beginPath();ctx.moveTo(h[0],h[1]);
-      ctx.bezierCurveTo(h[2],h[3],h[4],h[5],h[6],h[7]);ctx.stroke()})}
-  ctx.restore();
+function tileML(img){ /* lukisan di tengah, dua cerminnya menutup sisa lebar */
+  for(var k=-1;k<=1;k++){var x0=L.left+k*L.iwd;
+    ctx.save();
+    if(k!==0){var cw=L.iwd*.3;ctx.beginPath();ctx.rect(k<0?L.left-cw:L.left+L.iwd,-H*.3,cw,H*1.6);ctx.clip()}
+    if(k===0)ctx.drawImage(img,x0-.5,L.top,L.iwd+1,L.ihd);
+    else{ctx.translate(x0+L.iwd+.5,0);ctx.scale(-1,1);ctx.drawImage(img,0,L.top,L.iwd+1,L.ihd)}
+    ctx.restore()}
 }
 function paintML(tt){
   if(!(ML.complete&&ML.naturalWidth))return;
   var zs=1+.045*(tt/T);
   ctx.save();ctx.translate(L.ax,L.ay);ctx.scale(zs,zs);ctx.translate(-L.ax,-L.ay);ctx.imageSmoothingQuality='high';
   ctx.fillStyle='#6d6848';ctx.fillRect(-W*.3,-H*.3,W*1.6,H*1.6);
-  for(var k=-1;k<=1;k++){var x0=L.left+k*L.iwd;
-    ctx.save();
-    if(k!==0){var cw=L.iwd*.3;ctx.beginPath();ctx.rect(k<0?L.left-cw:L.left+L.iwd,-H*.3,cw,H*1.6);ctx.clip()}
-    if(k===0)ctx.drawImage(ML,x0-.5,L.top,L.iwd+1,L.ihd);
-    else{ctx.translate(x0+(k<0?L.iwd+.5:L.iwd+.5),0);ctx.scale(-1,1);ctx.drawImage(ML,0,L.top,L.iwd+1,L.ihd)}
-    ctx.restore()}
-  var sd=sadAmt(tt);
-  if(sd>0)drawSad(sd);
+  var sd=sadAmt(tt),sad=sd>0&&MLS.complete&&MLS.naturalWidth;
+  if(!sad||sd<1)tileML(ML);
+  if(sad){ctx.globalAlpha=sd;tileML(MLS);ctx.globalAlpha=1}
   ctx.restore();
-  if(sd>0){ /* warna ikut murung: sedikit pudar dan dingin, lalu pulih */
-    var prev=ctx.globalCompositeOperation;
-    ctx.save();ctx.globalCompositeOperation='saturation';
-    if(ctx.globalCompositeOperation==='saturation'){
-      ctx.globalAlpha=.42*sd;ctx.fillStyle='#777';ctx.fillRect(0,0,W,H)}
-    ctx.restore();ctx.globalCompositeOperation=prev;
-    ctx.save();ctx.globalAlpha=.13*sd;ctx.fillStyle='#2b3440';ctx.fillRect(0,0,W,H);ctx.restore();
-  }
 }
 
 function build(){
@@ -1967,20 +1992,26 @@ function pos(it,t){var span=H+260*u,top=-130*u;var y=it.y0+it.vy*t+Math.cos(t*it
 var SC0=6,SCD=2.4;
 function scanX(t){return L.pw-30+(t-SC0)/SCD*(W-L.pw+60)}
 function ease(p){return p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2}
-function foldGeo(i){var k=L.k,step=50*k;return {x:L.fx,y:L.fy+i*step,w:L.FW,tabH:22*k,tabW:L.FW*.5,h:i<3?78*k:150*k}}
+function foldGeo(i){var k=L.k,step=52*k;return {x:L.fx,y:L.fy+i*step,w:L.FW,tabH:25*k,tabW:L.FW*.62,h:i<3?78*k:142*k}}
 function slot(i){var g=foldGeo(i);return {x:g.x+g.w*(FOLD[i].side=='l'?.3:.6),y:g.y+g.tabH+16*L.k}}
 function rr(x,y,w,h,r){ctx.beginPath();ctx.roundRect?ctx.roundRect(x,y,w,h,r):ctx.rect(x,y,w,h)}
 function drawFolders(t,frac){
   var a=Math.max(0,Math.min(1,(t-5.1)/.9));if(a<=0)return;
   ctx.save();ctx.globalAlpha=a;ctx.translate((1-ease(a))*60*u,0);
   var k=L.k;
-  for(var i=0;i<4;i++){var F=FOLD[i],g=foldGeo(i),left=F.side=='l',tx=left?g.x:g.x+g.w-g.tabW,by=g.y+g.tabH;
+  for(var i=0;i<4;i++){var F=FOLD[i],g=foldGeo(i),left=F.side=='l',tx=left?g.x:g.x+g.w-g.tabW,by=g.y+g.tabH,sl=14*k;
     ctx.fillStyle=F.c;ctx.strokeStyle='#111';ctx.lineWidth=.9;
-    rr(tx,g.y,g.tabW,g.tabH+2,[5*k,5*k,0,0]);ctx.fill();ctx.stroke();
-    rr(g.x,by,g.w,g.h,left?[0,6*k,6*k,6*k]:[6*k,0,6*k,6*k]);ctx.fill();ctx.stroke();
+    /* tab miring: tepi kanan condong keluar ke bawah, sama seperti tab map di app */
+    ctx.beginPath();ctx.moveTo(tx,g.y);ctx.lineTo(tx+g.tabW-sl,g.y);ctx.lineTo(tx+g.tabW,by+1);ctx.lineTo(tx,by+1);ctx.closePath();ctx.fill();ctx.stroke();
+    ctx.beginPath();ctx.rect(g.x,by,g.w,g.h);ctx.fill();ctx.stroke();
     ctx.fillRect(tx+1,by-1,g.tabW-2,2.2);
-    if(F.grid){ctx.save();rr(g.x,by,g.w,g.h,[0,6*k,6*k,6*k]);ctx.clip();ctx.strokeStyle='rgba(20,20,18,.08)';ctx.lineWidth=.7;for(var gx=g.x;gx<g.x+g.w;gx+=11*k){ctx.beginPath();ctx.moveTo(gx,by);ctx.lineTo(gx,by+g.h);ctx.stroke()}for(var gy=by;gy<by+g.h;gy+=11*k){ctx.beginPath();ctx.moveTo(g.x,gy);ctx.lineTo(g.x+g.w,gy);ctx.stroke()}ctx.restore()}
-    var ink=F.dk?'#EDEAE3':'#111';ctx.fillStyle=ink;ctx.font='500 '+(9*k)+'px '+FONT_MONO;ctx.textAlign='left';ctx.fillText(__(F.n).toUpperCase(),tx+11*k,g.y+15*k);
+    if(F.grid){ctx.save();ctx.beginPath();ctx.rect(g.x,by,g.w,g.h);ctx.clip();ctx.strokeStyle='rgba(20,20,18,.08)';ctx.lineWidth=.7;for(var gx=g.x;gx<g.x+g.w;gx+=11*k){ctx.beginPath();ctx.moveTo(gx,by);ctx.lineTo(gx,by+g.h);ctx.stroke()}for(var gy=by;gy<by+g.h;gy+=11*k){ctx.beginPath();ctx.moveTo(g.x,gy);ctx.lineTo(g.x+g.w,gy);ctx.stroke()}ctx.restore()}
+    /* label tab: nomor mono kecil, lalu nama tebal — seperti kartu di app */
+    var ink=F.dk?'#EDEAE3':'#111';ctx.fillStyle=ink;ctx.textAlign='left';
+    var fn=__(F.n),fsp=fn.indexOf(' '),fno=fsp>0?fn.slice(0,fsp):'',flb=fsp>0?fn.slice(fsp+1):fn,tby=g.y+g.tabH*.5+4.6*k;
+    ctx.globalAlpha=a*.55;ctx.font='500 '+(9.5*k)+'px '+FONT_MONO;ctx.fillText(fno,tx+13*k,tby);
+    var fnw=ctx.measureText(fno).width;
+    ctx.globalAlpha=a;ctx.font='600 '+(14*k)+'px '+FONT_SANS;ctx.fillText(flb,tx+13*k+fnw+9*k,tby);
     var f=i<3?frac[i]:(frac[0]+frac[1]+frac[2])/3,val=F.v*ease(Math.min(1,f));
     if(i<3){ctx.font='500 '+(8*k)+'px '+FONT_MONO;ctx.globalAlpha=a*.65;ctx.fillText(__(F.s).toUpperCase(),g.x+12*k,by+20*k);ctx.globalAlpha=a;ctx.font='700 '+(17*k)+'px '+FONT_SANS;ctx.textAlign='right';ctx.fillText(f>0?rp(val):'—',g.x+g.w-12*k,by+22*k)}
     else{ctx.font='500 '+(8*k)+'px '+FONT_MONO;ctx.globalAlpha=a*.65;ctx.fillText(__('KEKAYAAN BERSIH · SEP 2026'),g.x+12*k,by+22*k);ctx.globalAlpha=a;ctx.font='700 '+(27*k)+'px '+FONT_SANS;ctx.fillText(f>0?rp(val):'Rp —',g.x+12*k,by+54*k);
@@ -2022,6 +2053,9 @@ function draw(){
     [[x0,y0,1,1],[x0+bw2,y0,-1,1],[x0,y0+bh2,1,-1],[x0+bw2,y0+bh2,-1,-1]].forEach(function(c){ctx.moveTo(c[0]+c[2]*cl,c[1]);ctx.lineTo(c[0],c[1]);ctx.lineTo(c[0],c[1]+c[3]*cl)});ctx.stroke();
     ctx.font='600 '+(17*u)+'px '+FONT_SANS;var txt=__('Akhirnya senyum.'),tw=ctx.measureText(txt).width,lw=tw+26*u,lh=36*u;
     var lx=Math.max(x0+bw2+24*u,Math.min(mx2+70*u,W-lw-14)),ly=my2+(L.desk?96:76)*u;
+    /* label jangan menimpa tumpukan kartu: kalau bersinggungan, turunkan ke bawahnya */
+    var g3=foldGeo(3),fbt=g3.y+g3.tabH+g3.h;
+    if(lx+lw>g3.x&&lx<g3.x+g3.w&&ly<fbt+8*u)ly=Math.min(fbt+10*u,H-lh-14);
     var q2=Math.max(0,Math.min(1,(q-.3)/.4)),ax=x0+bw2,ex=lx+16*u,seg1=ex-ax,seg2=ly-my2,len=(seg1+seg2)*q2;
     ctx.beginPath();ctx.moveTo(ax,my2);ctx.lineTo(ax+Math.min(len,seg1),my2);if(len>seg1)ctx.lineTo(ex,my2+Math.min(len-seg1,seg2));ctx.stroke();
     var q3=Math.max(0,(q-.65)/.35);if(q3>0){ctx.globalAlpha=q3;ctx.fillStyle='#E5673A';ctx.fillRect(lx,ly,lw,lh);ctx.fillStyle='#fff';ctx.textBaseline='middle';ctx.fillText(txt,lx+13*u,ly+lh/2+1);ctx.textBaseline='alphabetic'}
@@ -2043,12 +2077,216 @@ $('play').addEventListener('click',function(){if(reduce){reduce=false;t=0}if(t>=
 $('replay').addEventListener('click',function(){reduce=false;t=0;items.forEach(function(i){i.tc=null});playing=true;setBtn();start()});
 if('IntersectionObserver' in window)new IntersectionObserver(function(e){visible=e[0].isIntersecting;if(visible)start()}).observe(stage);
 var ro=new ResizeObserver(function(){resize()});
-function go(){buildSad();ro.observe(stage);resize();setBtn();start()}
+function go(){ro.observe(stage);resize();setBtn();start()}
 LANGH.push(function(){lastCap='';if(W)resize()});
 var fontsReady=document.fonts&&document.fonts.load?Promise.all([document.fonts.load('400 14px DotGothic16'),document.fonts.load('500 10px "IBM Plex Mono"'),document.fonts.load('700 20px "Inter Tight"')]):Promise.resolve();
-Promise.race([Promise.all([fontsReady,new Promise(function(r){if(ML.complete)r();else{ML.onload=r;ML.onerror=r}})]),new Promise(function(r){setTimeout(r,1500)})]).then(go);
+function imgReady(im){return new Promise(function(r){if(im.complete)r();else{im.onload=r;im.onerror=r}})}
+Promise.race([Promise.all([fontsReady,imgReady(ML),imgReady(MLS)]),new Promise(function(r){setTimeout(r,1800)})]).then(go);
 
 /* ---------- KALENDER ---------- */
+
+/* ---------- PLAK: lukisan kecil untuk tiap transaksi ----------
+   Tiap jenis pengeluaran di kalender punya satu benda yang digambar di
+   sini, bukan diambil dari berkas gambar. Semuanya memakai satu dasar
+   bercahaya dari kiri atas, satu set warna tanah, tepi yang dilembutkan,
+   lalu retak vernis tipis — jadi ke-14 gambarnya terasa sekeluarga dengan
+   lukisan di map 01, dan tidak ada satu pun berkas tambahan yang diunduh.
+
+   Bentuk ditulis sebagai daftar pendek dalam petak 100 x 100:
+     ['e',cx,cy,rx,ry,putar,warna]   bulat telur
+     ['r',x,y,w,h,putar,warna]       kotak
+     ['p','d',warna]                 bentuk bebas
+     ['s','d',warna,tebal]           garis
+     ['c',cx,cy,r,warna]             lingkaran
+   Nomor warna menunjuk ke gradien pg0..pg9 di <defs> awal halaman; tiap
+   warna sudah punya sisi terang dan sisi gelap sendiri, jadi bendanya
+   langsung terbaca punya bentuk. */
+var PLAK = {
+  /* cangkir porselen di atas lepek, dengan uap */
+  cup: [
+    ['e', 50, 76, 31, 7.5, 0, 1],
+    ['e', 50, 73, 30, 7, 0, 9],
+    ['e', 50, 71, 22, 4.6, 0, 5],
+    ['p', 'M33 44h34l-4 23a13 6 0 0 1-26 0z', 9],
+    ['s', 'M66 48c10 1 10 13 0 14', 9, 3.2],
+    ['e', 50, 44, 17, 4.6, 0, 2],
+    ['e', 48, 43.4, 12, 3, 0, 3],
+    ['s', 'M43 33c5-6-4-9 1-15', 5, 1.5],
+    ['s', 'M55 32c5-6-4-9 1-14', 5, 1.3]
+  ],
+  /* mangkuk berisi, dengan sendok kayu */
+  bowl: [
+    ['s', 'M64 40 78 24', 2, 3.4],
+    ['e', 79, 22, 6, 4.2, -40, 3],
+    ['e', 50, 50, 25, 9, 0, 3],
+    ['p', 'M24 50a26 26 0 0 0 52 0z', 9],
+    ['e', 50, 49, 24, 8, 0, 7],
+    ['e', 44, 46, 8, 4, -12, 5],
+    ['e', 58, 48, 6, 3, 10, 4],
+    ['e', 50, 77, 20, 4, 0, 1]
+  ],
+  /* keranjang anyaman dengan buah */
+  bag: [
+    ['e', 50, 80, 27, 5, 0, 1],
+    ['c', 40, 46, 11, 7],
+    ['c', 58, 44, 10, 6],
+    ['c', 50, 49, 9, 3],
+    ['p', 'M24 52h52l-6 26H30z', 2],
+    ['s', 'M27 60h46M29 68h42', 1, 1.6],
+    ['s', 'M26 52a24 18 0 0 1 48 0', 3, 3.2]
+  ],
+  /* kendi minyak berleher sempit */
+  pump: [
+    ['e', 50, 82, 20, 4.5, 0, 1],
+    ['p', 'M50 22c-4 0-6 3-6 7v6c-11 4-17 13-17 24 0 13 10 21 23 21s23-8 23-21c0-11-6-20-17-24v-6c0-4-2-7-6-7z', 2],
+    ['s', 'M62 36c11 2 13 16 4 20', 2, 3.4],
+    ['e', 44, 56, 9, 14, -12, 3],
+    ['e', 41, 52, 4.5, 7, -12, 4],
+    ['e', 50, 24, 6.5, 2.6, 0, 1]
+  ],
+  /* roda pedati berjeruji */
+  moto: [
+    ['c', 50, 52, 30, 1],
+    ['c', 50, 50, 29, 2],
+    ['c', 50, 50, 24, 1],
+    ['s', 'M50 26v48M26 50h48M33 33 67 67M67 33 33 67', 3, 2.6],
+    ['c', 50, 50, 8, 3],
+    ['c', 50, 50, 3.4, 1],
+    ['s', 'M50 21a29 29 0 0 1 21 9', 5, 2.2]
+  ],
+  /* lilin menyala di kaki dian */
+  bolt: [
+    ['e', 50, 84, 22, 5, 0, 1],
+    ['p', 'M30 80h40l-5-7H35z', 2],
+    ['e', 50, 73, 15, 4, 0, 3],
+    ['r', 44, 34, 12, 39, 0, 5],
+    ['e', 50, 34, 6, 2.2, 0, 9],
+    ['s', 'M50 34v-5', 1, 1.6],
+    ['p', 'M50 10c6 8 7 12 7 15a7 7 0 0 1-14 0c0-3 1-7 7-15z', 4],
+    ['p', 'M50 17c3 5 3 7 3 9a3 3 0 0 1-6 0c0-2 0-4 3-9z', 5]
+  ],
+  /* surat berlipat dengan cap lilin */
+  phone: [
+    ['e', 50, 78, 26, 4.5, 0, 1],
+    ['r', 22, 30, 56, 44, -3, 9],
+    ['r', 25, 33, 50, 38, -3, 5],
+    ['s', 'M26 40h40M26 48h44M26 56h32', 2, 1.5],
+    ['c', 62, 63, 8, 7],
+    ['c', 62, 63, 4.6, 1]
+  ],
+  /* lute: badan buah pir dengan leher panjang */
+  ticket: [
+    ['e', 50, 88, 20, 4, 0, 1],
+    ['p', 'M50 17c15 0 24 9 24 23 0 18-11 34-24 34S26 58 26 40c0-14 9-23 24-23z', 1],
+    ['p', 'M50 19c14 0 22 8 22 21 0 17-10 32-22 32S28 57 28 40c0-13 8-21 22-21z', 3],
+    ['p', 'M50 21c12 0 19 7 19 19 0 15-9 28-19 28s-19-13-19-28c0-12 7-19 19-19z', 4],
+    ['e', 41, 40, 6.5, 4, -14, 0],
+    ['e', 59, 40, 6.5, 4, 14, 0],
+    ['p', 'M38 56c8 11 16 11 24 0-8 5-16 5-24 0z', 0],
+    ['e', 50, 61, 6, 2.4, 0, 1],
+    ['e', 45, 29, 10, 4.5, -14, 5],
+    ['s', 'M50 17c-6-5-12-5-16-1', 3, 2.4],
+    ['s', 'M50 17c6-5 12-5 16-1', 3, 2.4]
+  ],
+  /* kotak berpita */
+  gift: [
+    ['e', 50, 80, 26, 5, 0, 1],
+    ['r', 26, 44, 48, 33, 0, 7],
+    ['r', 23, 35, 54, 11, 0, 2],
+    ['r', 44, 35, 12, 42, 0, 4],
+    ['p', 'M50 35c-10-14-24-9-16 0zM50 35c10-14 24-9 16 0z', 4],
+    ['c', 50, 33, 4, 5]
+  ],
+  /* kunci besar bergagang */
+  house: [
+    ['c', 32, 38, 15, 1],
+    ['c', 32, 38, 13, 3],
+    ['c', 32, 38, 7, 0],
+    ['s', 'M40 46 74 80', 3, 7],
+    ['s', 'M40 46 74 80', 4, 3.4],
+    ['p', 'M62 68h13v8h-8zM70 76h11v7h-7z', 3],
+    ['e', 32, 34, 7, 3, -45, 5]
+  ],
+  /* tanaman dalam pot tanah */
+  plant: [
+    ['e', 50, 86, 21, 4, 0, 1],
+    ['s', 'M50 62V42', 6, 3],
+    ['e', 36, 45, 13, 7.5, -26, 6],
+    ['e', 64, 41, 13, 7.5, 24, 6],
+    ['e', 50, 32, 9, 12, 0, 6],
+    ['e', 33, 43, 6, 3, -26, 3],
+    ['e', 50, 29, 4, 5, 0, 3],
+    ['p', 'M31 62h38l-5 23H36z', 7],
+    ['r', 28, 56, 44, 8, 0, 3],
+    ['e', 50, 60, 15, 2.6, 0, 2]
+  ],
+  /* bulu angsa di tempat tinta */
+  receipt: [
+    ['e', 50, 84, 26, 5, 0, 1],
+    ['p', 'M30 58h34l-4 22H34z', 1],
+    ['e', 47, 58, 17, 6, 0, 2],
+    ['e', 47, 57, 11, 3.4, 0, 0],
+    ['p', 'M49 56 78 14l5 4-30 41z', 9],
+    ['p', 'M74 10c9 5 13 15 12 25-4 2-9 1-13-2-5-4-6-11-4-17z', 5],
+    ['p', 'M75 15c6 4 9 11 8 18-3 1-6 0-8-2-3-3-3-10 0-16z', 9],
+    ['s', 'M78 14 84 30', 2, .8],
+    ['e', 44, 56, 5, 2, 0, 0]
+  ],
+  /* pundi-pundi berisi, bertali */
+  env: [
+    ['e', 48, 84, 26, 5, 0, 1],
+    ['p', 'M36 38c-9 8-16 18-16 27 0 12 12 18 28 18s28-6 28-18c0-9-7-19-16-27z', 2],
+    ['e', 48, 40, 14, 6, 0, 1],
+    ['s', 'M33 38h30', 3, 3.6],
+    ['e', 40, 62, 10, 12, -8, 3],
+    ['e', 37, 57, 4.5, 5.5, -8, 4],
+    ['e', 76, 82, 11, 5, -8, 3],
+    ['e', 76, 79, 11, 5, -8, 4],
+    ['e', 76, 76, 11, 5, -8, 5],
+    ['e', 68, 86, 9, 4, 6, 4]
+  ],
+  /* tumpukan keping emas */
+  coin: [
+    ['e', 50, 84, 27, 5, 0, 1],
+    ['e', 46, 72, 23, 8, 0, 2],
+    ['e', 46, 68, 23, 8, 0, 4],
+    ['e', 46, 64, 23, 8, 0, 3],
+    ['e', 46, 60, 23, 8, 0, 4],
+    ['e', 46, 56, 23, 8, 0, 3],
+    ['e', 46, 52, 23, 8, 0, 4],
+    ['e', 46, 51, 17, 5, 0, 5],
+    ['e', 41, 50, 7, 2.4, 0, 5],
+    ['e', 76, 74, 12, 11, -16, 3],
+    ['e', 76, 74, 10, 9, -16, 4],
+    ['e', 73, 71, 4, 3, -16, 5]
+  ]
+};
+function plakShape(s){var t=s[0],rot='';
+  if(t==='e'){if(s[5])rot=' transform="rotate('+s[5]+' '+s[1]+' '+s[2]+')"';
+    return '<ellipse cx="'+s[1]+'" cy="'+s[2]+'" rx="'+s[3]+'" ry="'+s[4]+'" fill="url(#pg'+s[6]+')"'+rot+'/>'}
+  if(t==='c')return '<circle cx="'+s[1]+'" cy="'+s[2]+'" r="'+s[3]+'" fill="url(#pg'+s[4]+')"/>';
+  if(t==='r'){if(s[5])rot=' transform="rotate('+s[5]+' '+(s[1]+s[3]/2)+' '+(s[2]+s[4]/2)+')"';
+    return '<rect x="'+s[1]+'" y="'+s[2]+'" width="'+s[3]+'" height="'+s[4]+'" fill="url(#pg'+s[6]+')"'+rot+'/>'}
+  if(t==='p')return '<path d="'+s[1]+'" fill="url(#pg'+s[2]+')"/>';
+  if(t==='s')return '<path d="'+s[1]+'" fill="none" stroke="url(#pg'+s[2]+')" stroke-width="'+s[3]+'" stroke-linecap="round" stroke-linejoin="round"/>';
+  return ''}
+var PLAKC={};
+function plak(key){if(PLAKC[key]!=null)return PLAKC[key];
+  var sh=PLAK[key];
+  PLAKC[key]=sh?'<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'
+    +'<rect width="100" height="100" fill="url(#pgr)"/>'
+    +'<g filter="url(#psf)">'+sh.map(plakShape).join('')+'</g>'
+    +'<rect width="100" height="100" filter="url(#pcr)" opacity=".22"/>'
+    +'<rect width="100" height="100" fill="url(#pvn)"/></svg>':'';
+  return PLAKC[key]}
+/* Lukisannya baru dibuat saat tanggalnya pertama kali disorot, lalu
+   disimpan di selnya. Jadi tidak ada 30 penyaring yang dihitung sekaligus
+   waktu halaman dibuka. */
+function plakInto(btn,key){if(!btn||btn.querySelector('.pl'))return;
+  var m=plak(key);if(!m)return;
+  var w=document.createElement('span');w.className='pl';w.setAttribute('aria-hidden','true');
+  w.innerHTML=m;btn.insertBefore(w,btn.firstChild)}
+
 var CC={'Makan & minum':'#C98B4B','Transportasi':'#7E95BC','Belanja harian':'#8FA36E','Rumah':'#6F8F5E','Tagihan':'#B4432A','Hiburan':'#A57BB5','Hadiah':'#D49A9A','Tempat tinggal':'#59634F','Piutang':'#4E6B3A','Langganan':'#5E6E8C','Gaji':'#4E6B3A','Keluarga':'#C98B4B','Investasi':'#B59A3A'};
 var BL={cup:'#F4C9B4',moto:'#C9DCEB',pump:'#F2DC9A',bag:'#CFDDBF',bowl:'#F4C9B4',bolt:'#F2DC9A',phone:'#DCD3EA',ticket:'#F1CFD6',env:'#DDEF9A',gift:'#F1CFD6',plant:'#CFDDBF',house:'#C9DCEB',receipt:'#F2DC9A',coin:'#F2DC9A'};
 var D=[
@@ -2130,7 +2368,8 @@ var HARI=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
     vy=Math.max(navH,Math.min(r.top-6,innerHeight-ph-12));
     pop.style.left=x+'px';pop.style.top=(vy-wr.top)+'px'}
   function show(i){clearTimeout(hideT);if(i===cur&&pop.classList.contains('on'))return;cur=i;clear();var d=D[i];
-    g.querySelectorAll('.day.sel').forEach(function(e){e.classList.remove('sel')});var b=g.querySelector('[data-d="'+i+'"]');if(!b)return;b.classList.add('sel');
+    g.querySelectorAll('.day.sel').forEach(function(e){e.classList.remove('sel')});var b=g.querySelector('[data-d="'+i+'"]');if(!b)return;
+    plakInto(b,d[0]);b.classList.add('sel');
     pop.innerHTML=build(i);place(b);pop.classList.add('on');
     var instant=reduce;if(instant){stage(4);var t0=pop.querySelector('.ty');if(t0)t0.textContent=d[6]==='suara'?'“'+__(d[2])+'”':__(d[2]);return}
     stage(1);var ty=pop.querySelector('.ty'),keys=pop.querySelectorAll('.kb i'),txt=d[6]==='suara'?'“'+__(d[2])+'”':__(d[2]),T1=900;
@@ -2596,6 +2835,41 @@ if(!RM&&fs.length)setInterval(function(){fs.forEach(function(f){f.classList.add(
 $('copy').addEventListener('click',function(){var b=this,txt=$('addr').textContent;var done=function(){b.textContent='Tersalin';setTimeout(function(){b.textContent='Salin email'},1600)};
   var fb=function(){var r=document.createRange();r.selectNodeContents($('addr'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Tekan salin'};
   try{navigator.clipboard.writeText(txt).then(done,fb)}catch(e){fb()}});
+
+/* ---------- MAP 10: email undangan yang sudah terisi ----------
+   Pengunjung cukup menulis alamat Google-nya, lalu tekan kirim. Tombolnya
+   membuka aplikasi email dengan tujuan, judul, dan isi yang sudah jadi;
+   alamat yang tadi diketik ikut masuk ke badan surat. Karena mailto tidak
+   selalu ada yang menangani (mis. Gmail di browser), disediakan juga jalan
+   ke Gmail web dan salinan isi suratnya. */
+var MAILTO=$('addr').textContent;
+function tplSubject(){return __('Ikut uji coba tertutup Mona')}
+function tplBody(em){
+  return __('Halo Rakit Lab,')+'\n\n'
+    +__('Saya ingin ikut uji coba tertutup Mona.')+'\n\n'
+    +__('Email Google (Play Store)')+': '+em+'\n'
+    +__('Perangkat')+': \n\n'
+    +__('Terima kasih.')}
+function jsay(msg,bad){var m=$('jmsg');m.textContent=msg?__(msg):'';$('jmail').classList.toggle('bad',!!bad)}
+function jmail(){return ($('jmail').value||'').trim()}
+function jok(){var v=jmail();if(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v))return v;
+  jsay('Tulis dulu email Google kamu',1);$('jmail').focus();return ''}
+function openUrl(u,blank){var a=document.createElement('a');a.href=u;if(blank){a.target='_blank';a.rel='noopener'}
+  document.body.appendChild(a);a.click();a.remove()}
+$('jform').addEventListener('submit',function(e){e.preventDefault();var v=jok();if(!v)return;
+  openUrl('mailto:'+MAILTO+'?subject='+encodeURIComponent(tplSubject())+'&body='+encodeURIComponent(tplBody(v)));
+  jsay('Emailnya sudah disiapkan. Tinggal tekan kirim di aplikasi emailmu.')});
+$('jmail').addEventListener('input',function(){if(this.classList.contains('bad'))jsay('')});
+$('jgmail').addEventListener('click',function(){var v=jok();if(!v)return;
+  openUrl('https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(MAILTO)
+    +'&su='+encodeURIComponent(tplSubject())+'&body='+encodeURIComponent(tplBody(v)),1);
+  jsay('Gmail terbuka di tab baru.')});
+function jman(){$('jmsg').textContent=__('Salin manual')+': '+MAILTO}
+$('jtpl').addEventListener('click',function(){var v=jmail()||__('(tulis email kamu di sini)');
+  var txt=__('Kepada')+': '+MAILTO+'\n'+__('Judul')+': '+tplSubject()+'\n\n'+tplBody(v);
+  var done=function(){jsay('Isi emailnya sudah tersalin.')};
+  try{navigator.clipboard.writeText(txt).then(done,function(){jman()})}
+  catch(e){jman()}});
 
 })();
 </script>
