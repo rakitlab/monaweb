@@ -14,11 +14,11 @@ Halaman berupa tumpukan map bertab. Tiap map punya `id` yang dipakai menu naviga
 | 02 | `buku` | Kalender September 2026 yang bisa dijelajahi |
 | 03 | `catat` | Lisa mini: suara, ketik, foto struk, notifikasi bank |
 | 04 | `arsip` | Tumpukan map arsip, lama lawan Mona |
-| 05 | `bersama` | Space bersama dan empat peran |
-| 06 | `cocok` | Enam situasi yang cocok dengan Mona |
-| 07 | `cerita` | Kenapa Mona Lisa, Mona, dan Lisa; analog di luar, canggih di dalam |
+| 05 | `bersama` | Space bersama; empat peran dengan avatar, izin per peran bisa dipilih |
+| 06 | `cocok` | Enam situasi: pilih satu di daftar, panel kanan berganti (jalan otomatis, berhenti saat disentuh) |
+| 07 | `cerita` | Buku cerita yang dibuka halaman demi halaman: Mona Lisa, Mona, Lisa, papan inspirasi UI, penutup |
 | 08 | `harga` | Perbandingan paket Gratis dan Pro |
-| 09 | `tanya` | Privasi dan FAQ |
+| 09 | `tanya` | Enam janji privasi dan FAQ akordeon; jawaban diketik di layar Lisa |
 | 10 | `gabung` | Pendaftaran uji coba tertutup |
 
 Kalau menambah atau memindah map, perbarui tiga tempat: nomor di `.tab`, daftar di `#nsel` (menu desktop), dan daftar di `#nsheet` (menu HP).
@@ -47,3 +47,7 @@ Situs statis, cocok untuk Vercel:
 - Semua warna ada sebagai variabel CSS di `:root`. Halaman memakai satu tema terang.
 - Ikon digambar sebagai `<symbol>` SVG di bagian atas file (grid 24, garis 1,6).
 - Wajah Lisa digambar dari 16 × 8 titik oleh JavaScript di bagian bawah file.
+- Skala huruf mengikuti aplikasi: isi 15px, tombol 14px, judul `clamp(28px, 3.5vw, 48px)`, label mono kecil huruf kapital, garis rambut 0,8px.
+- Avatar peran di Space (`av-1` sampai `av-4`) adalah `<symbol>` SVG buatan sendiri, dipakai di panel peran dan di peta anggota.
+- Buku di map 07 memakai `data-bk` pada tombol untuk melompat ke bab. Di layar sempit (860px ke bawah) buku jadi satu halaman per layar. Bisa digeser, dan panah kiri/kanan di keyboard juga jalan.
+- Animasi mengikuti `prefers-reduced-motion`: ketikan dan balik halaman langsung selesai.
