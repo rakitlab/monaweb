@@ -4,13 +4,22 @@
  * Web App yang menerima email dari form "Join Waitlist" di monaweb, menyimpan
  * barisnya ke Google Sheet, lalu mengirim pemberitahuan ke kotak masuk.
  *
- * Cara memasang ada di waitlist.md. Setelah diterapkan sebagai Web App,
- * salin URL yang berakhiran /exec ke WAITLIST_URL di index.html.
+ * Bisa dipasang dua cara: menempel di Sheet (Extensions → Apps Script) atau
+ * berdiri sendiri lewat script.google.com dengan SHEET_ID diisi. Cara memasang
+ * ada di waitlist.md. Setelah diterapkan sebagai Web App, salin URL yang
+ * berakhiran /exec ke WAITLIST_URL di index.html.
  */
 
 var NOTIFY = 'info.rakitdev@gmail.com';   // tujuan pemberitahuan
 var SHEET  = 'Waitlist';                  // nama tab di dalam Sheet
 var HEADER = ['Waktu', 'Email', 'Bahasa', 'Halaman', 'Rujukan'];
+
+/* Biarkan kosong kalau script ini dibuat dari dalam Sheet (Extensions →
+   Apps Script). Kalau dibuat berdiri sendiri lewat script.google.com, isi
+   dengan id Sheet-nya — potongan panjang di antara /d/ dan /edit pada URL
+   Sheet. Jalan kedua ini berguna kalau editor dari dalam Sheet tidak mau
+   terbuka, yang biasanya terjadi saat login beberapa akun Google. */
+var SHEET_ID = '';
 
 /* Formulir mengirim JSON sebagai text/plain supaya tidak memicu preflight
    OPTIONS, yang memang tidak dilayani Apps Script. */
@@ -51,8 +60,17 @@ function doGet() {
   return out({ ok: true, service: 'mona-waitlist' });
 }
 
+/* Satu-satunya tempat Sheet-nya dibuka, supaya kedua cara pasang —
+   menempel di Sheet atau berdiri sendiri — dilayani kode yang sama. */
+function book() {
+  var ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID)
+                    : SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) throw new Error('Sheet tidak ketemu. Isi SHEET_ID kalau script ini berdiri sendiri.');
+  return ss;
+}
+
 function sheet() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = book();
   var sh = ss.getSheetByName(SHEET);
   if (!sh) {
     sh = ss.insertSheet(SHEET);
@@ -74,7 +92,7 @@ function known(sh) {
 }
 
 function notify(email, total) {
-  var url = SpreadsheetApp.getActiveSpreadsheet().getUrl();
+  var url = book().getUrl();
   MailApp.sendEmail({
     to: NOTIFY,
     subject: 'Mona · daftar tunggu #' + total + ' · ' + email,

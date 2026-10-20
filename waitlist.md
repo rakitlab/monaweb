@@ -21,6 +21,43 @@ harus menekan kirim sendiri. Lima menit di bawah ini menutup celah itu.
 2. Hapus isi `Code.gs`, lalu tempel seluruh isi [`waitlist.gs`](waitlist.gs).
 3. Simpan (ikon disket atau `Ctrl/Cmd + S`).
 
+`SHEET_ID` dibiarkan kosong — script yang dibuat dari dalam Sheet sudah tahu
+Sheet mana yang dimaksud.
+
+### Kalau editornya tidak mau terbuka
+
+**Extensions → Apps Script** kadang berujung di halaman Google Drive "Maaf,
+saat ini tidak dapat membuka file". Itu bukan soal script-nya; editornya saja
+yang gagal dibuka. Yang paling sering jadi sebab:
+
+- **Login beberapa akun Google sekaligus.** Sheet-nya terbuka di akun kedua
+  (`/u/1/` pada URL), tapi `script.google.com` selalu mencoba akun pertama
+  (`/u/0/`). Buka Sheet-nya sambil hanya login satu akun, atau sisipkan angka
+  `/u/N/` yang sama ke URL script.google.com.
+- **Jendela penyamaran (Private / Incognito).** Editor Apps Script menarik
+  banyak berkas dari beberapa domain Google; di jendela penyamaran sering
+  gagal. Pakai jendela biasa.
+- **Ekstensi pemblokir iklan atau pelacak.** Matikan sementara untuk
+  `script.google.com`, atau coba Chrome tanpa ekstensi.
+
+Kalau ketiganya sudah dicoba dan editornya tetap menolak, ada jalan memutar:
+buat script-nya berdiri sendiri, tidak menempel di Sheet.
+
+1. Buka [script.google.com](https://script.google.com) → **New project**.
+2. Tempel isi `waitlist.gs` seperti biasa.
+3. Buka URL Sheet yang tadi. Bentuknya
+   `https://docs.google.com/spreadsheets/d/ID_PANJANG_DI_SINI/edit`.
+   Salin potongan di antara `/d/` dan `/edit`.
+4. Isikan potongan itu ke `SHEET_ID` di baris atas script:
+
+   ```js
+   var SHEET_ID = 'ID_PANJANG_DI_SINI';
+   ```
+
+Sisa langkahnya sama persis. Satu-satunya bedanya: script yang berdiri sendiri
+tidak muncul di menu **Extensions** Sheet-nya, jadi simpan sendiri tautan
+project-nya.
+
 ## 3. Terapkan sebagai Web App
 
 1. **Deploy → New deployment**.
@@ -76,3 +113,5 @@ Simpan, commit, push. Vercel menerapkannya otomatis.
   terisi, script-nya menjawab ok tapi tidak menyimpan apa-apa.
 - **Mengganti tujuan pemberitahuan**: ubah `NOTIFY` di baris atas
   `waitlist.gs`, lalu terapkan ulang seperti di atas.
+- **Dua cara pasang, satu kode**: `SHEET_ID` kosong berarti script menempel di
+  Sheet; `SHEET_ID` terisi berarti berdiri sendiri. Sisa kodenya sama.
