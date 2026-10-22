@@ -1345,9 +1345,36 @@ h1,h2,h3,h4,.ch-t,.cap,.tab,.steps span,.pg-h span,.pg-f span,
 .fold[open]>.tab .pm::after{transform:scaleY(0);opacity:0}
 .fold>summary.tab:hover .pm{color:currentColor}
 
-/* Baris kendali di atas tumpukan */
-.lglbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:20px 0 2px;color:var(--faint)}
+/* Baris kendali di atas tumpukan: grid dua kolom, label kiri dan tombol
+   kanan, dengan garis rambut di antaranya. Dibuat grid supaya labelnya
+   tidak pernah bisa menabrak tombol di lebar mana pun. */
+.lglbar{display:grid;grid-template-columns:auto minmax(12px,1fr) auto;align-items:center;gap:0 14px;margin:22px 0 4px}
+.lglbar .cap{grid-area:1/1;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lglbar::before{content:"";grid-area:1/2;height:var(--bw);background:var(--line)}
 .key.xs{height:32px;padding:0 13px;font-size:12.5px;gap:7px}
+.lglbar .key.xs{grid-area:1/3;justify-self:end}
+@media (max-width:460px){
+  .lglbar{grid-template-columns:minmax(0,1fr) auto;gap:0 12px}
+  .lglbar .key.xs{grid-area:1/2}
+  .lglbar::before{display:none}
+}
+
+/* Isi bagian: dua kolom. Kiri judul bagian yang ikut menempel saat
+   digulir, kanan isinya — supaya sisi kanan tidak lagi kosong panjang.
+   Di bawah 880px kembali satu kolom seperti semula. */
+.sec{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:26px 56px;align-items:start}
+.sec-side{position:sticky;top:calc(var(--nh) + 26px)}
+.sec-side h2{font-size:clamp(26px,2.5vw,40px);text-wrap:balance;letter-spacing:-.04em;line-height:1;font-weight:700}
+.sec-side p{margin-top:16px;font-size:15px;color:var(--mute);max-width:40ch}
+.sec-side .row{margin-top:20px}
+.sec .lgl{max-width:46em}
+@media (max-width:880px){
+  .sec{grid-template-columns:minmax(0,1fr);gap:22px}
+  .sec-side{position:static}
+  .sec-side h2{font-size:clamp(26px,5.4vw,36px)}
+  .sec-side p{max-width:58ch}
+  .sec-side .sec-no{display:none}  /* tabnya tepat di atas, jadi mubazir */
+}
 
 /* Gerakan buka-tutup, hanya di peramban yang mendukung; selain itu
    bagian tetap muncul seketika seperti <details> biasa. */
@@ -1360,3 +1387,4 @@ h1,h2,h3,h4,.ch-t,.cap,.tab,.steps span,.pg-h span,.pg-f span,
   .fold::details-content{transition:none}
   .tab .pm::before,.tab .pm::after{transition:none}
 }
+.sec-side .sec-no{display:block;margin-bottom:14px;color:var(--faint)}

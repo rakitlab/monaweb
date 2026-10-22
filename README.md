@@ -30,6 +30,8 @@ Polanya sama seperti `index.html`: teks sumber bahasa Indonesia ditulis langsung
 
 Tiap bagian adalah `<details class="folder fold">` dengan tabnya sebagai `<summary class="tab">`. Buka-tutupnya dikerjakan HTML sendiri, bukan skrip, jadi tetap bisa dibuka saat JavaScript mati — syarat untuk halaman legal, dan berbeda dari akordeon FAQ di map 09 yang memang digerakkan JS. Map yang tertutup menyusut jadi setinggi tabnya, sehingga dua belas bagian muat dalam satu layar. Bagian 01 dibiarkan `open` di ketiga halaman; di `/hapus-akun` bagian itu memuat kedua cara menghapus akun, supaya peninjau Google melihatnya tanpa menekan apa pun. `assets/mona-legal.js` hanya menambah kenyamanan: tombol buka/tutup semua, membuka bagian yang dituju tautan `#anchor`, dan membuka semuanya sebelum halaman dicetak.
 
+Isi tiap bagian dibagi dua kolom lewat `.sec`: kolom kiri `.sec-side` memuat nomor bagian, judul, pengantar, dan label tanggal, dan kolom itu `position:sticky` sehingga judulnya ikut menempel saat isi digulir. Kolom kanan `.lgl` memuat isinya. Di bawah 880px keduanya kembali menumpuk jadi satu kolom dan nomor bagian di kolom kiri disembunyikan, karena tabnya sudah persis di atasnya.
+
 Dua janji di map 09 sengaja dibatasi cakupannya supaya tidak bertabrakan dengan halaman privasi: "Server di Singapura" berlaku untuk penyimpanan data Mona, bukan untuk pemrosesan Gemini, dan kartu AI menyebut pemrosesan Google yang bisa terjadi di luar Indonesia.
 
 ## Isi halaman
