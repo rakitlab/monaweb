@@ -16,6 +16,10 @@ Halaman depan ada di `index.html`; tiga halaman legal ada di `privasi.html`, `ke
 | `last-supper-tall.jpg` | Latar Space bersama di layar ≤600px, potongan tegak |
 | `creation-of-adam.jpg` | Latar map 10 |
 
+### Cache berkas bersama
+
+Tautan ke `mona.css`, `mona-i18n.js`, dan `mona-legal.js` membawa penanda versi, misalnya `assets/mona.css?v=20261022c`. **Setiap kali salah satu berkas itu diubah, naikkan penandanya di keempat halaman HTML.** Tanpa itu, peramban dan CDN masih menyajikan berkas lama sampai cache-nya habis, dan halaman tampil kacau karena HTML baru bertemu CSS lama — persis yang terjadi saat header cache-nya masih sehari penuh.
+
 ## Halaman legal
 
 Tiga halaman terpisah, disyaratkan untuk pengajuan aplikasi di Google Play. URL-nya bersih berkat `cleanUrls` di `vercel.json`.
