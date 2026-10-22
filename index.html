@@ -52,11 +52,6 @@
     <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3 19.5c0-3.4 2.7-5.6 6-5.6s6 2.2 6 5.6M16 5.6a3.2 3.2 0 0 1 0 5.8M18 14.2c1.9.7 3.2 2.5 3.2 5.3"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
     <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
-    <!-- Bahan lukisan kecil di kalender (map 02): satu set gradien warna
-         tanah, dasar bercahaya dari kiri atas, pelembut tepi ala sfumato,
-         retak vernis, dan lapisan kuning tua. Dipakai bersama oleh semua
-         gambar supaya ke-14 benda terasa satu keluarga. Lihat PLAK di skrip. -->
-<linearGradient id="pg0" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#7b715d"/><stop offset=".52" stop-color="#1C1309"/><stop offset="1" stop-color="#181007"/></linearGradient><linearGradient id="pg1" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#8d7c64"/><stop offset=".52" stop-color="#3A2715"/><stop offset="1" stop-color="#271a0d"/></linearGradient><linearGradient id="pg2" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#a9916c"/><stop offset=".52" stop-color="#6B4A24"/><stop offset="1" stop-color="#402b15"/></linearGradient><linearGradient id="pg3" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#c6a874"/><stop offset=".52" stop-color="#9C7232"/><stop offset="1" stop-color="#583f1c"/></linearGradient><linearGradient id="pg4" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#e0c087"/><stop offset=".52" stop-color="#C99C52"/><stop offset="1" stop-color="#6f542c"/></linearGradient><linearGradient id="pg5" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#f2e3b9"/><stop offset=".52" stop-color="#E9D8A8"/><stop offset="1" stop-color="#7f7257"/></linearGradient><linearGradient id="pg6" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#989a76"/><stop offset=".52" stop-color="#4E5B35"/><stop offset="1" stop-color="#31341d"/></linearGradient><linearGradient id="pg7" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#b4816b"/><stop offset=".52" stop-color="#7E3022"/><stop offset="1" stop-color="#491e14"/></linearGradient><linearGradient id="pg8" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#969895"/><stop offset=".52" stop-color="#4A566A"/><stop offset="1" stop-color="#2f3138"/></linearGradient><linearGradient id="pg9" x1="0" y1="0" x2=".75" y2="1"><stop offset="0" stop-color="#e5dabd"/><stop offset=".52" stop-color="#D2C9B0"/><stop offset="1" stop-color="#736b5b"/></linearGradient><radialGradient id="pgr" cx=".32" cy=".26" r=".9"><stop offset="0" stop-color="#8A7340"/><stop offset=".45" stop-color="#4C3D21"/><stop offset="1" stop-color="#160F07"/></radialGradient><linearGradient id="pvn" x1="0" y1="0" x2=".4" y2="1"><stop offset="0" stop-color="#FFD98A" stop-opacity=".22"/><stop offset=".55" stop-color="#C98B3A" stop-opacity=".06"/><stop offset="1" stop-color="#2A1706" stop-opacity=".3"/></linearGradient><filter id="pcr" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="3.1" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 .08 0 0 0 0 .05 0 0 0 0 .03 -9 -9 -9 0 12.1"/></filter><filter id="psf" x="-15%" y="-15%" width="130%" height="130%"><feGaussianBlur stdDeviation=".55"/></filter>
   </defs>
 </svg>
 
@@ -775,210 +770,18 @@ Promise.race([Promise.all([fontsReady,imgReady(ML),imgReady(MLS)]),new Promise(f
 
 /* ---------- KALENDER ---------- */
 
-/* ---------- PLAK: lukisan kecil untuk tiap transaksi ----------
-   Tiap jenis pengeluaran di kalender punya satu benda yang digambar di
-   sini, bukan diambil dari berkas gambar. Semuanya memakai satu dasar
-   bercahaya dari kiri atas, satu set warna tanah, tepi yang dilembutkan,
-   lalu retak vernis tipis — jadi ke-14 gambarnya terasa sekeluarga dengan
-   lukisan di map 01, dan tidak ada satu pun berkas tambahan yang diunduh.
-
-   Bentuk ditulis sebagai daftar pendek dalam petak 100 x 100:
-     ['e',cx,cy,rx,ry,putar,warna]   bulat telur
-     ['r',x,y,w,h,putar,warna]       kotak
-     ['p','d',warna]                 bentuk bebas
-     ['s','d',warna,tebal]           garis
-     ['c',cx,cy,r,warna]             lingkaran
-   Nomor warna menunjuk ke gradien pg0..pg9 di <defs> awal halaman; tiap
-   warna sudah punya sisi terang dan sisi gelap sendiri, jadi bendanya
-   langsung terbaca punya bentuk. */
-var PLAK = {
-  /* cangkir porselen di atas lepek, dengan uap */
-  cup: [
-    ['e', 50, 76, 31, 7.5, 0, 1],
-    ['e', 50, 73, 30, 7, 0, 9],
-    ['e', 50, 71, 22, 4.6, 0, 5],
-    ['p', 'M33 44h34l-4 23a13 6 0 0 1-26 0z', 9],
-    ['s', 'M66 48c10 1 10 13 0 14', 9, 3.2],
-    ['e', 50, 44, 17, 4.6, 0, 2],
-    ['e', 48, 43.4, 12, 3, 0, 3],
-    ['s', 'M43 33c5-6-4-9 1-15', 5, 1.5],
-    ['s', 'M55 32c5-6-4-9 1-14', 5, 1.3]
-  ],
-  /* mangkuk berisi, dengan sendok kayu */
-  bowl: [
-    ['s', 'M64 40 78 24', 2, 3.4],
-    ['e', 79, 22, 6, 4.2, -40, 3],
-    ['e', 50, 50, 25, 9, 0, 3],
-    ['p', 'M24 50a26 26 0 0 0 52 0z', 9],
-    ['e', 50, 49, 24, 8, 0, 7],
-    ['e', 44, 46, 8, 4, -12, 5],
-    ['e', 58, 48, 6, 3, 10, 4],
-    ['e', 50, 77, 20, 4, 0, 1]
-  ],
-  /* keranjang anyaman dengan buah */
-  bag: [
-    ['e', 50, 80, 27, 5, 0, 1],
-    ['c', 40, 46, 11, 7],
-    ['c', 58, 44, 10, 6],
-    ['c', 50, 49, 9, 3],
-    ['p', 'M24 52h52l-6 26H30z', 2],
-    ['s', 'M27 60h46M29 68h42', 1, 1.6],
-    ['s', 'M26 52a24 18 0 0 1 48 0', 3, 3.2]
-  ],
-  /* kendi minyak berleher sempit */
-  pump: [
-    ['e', 50, 82, 20, 4.5, 0, 1],
-    ['p', 'M50 22c-4 0-6 3-6 7v6c-11 4-17 13-17 24 0 13 10 21 23 21s23-8 23-21c0-11-6-20-17-24v-6c0-4-2-7-6-7z', 2],
-    ['s', 'M62 36c11 2 13 16 4 20', 2, 3.4],
-    ['e', 44, 56, 9, 14, -12, 3],
-    ['e', 41, 52, 4.5, 7, -12, 4],
-    ['e', 50, 24, 6.5, 2.6, 0, 1]
-  ],
-  /* roda pedati berjeruji */
-  moto: [
-    ['c', 50, 52, 30, 1],
-    ['c', 50, 50, 29, 2],
-    ['c', 50, 50, 24, 1],
-    ['s', 'M50 26v48M26 50h48M33 33 67 67M67 33 33 67', 3, 2.6],
-    ['c', 50, 50, 8, 3],
-    ['c', 50, 50, 3.4, 1],
-    ['s', 'M50 21a29 29 0 0 1 21 9', 5, 2.2]
-  ],
-  /* lilin menyala di kaki dian */
-  bolt: [
-    ['e', 50, 84, 22, 5, 0, 1],
-    ['p', 'M30 80h40l-5-7H35z', 2],
-    ['e', 50, 73, 15, 4, 0, 3],
-    ['r', 44, 34, 12, 39, 0, 5],
-    ['e', 50, 34, 6, 2.2, 0, 9],
-    ['s', 'M50 34v-5', 1, 1.6],
-    ['p', 'M50 10c6 8 7 12 7 15a7 7 0 0 1-14 0c0-3 1-7 7-15z', 4],
-    ['p', 'M50 17c3 5 3 7 3 9a3 3 0 0 1-6 0c0-2 0-4 3-9z', 5]
-  ],
-  /* surat berlipat dengan cap lilin */
-  phone: [
-    ['e', 50, 78, 26, 4.5, 0, 1],
-    ['r', 22, 30, 56, 44, -3, 9],
-    ['r', 25, 33, 50, 38, -3, 5],
-    ['s', 'M26 40h40M26 48h44M26 56h32', 2, 1.5],
-    ['c', 62, 63, 8, 7],
-    ['c', 62, 63, 4.6, 1]
-  ],
-  /* lute: badan buah pir dengan leher panjang */
-  ticket: [
-    ['e', 50, 88, 20, 4, 0, 1],
-    ['p', 'M50 17c15 0 24 9 24 23 0 18-11 34-24 34S26 58 26 40c0-14 9-23 24-23z', 1],
-    ['p', 'M50 19c14 0 22 8 22 21 0 17-10 32-22 32S28 57 28 40c0-13 8-21 22-21z', 3],
-    ['p', 'M50 21c12 0 19 7 19 19 0 15-9 28-19 28s-19-13-19-28c0-12 7-19 19-19z', 4],
-    ['e', 41, 40, 6.5, 4, -14, 0],
-    ['e', 59, 40, 6.5, 4, 14, 0],
-    ['p', 'M38 56c8 11 16 11 24 0-8 5-16 5-24 0z', 0],
-    ['e', 50, 61, 6, 2.4, 0, 1],
-    ['e', 45, 29, 10, 4.5, -14, 5],
-    ['s', 'M50 17c-6-5-12-5-16-1', 3, 2.4],
-    ['s', 'M50 17c6-5 12-5 16-1', 3, 2.4]
-  ],
-  /* kotak berpita */
-  gift: [
-    ['e', 50, 80, 26, 5, 0, 1],
-    ['r', 26, 44, 48, 33, 0, 7],
-    ['r', 23, 35, 54, 11, 0, 2],
-    ['r', 44, 35, 12, 42, 0, 4],
-    ['p', 'M50 35c-10-14-24-9-16 0zM50 35c10-14 24-9 16 0z', 4],
-    ['c', 50, 33, 4, 5]
-  ],
-  /* kunci besar bergagang */
-  house: [
-    ['c', 32, 38, 15, 1],
-    ['c', 32, 38, 13, 3],
-    ['c', 32, 38, 7, 0],
-    ['s', 'M40 46 74 80', 3, 7],
-    ['s', 'M40 46 74 80', 4, 3.4],
-    ['p', 'M62 68h13v8h-8zM70 76h11v7h-7z', 3],
-    ['e', 32, 34, 7, 3, -45, 5]
-  ],
-  /* tanaman dalam pot tanah */
-  plant: [
-    ['e', 50, 86, 21, 4, 0, 1],
-    ['s', 'M50 62V42', 6, 3],
-    ['e', 36, 45, 13, 7.5, -26, 6],
-    ['e', 64, 41, 13, 7.5, 24, 6],
-    ['e', 50, 32, 9, 12, 0, 6],
-    ['e', 33, 43, 6, 3, -26, 3],
-    ['e', 50, 29, 4, 5, 0, 3],
-    ['p', 'M31 62h38l-5 23H36z', 7],
-    ['r', 28, 56, 44, 8, 0, 3],
-    ['e', 50, 60, 15, 2.6, 0, 2]
-  ],
-  /* bulu angsa di tempat tinta */
-  receipt: [
-    ['e', 50, 84, 26, 5, 0, 1],
-    ['p', 'M30 58h34l-4 22H34z', 1],
-    ['e', 47, 58, 17, 6, 0, 2],
-    ['e', 47, 57, 11, 3.4, 0, 0],
-    ['p', 'M49 56 78 14l5 4-30 41z', 9],
-    ['p', 'M74 10c9 5 13 15 12 25-4 2-9 1-13-2-5-4-6-11-4-17z', 5],
-    ['p', 'M75 15c6 4 9 11 8 18-3 1-6 0-8-2-3-3-3-10 0-16z', 9],
-    ['s', 'M78 14 84 30', 2, .8],
-    ['e', 44, 56, 5, 2, 0, 0]
-  ],
-  /* pundi-pundi berisi, bertali */
-  env: [
-    ['e', 48, 84, 26, 5, 0, 1],
-    ['p', 'M36 38c-9 8-16 18-16 27 0 12 12 18 28 18s28-6 28-18c0-9-7-19-16-27z', 2],
-    ['e', 48, 40, 14, 6, 0, 1],
-    ['s', 'M33 38h30', 3, 3.6],
-    ['e', 40, 62, 10, 12, -8, 3],
-    ['e', 37, 57, 4.5, 5.5, -8, 4],
-    ['e', 76, 82, 11, 5, -8, 3],
-    ['e', 76, 79, 11, 5, -8, 4],
-    ['e', 76, 76, 11, 5, -8, 5],
-    ['e', 68, 86, 9, 4, 6, 4]
-  ],
-  /* tumpukan keping emas */
-  coin: [
-    ['e', 50, 84, 27, 5, 0, 1],
-    ['e', 46, 72, 23, 8, 0, 2],
-    ['e', 46, 68, 23, 8, 0, 4],
-    ['e', 46, 64, 23, 8, 0, 3],
-    ['e', 46, 60, 23, 8, 0, 4],
-    ['e', 46, 56, 23, 8, 0, 3],
-    ['e', 46, 52, 23, 8, 0, 4],
-    ['e', 46, 51, 17, 5, 0, 5],
-    ['e', 41, 50, 7, 2.4, 0, 5],
-    ['e', 76, 74, 12, 11, -16, 3],
-    ['e', 76, 74, 10, 9, -16, 4],
-    ['e', 73, 71, 4, 3, -16, 5]
-  ]
-};
-function plakShape(s){var t=s[0],rot='';
-  if(t==='e'){if(s[5])rot=' transform="rotate('+s[5]+' '+s[1]+' '+s[2]+')"';
-    return '<ellipse cx="'+s[1]+'" cy="'+s[2]+'" rx="'+s[3]+'" ry="'+s[4]+'" fill="url(#pg'+s[6]+')"'+rot+'/>'}
-  if(t==='c')return '<circle cx="'+s[1]+'" cy="'+s[2]+'" r="'+s[3]+'" fill="url(#pg'+s[4]+')"/>';
-  if(t==='r'){if(s[5])rot=' transform="rotate('+s[5]+' '+(s[1]+s[3]/2)+' '+(s[2]+s[4]/2)+')"';
-    return '<rect x="'+s[1]+'" y="'+s[2]+'" width="'+s[3]+'" height="'+s[4]+'" fill="url(#pg'+s[6]+')"'+rot+'/>'}
-  if(t==='p')return '<path d="'+s[1]+'" fill="url(#pg'+s[2]+')"/>';
-  if(t==='s')return '<path d="'+s[1]+'" fill="none" stroke="url(#pg'+s[2]+')" stroke-width="'+s[3]+'" stroke-linecap="round" stroke-linejoin="round"/>';
-  return ''}
-var PLAKC={};
-function plak(key){if(PLAKC[key]!=null)return PLAKC[key];
-  var sh=PLAK[key];
-  PLAKC[key]=sh?'<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">'
-    +'<rect width="100" height="100" fill="url(#pgr)"/>'
-    +'<g filter="url(#psf)">'+sh.map(plakShape).join('')+'</g>'
-    +'<rect width="100" height="100" filter="url(#pcr)" opacity=".22"/>'
-    +'<rect width="100" height="100" fill="url(#pvn)"/></svg>':'';
-  return PLAKC[key]}
-/* Lukisannya baru dibuat saat tanggalnya pertama kali disorot, lalu
-   disimpan di selnya. Jadi tidak ada 30 penyaring yang dihitung sekaligus
-   waktu halaman dibuka. */
-function plakInto(btn,key){if(!btn||btn.querySelector('.pl'))return;
-  var m=plak(key);if(!m)return;
-  var w=document.createElement('span');w.className='pl';w.setAttribute('aria-hidden','true');
-  w.innerHTML=m;btn.insertBefore(w,btn.firstChild)}
-
 var CC={'Makan & minum':'#C98B4B','Transportasi':'#7E95BC','Belanja harian':'#8FA36E','Rumah':'#6F8F5E','Tagihan':'#B4432A','Hiburan':'#A57BB5','Hadiah':'#D49A9A','Tempat tinggal':'#59634F','Piutang':'#4E6B3A','Langganan':'#5E6E8C','Gaji':'#4E6B3A','Keluarga':'#C98B4B','Investasi':'#B59A3A'};
-var BL={cup:'#F4C9B4',moto:'#C9DCEB',pump:'#F2DC9A',bag:'#CFDDBF',bowl:'#F4C9B4',bolt:'#F2DC9A',phone:'#DCD3EA',ticket:'#F1CFD6',env:'#DDEF9A',gift:'#F1CFD6',plant:'#CFDDBF',house:'#C9DCEB',receipt:'#F2DC9A',coin:'#F2DC9A'};
+/* Saat satu tanggal disorot, selnya diisi penuh warna kategorinya. Warna
+   tulisannya tidak dipatok: dihitung dari terang-gelap warna itu, supaya
+   kategori muda (Hadiah, Investasi) tetap pakai tinta dan kategori tua
+   (Tagihan, Gaji) pakai kertas. Ambangnya 0,18 — titik tempat kontras ke
+   #111 dan ke #F5F3EE sama besar, jadi sisi mana pun yang menang selalu
+   di atas 4,5:1. */
+var FGC={};
+function fg(hex){if(FGC[hex])return FGC[hex];
+  var l=[1,3,5].map(function(i){var c=parseInt(hex.substr(i,2),16)/255;
+    return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)});
+  return FGC[hex]=(.2126*l[0]+.7152*l[1]+.0722*l[2])>.18?'#111':'#F5F3EE'}
 var D=[
 ['cup','Kopi susu','kopi susu 28 ribu pakai gopay','Makan & minum','GoPay',-28000,'suara'],
 ['moto','Ojek ke kantor','ojek 18rb','Transportasi','GoPay',-18000,'ketik'],
@@ -1014,7 +817,7 @@ var HARI=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
 (function(){
   var g=$('cal'),h='';['Sen','Sel','Rab','Kam','Jum','Sab','Min'].forEach(function(d){h+='<div class="dow">'+d+'</div>'});
   var first=new Date(2026,8,1).getDay(),off=(first+6)%7;for(var i=0;i<off;i++)h+='<div class="day empty"></div>';
-  D.forEach(function(d,i){var amt=d[5];h+='<button type="button" class="day" data-d="'+i+'" aria-label="'+(i+1)+' September: '+__(d[1])+' '+rp(amt)+'"><span class="n">'+(i+1)+'</span><span class="led" style="background:'+CC[d[3]]+'"></span><span class="art"><svg class="ic"><use href="#i-'+d[0]+'"/></svg></span><span class="a'+(amt>0?' in':'')+'">'+(amt>0?'+':'−')+Math.abs(amt).toLocaleString('id-ID')+'</span></button>'});
+  D.forEach(function(d,i){var amt=d[5],cl=CC[d[3]];h+='<button type="button" class="day" data-d="'+i+'" style="--dc:'+cl+';--dfg:'+fg(cl)+'" aria-label="'+(i+1)+' September: '+__(d[1])+' '+rp(amt)+'"><span class="n">'+(i+1)+'</span><span class="led" style="background:'+CC[d[3]]+'"></span><span class="art"><svg class="ic"><use href="#i-'+d[0]+'"/></svg></span><span class="a'+(amt>0?' in':'')+'">'+(amt>0?'+':'−')+Math.abs(amt).toLocaleString('id-ID')+'</span></button>'});
   var tail=(7-(off+D.length)%7)%7;for(i=0;i<tail;i++)h+='<div class="day empty"></div>';
   g.innerHTML=h;
   /* Popover "Mona in action": masuk → Lisa membaca → tercatat → simpan */
@@ -1059,7 +862,7 @@ var HARI=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
     pop.style.left=x+'px';pop.style.top=(vy-wr.top)+'px'}
   function show(i){clearTimeout(hideT);if(i===cur&&pop.classList.contains('on'))return;cur=i;clear();var d=D[i];
     g.querySelectorAll('.day.sel').forEach(function(e){e.classList.remove('sel')});var b=g.querySelector('[data-d="'+i+'"]');if(!b)return;
-    plakInto(b,d[0]);b.classList.add('sel');
+    b.classList.add('sel');
     pop.innerHTML=build(i);place(b);pop.classList.add('on');
     var instant=reduce;if(instant){stage(4);var t0=pop.querySelector('.ty');if(t0)t0.textContent=d[6]==='suara'?'“'+__(d[2])+'”':__(d[2]);return}
     stage(1);var ty=pop.querySelector('.ty'),keys=pop.querySelectorAll('.kb i'),txt=d[6]==='suara'?'“'+__(d[2])+'”':__(d[2]),T1=900;
