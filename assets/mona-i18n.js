@@ -12,6 +12,8 @@ var I18N={
   "Language": "Bahasa",
   "Beranda": "Home",
   "Isi halaman": "On this page",
+  "Buka semua": "Expand all",
+  "Tutup semua": "Collapse all",
   /* kaki halaman */
   "Money Navigator dengan asisten Lisa.": "Money Navigator with Lisa, your assistant.",
   "Dibuat oleh Rakit Lab.": "Made by Rakit Lab.",

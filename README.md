@@ -28,6 +28,8 @@ Tiga halaman terpisah, disyaratkan untuk pengajuan aplikasi di Google Play. URL-
 
 Polanya sama seperti `index.html`: teks sumber bahasa Indonesia ditulis langsung di HTML supaya terbaca tanpa JavaScript, dan kamus `I18N_PAGE` di akhir berkas menerjemahkannya ke bahasa Inggris saat dijalankan. Kalau mengubah satu kalimat, ubah juga kuncinya di kamus — kunci adalah teks Indonesia yang utuh.
 
+Tiap bagian adalah `<details class="folder fold">` dengan tabnya sebagai `<summary class="tab">`. Buka-tutupnya dikerjakan HTML sendiri, bukan skrip, jadi tetap bisa dibuka saat JavaScript mati — syarat untuk halaman legal, dan berbeda dari akordeon FAQ di map 09 yang memang digerakkan JS. Map yang tertutup menyusut jadi setinggi tabnya, sehingga dua belas bagian muat dalam satu layar. Bagian 01 dibiarkan `open` di ketiga halaman; di `/hapus-akun` bagian itu memuat kedua cara menghapus akun, supaya peninjau Google melihatnya tanpa menekan apa pun. `assets/mona-legal.js` hanya menambah kenyamanan: tombol buka/tutup semua, membuka bagian yang dituju tautan `#anchor`, dan membuka semuanya sebelum halaman dicetak.
+
 Dua janji di map 09 sengaja dibatasi cakupannya supaya tidak bertabrakan dengan halaman privasi: "Server di Singapura" berlaku untuk penyimpanan data Mona, bukan untuk pemrosesan Gemini, dan kartu AI menyebut pemrosesan Google yang bisa terjadi di luar Indonesia.
 
 ## Isi halaman
