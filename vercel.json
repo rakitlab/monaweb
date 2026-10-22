@@ -1,5 +1,13 @@
 {
   "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/privacy", "destination": "/privasi", "permanent": true },
+    { "source": "/privacy-policy", "destination": "/privasi", "permanent": true },
+    { "source": "/terms", "destination": "/ketentuan", "permanent": true },
+    { "source": "/delete-account", "destination": "/hapus-akun", "permanent": true },
+    { "source": "/hapus", "destination": "/hapus-akun", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -7,6 +15,12 @@
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
       ]
     }
   ]

@@ -2,15 +2,33 @@
 
 Website untuk aplikasi Mona, pencatat uang dengan asisten Lisa. Dibuat oleh Rakit Lab.
 
-Seluruh situs ada di satu file, `index.html`, ditambah lima foto lukisan di `assets/`. Tidak ada build, tidak ada dependensi. Dua berkas sisanya, `waitlist.gs` dan `waitlist.md`, adalah backend daftar tunggu — tidak ikut disajikan ke pengunjung.
+Halaman depan ada di `index.html`; tiga halaman legal ada di `privasi.html`, `ketentuan.html`, dan `hapus-akun.html`. Gaya dan mesin bahasa dipakai bersama lewat `assets/mona.css` dan `assets/mona-i18n.js`. Tidak ada build, tidak ada dependensi. Dua berkas sisanya, `waitlist.gs` dan `waitlist.md`, adalah backend daftar tunggu — tidak ikut disajikan ke pengunjung.
 
 | Berkas | Dipakai di |
 | -- | -- |
+| `assets/mona.css` | Seluruh gaya situs, dipakai halaman depan dan tiga halaman legal |
+| `assets/mona-i18n.js` | Mesin terjemahan untuk halaman legal (halaman depan memakai salinan yang menyatu dengan skripnya) |
+| `assets/mona-wordmark.svg` | Logo di bilah atas halaman legal |
+| `assets/mona-mark.svg` | Logo di kaki halaman legal |
 | `mona-lisa.jpg` | Animasi sampul (map 01), setelah catatan dibereskan |
 | `mona-lisa-sad.jpg` | Animasi sampul (map 01), sebelum dibereskan — "Mona Lisa with soothing temple patches" |
 | `last-supper.jpg` | Latar Space bersama (map 05), layar lebar |
 | `last-supper-tall.jpg` | Latar Space bersama di layar ≤600px, potongan tegak |
 | `creation-of-adam.jpg` | Latar map 10 |
+
+## Halaman legal
+
+Tiga halaman terpisah, disyaratkan untuk pengajuan aplikasi di Google Play. URL-nya bersih berkat `cleanUrls` di `vercel.json`.
+
+| URL | Berkas | Isi |
+| -- | -- | -- |
+| `/privasi` | `privasi.html` | Kebijakan Privasi: data yang dikumpulkan, izin Android, jalur Gemini, retensi, hak menurut UU PDP No. 27/2022 |
+| `/ketentuan` | `ketentuan.html` | Syarat Penggunaan: akun, paket, batas asisten Lisa, tanggung jawab, hukum yang berlaku |
+| `/hapus-akun` | `hapus-akun.html` | Permintaan penghapusan akun dan data, URL terpisah yang diminta Google Play |
+
+Polanya sama seperti `index.html`: teks sumber bahasa Indonesia ditulis langsung di HTML supaya terbaca tanpa JavaScript, dan kamus `I18N_PAGE` di akhir berkas menerjemahkannya ke bahasa Inggris saat dijalankan. Kalau mengubah satu kalimat, ubah juga kuncinya di kamus — kunci adalah teks Indonesia yang utuh.
+
+Dua janji di map 09 sengaja dibatasi cakupannya supaya tidak bertabrakan dengan halaman privasi: "Server di Singapura" berlaku untuk penyimpanan data Mona, bukan untuk pemrosesan Gemini, dan kartu AI menyebut pemrosesan Google yang bisa terjadi di luar Indonesia.
 
 ## Isi halaman
 
