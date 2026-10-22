@@ -244,20 +244,35 @@ svg.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;str
 .lm[data-s="4"] .sk{background:var(--ink);color:var(--paper);opacity:1}
 .lm-body{display:grid;grid-template-columns:minmax(0,1.1fr) 160px minmax(0,1fr);min-height:430px}
 .lm-in{position:relative;padding:22px clamp(16px,2.4vw,30px);min-width:0;display:flex;flex-direction:column;gap:14px}
-.lm-mid{border-left:var(--bw) solid var(--ink);border-right:var(--bw) solid var(--ink);background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:18px 10px}
-.medal{position:relative;width:114px;height:68px;border-radius:5px;background:var(--lcd);display:grid;place-items:center;border:var(--bw) solid #3a3a37}
+/* spine tengah = faceplate hitam, bukan kertas: LCD dan rel tahap jadi terbaca */
+.lm-mid{position:relative;border-left:var(--bw) solid var(--ink);border-right:var(--bw) solid var(--ink);background:#191a17;background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),inset 0 -1px 0 rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:22px 12px}
+.medal{position:relative;width:114px;height:68px;border-radius:6px;background:var(--lcd);display:grid;place-items:center;border:var(--bw) solid #43483f;box-shadow:0 0 0 4px #121310,0 1px 0 4px rgba(255,255,255,.05),inset 0 0 18px rgba(140,242,154,.09);transition:box-shadow .3s}
+.lm[data-s="1"] .medal,.lm[data-s="2"] .medal{box-shadow:0 0 0 4px #121310,0 1px 0 4px rgba(255,255,255,.05),inset 0 0 20px rgba(229,103,58,.16),0 0 20px rgba(229,103,58,.18)}
+.lm[data-s="3"] .medal,.lm[data-s="4"] .medal{box-shadow:0 0 0 4px #121310,0 1px 0 4px rgba(255,255,255,.05),inset 0 0 20px rgba(140,242,154,.16),0 0 20px rgba(95,191,111,.2)}
 .medal .face{grid-template-columns:repeat(16,4px);grid-auto-rows:4px;gap:.8px}
-.stg{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font:500 9.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;width:100%;max-width:100px}
-.stg li{display:flex;align-items:center;gap:9px;color:var(--faint);transition:color .2s}
-.stg li i{width:7px;height:7px;border-radius:50%;background:var(--groove);flex:none;transition:background .2s}
-.stg li.on{color:var(--ink)}
-.stg li.on i{background:var(--led)}
-.stg li.now i{background:var(--or);animation:blink .6s steps(2) infinite}
-.lm-ms{font:500 10px var(--mono);letter-spacing:.1em;color:var(--mute);text-transform:uppercase;min-height:1.2em}
+/* rel tahap: garis sinyal yang terisi fosfor seiring Lisa bekerja */
+.stg{position:relative;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font:500 9.5px var(--mono);letter-spacing:.11em;text-transform:uppercase;width:100%;max-width:108px;--fp:0}
+.stg::before{content:"";position:absolute;left:3px;top:8px;bottom:8px;width:1px;background:#2d312b}
+.stg::after{content:"";position:absolute;left:3px;top:8px;width:1px;height:calc((100% - 16px) * var(--fp));background:var(--phos-mid);box-shadow:0 0 6px rgba(140,242,154,.45);transition:height .35s ease}
+.lm[data-s="2"] .stg{--fp:.3333}
+.lm[data-s="3"] .stg,.lm[data-s="4"] .stg{--fp:1}
+.stg li{position:relative;min-height:16px;display:flex;align-items:center;gap:9px;color:#71766c;transition:color .2s}
+.stg li i{position:relative;width:7px;height:7px;border-radius:50%;background:#32362f;flex:none;transition:background .2s,box-shadow .2s}
+.stg li b{font-weight:500;color:#4e544b;font-variant-numeric:tabular-nums;transition:color .2s}
+.stg li.on{color:#e7e4dc}
+.stg li.on b{color:var(--phos-mid)}
+.stg li.on i{background:var(--led);box-shadow:0 0 7px rgba(95,191,111,.55)}
+.stg li.now{color:var(--or)}
+.stg li.now b{color:var(--or)}
+.stg li.now i{background:var(--or);box-shadow:0 0 8px rgba(229,103,58,.6);animation:blink .6s steps(2) infinite}
+.stg li.now::before{content:"";position:absolute;left:-1px;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;border:1px solid var(--or);animation:ringp 1.4s ease-out infinite}
+/* chip waktu baca: baru muncul saat angkanya ada, biar tidak jadi kotak kosong */
+.lm-ms{font:500 9.5px var(--mono);letter-spacing:.1em;color:var(--phos);text-transform:uppercase;white-space:nowrap;min-height:22px;display:inline-flex;align-items:center;padding:0 9px;border:1px solid transparent;border-radius:3px;background:transparent;transition:color .25s,border-color .25s,background .25s,opacity .25s;opacity:0}
+.lm[data-s="3"] .lm-ms,.lm[data-s="4"] .lm-ms{opacity:1;border-color:#39412f;background:#121310}
 .lm-out{padding:22px clamp(16px,2.4vw,30px);min-width:0;display:flex;flex-direction:column;justify-content:center}
 .lm-foot{display:grid;grid-template-columns:minmax(0,1.1fr) 160px minmax(0,1fr);border-top:var(--bw) solid var(--ink);font:500 10.5px var(--mono);letter-spacing:.12em;text-transform:uppercase}
 .lm-foot span{padding:10px 16px;text-align:center}
-.lm-foot span:nth-child(2){border-left:var(--bw) solid var(--ink);border-right:var(--bw) solid var(--ink);background:var(--paper);color:var(--mute)}
+.lm-foot span:nth-child(2){border-left:var(--bw) solid var(--ink);border-right:var(--bw) solid var(--ink);background:#191a17;color:var(--phos-mid);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
 
 /* slip hasil (kanan) */
 .sl{display:flex;flex-direction:column;gap:14px;width:100%}
@@ -608,8 +623,9 @@ img.bs-art{background:none;opacity:1;-webkit-mask:none;mask:none;object-fit:cove
   .fcopy h1{font-size:clamp(40px,11vw,64px)}
   .nsheet{grid-template-columns:repeat(2,minmax(0,1fr))}
   .lm-body{grid-template-columns:1fr;min-height:0}
-  .lm-mid{flex-direction:row;justify-content:space-between;gap:16px;border-left:0;border-right:0;border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink);padding:14px 18px}
+  .lm-mid{flex-direction:row;justify-content:space-between;gap:16px;border-left:0;border-right:0;border-top:var(--bw) solid var(--ink);border-bottom:var(--bw) solid var(--ink);padding:16px 18px}
   .stg{flex-direction:row;flex-wrap:wrap;max-width:none;width:auto;gap:8px 16px}
+  .stg::before,.stg::after{display:none}
   .lm-foot{grid-template-columns:1fr 1fr}
   .lm-foot span:nth-child(2){display:none}
   .lm-foot span:nth-child(3){border-left:var(--bw) solid var(--ink)}
