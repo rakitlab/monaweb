@@ -783,7 +783,13 @@ img.bs-art{background:none;opacity:1;-webkit-mask:none;mask:none;object-fit:cove
 /* tempelan: kompas, layar Lisa, stiker ikon */
 .cmpk{align-self:flex-start;margin:.4em 0 1em;padding:.7em;background:var(--well);border:var(--bw) solid var(--ink);border-radius:50%;transform:rotate(-4deg)}
 .cmpk svg{display:block;width:8.5em;height:8.5em}
+.cmpk svg>.f{fill:none;stroke:var(--ink);stroke-width:1.8}
+.cmpk svg>.dash{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-dasharray:1.4 5.6;stroke-linecap:round;opacity:.45}
+.cmpk svg>path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+.cmpk svg>.k{fill:var(--ink)}
 .cmpk .needle{transform-origin:60px 60px;transform:rotate(24deg);transition:transform .8s cubic-bezier(.3,.8,.2,1)}
+.cmpk .needle .o{fill:var(--cc,var(--or))}
+.cmpk .needle .f{fill:var(--mute)}
 .cmpk:hover .needle,.cmpk:focus-within .needle{transform:rotate(0)}
 .lscr{display:flex;align-items:center;gap:1em;padding:1em 1.2em;border:var(--bw) solid #3a3a37;border-radius:4px;margin-top:auto}
 .lscr .face{flex:none;grid-template-columns:repeat(16,.34em);grid-auto-rows:.34em;gap:.06em}
