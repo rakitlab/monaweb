@@ -1348,7 +1348,7 @@ h1,h2,h3,h4,.ch-t,.cap,.tab,.steps span,.pg-h span,.pg-f span,
 /* Baris kendali di atas tumpukan: grid dua kolom, label kiri dan tombol
    kanan, dengan garis rambut di antaranya. Dibuat grid supaya labelnya
    tidak pernah bisa menabrak tombol di lebar mana pun. */
-.lglbar{display:grid;grid-template-columns:auto minmax(12px,1fr) auto;align-items:center;gap:0 14px;margin:22px 0 4px}
+.lglbar{display:grid;grid-template-columns:auto minmax(12px,1fr) auto;align-items:center;gap:0 14px;margin:22px auto 4px}
 .lglbar .cap{grid-area:1/1;color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lglbar::before{content:"";grid-area:1/2;height:var(--bw);background:var(--line)}
 .key.xs{height:32px;padding:0 13px;font-size:12.5px;gap:7px}
