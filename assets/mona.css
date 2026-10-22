@@ -1410,3 +1410,45 @@ h1,h2,h3,h4,.ch-t,.cap,.tab,.steps span,.pg-h span,.pg-f span,
   .tab .pm::before,.tab .pm::after{transition:none}
 }
 .sec-side .sec-no{display:block;margin-bottom:14px;color:var(--faint)}
+
+/* ---------- RAPIKAN LAYAR PONSEL ----------
+   Ditaruh paling akhir supaya menang urutan. Semua ukuran di sini diuji di
+   320, 360, 390 dan 412px; 320px sekaligus mewakili ponsel 412px yang
+   ukuran hurufnya diperbesar di pengaturan Android. */
+@media (max-width:620px){
+  /* 06 Cocok untuk: tiga angka tak muat sejajar. Angka pertama (yang paling
+     panjang) mendapat satu baris penuh, dua lainnya berbagi baris kedua.
+     Label boleh dua baris; angkanya didorong ke bawah supaya tetap sebaris. */
+  .kp dl{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kp dl>div{display:flex;flex-direction:column;padding:14px 16px}
+  .kp dl>div:first-child{grid-column:1/-1;border-bottom:var(--bw) solid var(--line)}
+  .kp dl>div:nth-child(2){border-left:0}
+  .kp dt{margin-bottom:8px}
+  .kp dd{margin-top:auto;font-size:clamp(16px,5.2vw,22px)}
+  .kp dl>div:first-child dd{font-size:clamp(24px,7.4vw,30px)}
+
+  /* 04 Arsip: label dan total bertumpuk, jangan berebut satu baris */
+  .fo-sum{flex-direction:column;align-items:flex-start;gap:8px;padding:16px 16px 14px}
+  .fo-sum b{font-size:clamp(24px,8.4vw,32px)}
+
+  /* 03 Catat: kolom tunggal tidak boleh melebar mengikuti isi */
+  .lm-body{grid-template-columns:minmax(0,1fr)}
+  .lm-mid{min-width:0;flex-wrap:wrap;gap:12px}
+  .lm-mid .stg{min-width:0}
+}
+
+/* 05 Bersama: chip izin di kartu peran terlalu sempit untuk ikon + kata */
+@media (max-width:460px){
+  .bs-role .pm>span{gap:0;padding:0 6px;letter-spacing:.06em;font-size:9px;justify-content:center}
+  .bs-role .pm svg{display:none}
+}
+
+/* 07 Cerita: papan inspirasi diperkecil sebagai satu gambar utuh — huruf
+   ikut lebar papan, bukan ukuran huruf halaman, agar tiap tempelan memuat
+   tulisannya seperti di layar lebar. */
+.book.mob .pg-b{container-type:inline-size}
+/* Wajah piksel di halaman 2 juga diskalakan ke lebar halaman */
+.book.mob .fr{font-size:min(1em,3.5cqi)}
+.book.mob .mb{font-size:4.2cqi;min-height:0}
+.book.mob .mi.m6 .in span,.book.mob .mi.m7 .in div{gap:.6em;white-space:nowrap}
+.book.mob .mi.m9 .a b,.book.mob .mi.m9 .h b{white-space:nowrap}
